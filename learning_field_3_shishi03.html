@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>সহশিক্ষাক্রমিক কার্যাবলি (Co-curricular Activities) - অনলাইন কুইজ পরীক্ষা</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+<style>
+@font-face{font-family:'SolaimanLipi';src:local('SolaimanLipi'),local('Solaiman Lipi'),url('SolaimanLipi.ttf') format('truetype');font-display:swap}
+*{font-family:'SolaimanLipi',Arial,sans-serif !important;box-sizing:border-box}
+.katex,.katex *{font-family:KaTeX_Main,'Times New Roman',serif !important}
+:root{--primary:#006a4e;--primary-d:#004d37;--bg:#f2f6f4;--card:#fff;--text:#1d2b26;--muted:#5d6d66;--border:#d5e2dc;--ok:#1b8a4b;--okbg:#e3f6ea;--bad:#c62828;--badbg:#fdeaea;--shadow:0 2px 10px rgba(0,0,0,.08);--ul:#006a4e}
+[data-theme=dark]{--primary:#4db6ac;--bg:#101816;--card:#1a2622;--text:#e6f0ec;--muted:#9bb0a8;--border:#2c3d37;--ok:#66d28f;--okbg:#17352a;--bad:#ff8a80;--badbg:#3a2020;--shadow:0 2px 10px rgba(0,0,0,.5);--ul:#4db6ac}
+body{margin:0;background:var(--bg);color:var(--text);line-height:1.7;-webkit-user-select:none;-moz-user-select:none;user-select:none}
+.wrap{max-width:900px;margin:0 auto;padding:12px}
+header{background:linear-gradient(135deg,#004d37,#006a4e);color:#fff;text-align:center;padding:22px 14px;border-radius:0 0 18px 18px;box-shadow:var(--shadow)}
+header h1{margin:0;font-size:1.5rem}header p{margin:3px 0 0;font-size:1rem;opacity:.95}
+.card{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:16px;margin:14px 0;border:1px solid var(--border)}
+.chapter-title{margin:0 0 12px;padding-bottom:8px;font-size:1.4rem;color:var(--primary);border-bottom:3px solid var(--ul)}
+.badge{background:var(--bg);border-left:4px solid var(--primary);padding:8px 12px;border-radius:8px;margin:8px 0;font-size:.95rem}
+.warn{background:#fff6e0;color:#6b4a00;border-left:4px solid #f0a500;padding:8px 12px;border-radius:8px;font-size:.95rem}
+#info2,#info3{text-align:center}
+#info3{white-space:nowrap;font-size:clamp(.62rem,3.3vw,.95rem)}
+.wrow{display:flex;justify-content:space-between;gap:10px;margin-bottom:2px}
+[data-theme=dark] .warn{background:#3a3016;color:#ffd98a}
+.bar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--card);padding:10px 14px;border-radius:12px;box-shadow:var(--shadow);border:1px solid var(--border)}
+#timer{font-size:1.3rem;font-weight:700;color:var(--primary)}#timer.low{color:var(--bad)}
+button{cursor:pointer;border:0;border-radius:10px;padding:9px 16px;font-size:1rem;background:var(--primary);color:#fff}
+[data-theme=dark] button{color:#0b1512}
+button:disabled{opacity:.5;cursor:default}
+.qn{font-weight:700;margin-bottom:8px}
+.opt{display:block;width:100%;text-align:left;background:var(--bg);color:var(--text);border:2px solid var(--border);margin:6px 0;padding:9px 12px;border-radius:10px}
+[data-theme=dark] .opt{color:var(--text)}
+.opt.sel{border-color:var(--primary)}
+.opt.correct{background:var(--okbg);border-color:var(--ok)}
+.opt.wrong{background:var(--badbg);border-color:var(--bad)}
+.tag{display:inline-block;font-size:.8rem;background:var(--bg);color:var(--primary);border:1px solid var(--border);border-radius:20px;padding:0 10px;margin-bottom:6px}
+.exp{display:none;margin-top:8px;padding:8px 12px;border-radius:8px;background:var(--bg);border-left:4px solid var(--primary);font-size:.95rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.stat-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;box-shadow:var(--shadow)}
+.stat-box b{display:block;font-size:1.5rem;color:var(--primary)}
+#fb{font-size:1.1rem;font-weight:700;text-align:center;margin:12px 0}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<h2 class="chapter-title">সহশিক্ষাক্রমিক কার্যাবলি (Co-curricular Activities)</h2>
+<div class="warn"><div class="wrow"><b id="fullmark"></b><b id="timeinfo"></b></div><div id="info2"></div><div id="info3"></div></div>
+</div>
+<div class="bar"><span>⏱️ <span id="timer">১০:০০</span></span><span id="prog"></span><button id="theme">🌙 ডার্ক মোড</button></div>
+<div id="quiz"></div>
+<div id="result" class="hide">
+<div class="card"><div class="stats" id="stats"></div><div id="fb"></div><div style="text-align:center"><button id="again">পুনরায় কুইজ দাও</button></div></div>
+</div>
+<div class="card" style="text-align:center"><button id="submit">সাবমিট করো</button></div>
+
+</div>
+<script>
+const masterQuestionBank=[["সহশিক্ষাক্রমিক কার্যক্রম শিক্ষাক্রমের কী?",["ঐচ্ছিক সংযোজন","পরীক্ষাভিত্তিক অংশ","বহির্ভূত বিষয়","অবিচ্ছেদ্য অংশ"],3,0],["কোন শিক্ষাক্রমে সহশিক্ষাক্রমিক কার্যক্রমের ওপর গুরুত্বারোপ করা হয়েছে?",["শিক্ষাক্রম ১৯৯৫","জাতীয় শিক্ষাক্রম ২০১২","জাতীয় শিক্ষানীতি ১৯৭৪","শিক্ষাক্রম ২০২২"],1,0],["সহশিক্ষাক্রমিক কার্যক্রম শ্রেণিকক্ষে সংগঠিত শিখন-শেখানো কার্যক্রমের কী?",["বিকল্প","প্রতিদ্বন্দ্বী","বর্ধিতাংশ","পরিবর্তিত রূপ"],2,0],["সহশিক্ষাক্রমিক কার্যক্রমের উদ্দেশ্য কেমন নাগরিক উপহার দেওয়া?",["সুশৃঙ্খল","পরীক্ষায় পারদর্শী","শুধু কর্মজীবী","অনুগত দর্শক"],0,0],["সহশিক্ষাক্রমিক কার্যক্রমে শিক্ষার্থীদের অংশগ্রহণ ও উপস্থিতির জন্য দায়িত্বপ্রাপ্ত শিক্ষক কী সংরক্ষণ করবেন?",["রেজিস্টার","বাজেট প্রতিবেদন","পাঠ্য বই","ম্যাগাজিন"],0,0],["সহশিক্ষাক্রমিক কার্যক্রমে অংশগ্রহণকারী শিক্ষার্থীদের কৃতিত্বের জন্য প্রতিষ্ঠান কী প্রদান করবে?",["বেতন","নতুন পাঠ্য বই","সনদ","পদোন্নতি"],2,0],["সহশিক্ষাক্রমিক কার্যক্রম শ্রেণিতে শিক্ষার্থীদের কীসের হার বৃদ্ধিতে ভূমিকা রাখে?",["পরীক্ষার ফি","উপস্থিতির হার","বেতনের হার","পাঠ্য বইয়ের সংখ্যা"],1,0],["নিচের কোনটি সহশিক্ষাক্রমিক কার্যাবলির একটি গুরুত্ব হিসেবে উল্লিখিত?",["শিক্ষকের বেতন বৃদ্ধি করে","পরীক্ষা বাতিল করে","পাঠ্য বই কমিয়ে দেয়","দলগতভাবে কাজ করতে অনুপ্রেরণা যোগায়"],3,0],["সহশিক্ষাক্রমিক কার্যাবলির মাধ্যমে শিক্ষার্থী কার নিকট অনুগত হতে শেখে?",["পরীক্ষকের নিকট","অভিভাবকের নিকট","প্রতিবেশীর নিকট","নেতৃত্বের নিকট"],3,0],["সহশিক্ষাক্রমিক কার্যাবলি শিক্ষার্থীদের অবসর সময় কীভাবে কাটাতে শেখায়?",["নিষ্ক্রিয়ভাবে","কার্যকরীভাবে","একাকী","অর্থ উপার্জনের মাধ্যমে"],1,0],["সহশিক্ষাক্রমিক কার্যাবলির মাধ্যমে শিক্ষার্থীর কীসের বৃদ্ধি ঘটলে প্রতিষ্ঠানের সুনাম বাড়ে?",["পরীক্ষার নম্বর","বিনোদনের সময়","প্রতিষ্ঠানের প্রতি আনুগত্য","পাঠ্য বইয়ের সংখ্যা"],2,0],["নিচের কোনটি আউটডোর খেলাধুলা হিসেবে উল্লিখিত?",["ক্রিকেট","দাবা","টেবিল টেনিস","অভিনয়"],0,0],["নিচের কোনটি ইনডোর খেলাধুলা হিসেবে উল্লিখিত?",["টেবিল টেনিস","ফুটবল","হকি","ক্রিকেট"],0,0],["বিতর্ক ক্লাবে কোন কোন ভাষায় আয়োজনের কথা বলা হয়েছে?",["বাংলা ও আরবি","ইংরেজি ও ফরাসি","ইংরেজি ও বাংলা","আরবি ও সংস্কৃত"],2,0],["নির্ধারিত বক্তৃতার পাশাপাশি আর কোন ধরনের বক্তৃতার কথা উল্লেখ আছে?",["লিখিত বক্তৃতা","তাৎক্ষণিক বক্তৃতা","রেকর্ডকৃত বক্তৃতা","মুখস্থ বক্তৃতা"],1,0],["নিচের কোনটি সহশিক্ষাক্রমিক কার্যাবলির তালিকায় উল্লিখিত একটি প্রতিযোগিতা?",["আন্তর্জাতিক গণিত সম্মেলন","জাতীয় পরীক্ষা","বার্ষিক পরীক্ষা","গণিত অলিম্পিয়াড"],3,0],["ধর্মীয় কার্যাবলির তালিকায় আজানের পাশাপাশি কোন প্রতিযোগিতার কথা উল্লেখ আছে?",["বক্তৃতা প্রতিযোগিতা","রচনা প্রতিযোগিতা","চিত্রাঙ্কন প্রতিযোগিতা","কেরাত প্রতিযোগিতা"],3,0],["সহশিক্ষাক্রমিক কার্যক্রম সফলভাবে পরিচালনায় নেতৃত্ব প্রদান করবেন কে?",["বিষয় শিক্ষক","প্রতিষ্ঠান প্রধান","অভিভাবক","জেলা প্রশাসক"],1,0],["সহশিক্ষাক্রমিক কার্যক্রমের কমিটিগুলো কাদের সমন্বয়ে গঠিত হবে?",["শুধু শিক্ষক","শুধু শিক্ষার্থী","শিক্ষক ও শিক্ষার্থী","অভিভাবক ও স্থানীয় জনপ্রতিনিধি"],2,0],["সহশিক্ষাক্রমিক কার্যক্রমের প্রত্যেক কমিটিতে শিক্ষক কী হিসেবে কাজ করবেন?",["উপদেষ্টা","পরীক্ষক","সদস্য-সচিব","দর্শক"],0,0],["নিচের কোনটি সহশিক্ষাক্রমিক কার্যাবলির কমিটি হিসেবে উল্লিখিত?",["শিক্ষা সফর কমিটি","বেতন নির্ধারণ কমিটি","পরীক্ষা বাতিল কমিটি","ভবন নির্মাণ কমিটি"],0,0],["ন্যাশনাল ক্যাডেট কোর কোন কমিটির অন্তর্ভুক্ত হিসেবে উল্লিখিত?",["ম্যাগাজিন কমিটি","শিক্ষা সফর কমিটি","স্কাউট, গার্লস গাইড, রেডক্রস, ন্যাশনাল ক্যাডেট কোর কমিটি","বিশেষ দিবস উদযাপন কমিটি"],2,0],["‘সহশিক্ষাক্রমিক কার্যক্রম শিক্ষাক্রমের অবিচ্ছেদ্য অংশ’ — এর অর্থ কী?",["এটি শিক্ষাক্রমের বাইরের একটি বিনোদন","শিক্ষাক্রম থেকে একে আলাদা করা যায় না; এটি শ্রেণিকক্ষ শিখনের বর্ধিতাংশ","এটি কেবল পরীক্ষার জন্য প্রয়োজন","এটি শিক্ষাক্রমের বিকল্প"],1,1],["সহশিক্ষাক্রমিক কার্যাবলি ‘দলগতভাবে কাজ করতে অনুপ্রেরণা যোগায়’ — এর তাৎপর্য কী?",["শিক্ষার্থীরা একা কাজ করতে শেখে","শিক্ষার্থীরা প্রতিযোগিতা এড়িয়ে চলে","শিক্ষার্থীরা শুধু শিক্ষকের নির্দেশ মুখস্থ করে","শিক্ষার্থীরা একসাথে কাজ করার মাধ্যমে সহযোগিতা ও সমন্বয় শেখে"],3,1],["‘শিক্ষার্থী তার নিজস্ব প্রবণতা ও সামর্থ্য অনুযায়ী বিচিত্র কাজে অংশগ্রহণ করতে পারে’ — এর অর্থ কী?",["সবাইকে একই কার্যক্রমে বাধ্য করা হয়","শুধু মেধাবীরা অংশ নিতে পারে","কেবল খেলাধুলাতেই অংশ নেওয়া যায়","প্রত্যেকে নিজের আগ্রহ ও সামর্থ্য অনুযায়ী পছন্দের কার্যক্রম বেছে নিতে পারে"],3,1],["সহশিক্ষাক্রমিক কার্যাবলি দেশের চলমান আর্থ-সামাজিক ও সাংস্কৃতিক পরিবেশের সঙ্গে ‘খাপ খাওয়াতে শেখায়’ — এর অর্থ কী?",["শিক্ষার্থীরা পরিবেশ থেকে দূরে থাকে","শিক্ষার্থীরা সমাজ ও সংস্কৃতির পরিবেশ বুঝে তার সাথে মানিয়ে চলতে শেখে","শিক্ষার্থীরা পরিবেশ পরিবর্তনে বাধ্য হয়","শিক্ষার্থীরা কেবল বিদেশি সংস্কৃতি শেখে"],1,1],["‘শৃঙ্খলাবোধ জাগায় এবং প্রয়োজনে নেতৃত্বের নিকট অনুগত হতে শেখায়’ — এর অর্থ কী?",["শিক্ষার্থী সব নির্দেশ উপেক্ষা করতে শেখে","শিক্ষার্থী নেতৃত্ব থেকে দূরে থাকে","শিক্ষার্থী নিয়ম মেনে চলে এবং প্রয়োজনে নেতার নির্দেশনা মানতে শেখে","শিক্ষার্থী কেবল নিজের মতো কাজ করে"],2,1],["সহশিক্ষাক্রমিক কার্যাবলির ফলে প্রতিষ্ঠানের সুনাম বৃদ্ধি পায় — এর কারণ কী?",["শিক্ষার্থীদের মধ্যে প্রতিষ্ঠানের প্রতি আনুগত্য বৃদ্ধি পায়","শিক্ষার্থীদের পরীক্ষা কমে যায়","শিক্ষকদের বেতন বেড়ে যায়","প্রতিষ্ঠানের ভবন বড় হয়"],0,1],["একটি বিদ্যালয়ে বিজ্ঞান ক্লাব ও গণিত অলিম্পিয়াড আয়োজনের দায়িত্ব কোন কমিটির?",["বিজ্ঞান ক্লাব, গণিত অলিম্পিয়াড কমিটি","খেলাধুলা কমিটি","ম্যাগাজিন কমিটি","শিক্ষা সফর কমিটি"],0,2],["একটি বিদ্যালয় জাতীয় দিবস ও মনীষীদের জন্ম-মৃত্যুবার্ষিকী উদযাপন করতে চায়। এ কাজের জন্য কোন কমিটি উপযুক্ত?",["খেলাধুলা (ইনডোর ও আউটডোর) কমিটি","ম্যাগাজিন কমিটি","বিশেষ দিবস উদযাপন কমিটি","শিক্ষা সফর কমিটি"],2,2],["রিফাত ক্লাসে প্রায়ই অনুপস্থিত থাকত। বিদ্যালয়ে ফুটবল ও অন্যান্য খেলাধুলা শুরু হওয়ায় সে এখন নিয়মিত আসে। এতে সহশিক্ষাক্রমিক কার্যক্রমের কোন ভূমিকা ফুটে উঠেছে?",["পরীক্ষার ফি হ্রাস","শ্রেণিতে উপস্থিতির হার বৃদ্ধি","শিক্ষকের বেতন বৃদ্ধি","পাঠ্য বইয়ের সংখ্যা হ্রাস"],1,2],["একজন অধ্যক্ষ সকল কমিটির কাজ নিয়মিত সমন্বয়, মনিটরিং ও মূল্যায়ন করছেন। তিনি কোন দায়িত্ব পালন করছেন?",["উপদেষ্টা শিক্ষকের একক দায়িত্ব","শিক্ষার্থী প্রতিনিধির দায়িত্ব","অভিভাবকের দায়িত্ব","সহশিক্ষাক্রমিক কার্যক্রমে প্রতিষ্ঠান প্রধানের দায়িত্ব"],3,2],["একজন শিক্ষার্থী সাহিত্য সভায় স্বরচিত কবিতা পড়ল, অন্যজন গানে অংশ নিল। এ ঘটনায় সহশিক্ষাক্রমিক কার্যাবলির কোন গুরুত্ব ফুটে উঠেছে?",["সবার জন্য একই কাজ বাধ্যতামূলক হওয়া","পরীক্ষার নম্বর বৃদ্ধি","শিক্ষকের কাজ কমে যাওয়া","নিজস্ব প্রবণতা ও সামর্থ্য অনুযায়ী বিচিত্র কাজে অংশগ্রহণের সুযোগ"],3,2],["একটি কলেজে মিলাদ মাহফিল, ধর্মীয় আলোচনা ও পূজা উদযাপন আয়োজন করতে হবে। এ কাজের জন্য কোন কমিটি উপযুক্ত?",["বিজ্ঞান ক্লাব, গণিত অলিম্পিয়াড কমিটি","ধর্মীয় অনুষ্ঠান ও ধর্মীয় আলোচনা কমিটি","ম্যাগাজিন কমিটি","খেলাধুলা কমিটি"],1,2],["সহশিক্ষাক্রমিক কার্যক্রম পরিচালনায় প্রতিষ্ঠান প্রধান, উপদেষ্টা শিক্ষক ও শিক্ষার্থীদের ভূমিকার সঠিক তুলনা কোনটি?",["শিক্ষার্থীরা মনিটরিং করে; প্রতিষ্ঠান প্রধান কেবল দর্শক","উপদেষ্টা শিক্ষক নেতৃত্ব দেন; প্রতিষ্ঠান প্রধান কোনো ভূমিকা রাখেন না","প্রতিষ্ঠান প্রধান নেতৃত্ব দিয়ে সমন্বয়, মনিটরিং ও মূল্যায়ন করেন; উপদেষ্টা শিক্ষক পরামর্শ দেন; শিক্ষার্থীরা সেই পরামর্শে কাজ করে","সবাই একই কাজ করেন, কোনো পার্থক্য নেই"],2,3],["বিদ্যালয়ে দলগত সহশিক্ষাক্রমিক কার্যক্রম বাড়ালে শিক্ষক-শিক্ষার্থী ও শিক্ষার্থী-শিক্ষার্থী সম্পর্কে কী ফল আশা করা যায়?",["সম্পর্ক সুদৃঢ় হবে","সম্পর্ক দুর্বল হবে","সম্পর্কে কোনো প্রভাব পড়বে না","শুধু শিক্ষক-শিক্ষার্থী সম্পর্ক নষ্ট হবে"],0,3],["একটি প্রতিষ্ঠান কেবল পাঠ্যবইভিত্তিক পাঠদান করে এবং সহশিক্ষাক্রমিক কার্যক্রম বাদ দেয়। পাঠ অনুযায়ী এতে শিক্ষার্থীদের কী ক্ষতি হবে?",["নেতৃত্ব, সহযোগিতা, নৈতিক গুণাবলি ও দায়িত্ববোধ বিকাশের সুযোগ কমে যাবে","পরীক্ষার নম্বর সবসময় বেড়ে যাবে","শিক্ষকের দায়িত্ব বেড়ে যাবে","প্রতিষ্ঠানের সুনাম বাড়বে"],0,3],["শ্রেণিকক্ষের শিখন-শেখানো কার্যক্রম ও সহশিক্ষাক্রমিক কার্যক্রমের মধ্যে কোন তুলনাটি সঠিক?",["সহশিক্ষাক্রমিক কার্যক্রম শ্রেণিকক্ষ কার্যক্রমের বিকল্প এবং এর সাথে সম্পর্কহীন","শ্রেণিকক্ষ কার্যক্রম শুধু নেতৃত্ববিকাশ করে","সহশিক্ষাক্রমিক কার্যক্রম শ্রেণিকক্ষ কার্যক্রমের বর্ধিতাংশ, যা ব্যক্তিক ও সামাজিক মূল্যবোধ এবং নেতৃত্বের গুণাবলি বিকাশে সাহায্য করে","দুটির উদ্দেশ্য সম্পূর্ণ আলাদা এবং পরস্পরবিরোধী"],2,3],["একজন অধ্যক্ষ কোনো কমিটি গঠন না করে সব সহশিক্ষাক্রমিক কাজ একাই করেন। পাঠ অনুযায়ী তাঁর কী করা উচিত?",["সব কমিটি বাতিল করে নিজেই সব কাজ চালিয়ে যাওয়া","শিক্ষক ও শিক্ষার্থী সমন্বয়ে কমিটি গঠন করে প্রতিটিতে উপদেষ্টা শিক্ষক রাখা এবং নিজে সমন্বয়, মনিটরিং ও মূল্যায়ন করা","কেবল শিক্ষার্থীদের হাতে সব দায়িত্ব ছেড়ে দেওয়া","সহশিক্ষাক্রমিক কার্যক্রম বন্ধ করে দেওয়া"],1,3],["একজন শিক্ষার্থী অবসর সময় অপচয় করে। সহশিক্ষাক্রমিক কার্যাবলির গুরুত্বের আলোকে তার জন্য সবচেয়ে উপযুক্ত পদক্ষেপ কোনটি?",["তাকে সব কার্যক্রম থেকে দূরে রাখা","শুধু শাস্তি দেওয়া","পাঠ্য বইয়ের পরিমাণ কমিয়ে দেওয়া","নিজস্ব প্রবণতা ও সামর্থ্য অনুযায়ী কোনো ক্লাব বা কার্যক্রমে অংশগ্রহণে উৎসাহিত করা"],3,3]].map(([q,o,a,t])=>({q,o,a,t}));
+/* t: 0=জ্ঞানমূলক 1=অনুধাবনমূলক 2=প্রয়োগমূলক 3=উচ্চতর দক্ষতা */
+const N=20,TIME=600,QUOTA=[11,3,3,3],TN=["জ্ঞানমূলক","অনুধাবনমূলক","প্রয়োগমূলক","উচ্চতর দক্ষতা"];
+const bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
+const $=id=>document.getElementById(id);
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const L=['ক','খ','গ','ঘ'];
+let Q=[],ans=[],left=TIME,tm=null,done=false;
+function renderMath(el){try{if(window.renderMathInElement)renderMathInElement(el,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false})}catch(e){}}
+function info(){
+  const n=masterQuestionBank.length,t=Math.min(N,n);
+  $('fullmark').textContent='পূর্ণমান: '+bn(t);$('timeinfo').textContent='সময়: '+bn(TIME/60)+' মিনিট';
+  $('info2').textContent='['+bn(n)+' টি প্রশ্ন আছে]';
+  $('info3').textContent='প্রতিবার '+bn(t)+'টা প্রশ্ন আসবে। (অপশনসহ এলোমেলো)'
+}
+function start(){
+  clearInterval(tm);done=false;left=TIME;
+  const take=Math.min(N,masterQuestionBank.length);let pick=[];
+  QUOTA.forEach((n,t)=>{pick=pick.concat(shuf(masterQuestionBank.filter(x=>x.t===t)).slice(0,n))});
+  if(pick.length<take){const rest=shuf(masterQuestionBank.filter(x=>!pick.includes(x)));pick=pick.concat(rest.slice(0,take-pick.length))}
+  pick=shuf(pick.slice(0,take));
+  Q=pick.map(x=>{const idx=shuf(x.o.map((t,i)=>i));return{q:x.q,t:x.t,o:idx.map(i=>x.o[i]),a:idx.indexOf(x.a)}});
+  ans=Q.map(()=>-1);
+  $('result').classList.add('hide');$('submit').disabled=false;$('submit').parentElement.classList.remove('hide');
+  const box=$('quiz');box.innerHTML='';
+  Q.forEach((q,i)=>{
+    const c=document.createElement('div');c.className='card';c.id='q'+i;
+    c.innerHTML='<div class="qn">'+bn(i+1)+'। '+q.q+'</div>'+q.o.map((t,j)=>'<button class="opt" data-i="'+i+'" data-j="'+j+'">'+t+'</button>').join('');
+    box.appendChild(c)});
+  box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>pickOpt(+b.dataset.i,+b.dataset.j));
+  upd();tick();tm=setInterval(tick,1000);
+  renderMath(box);try{window.scrollTo(0,0)}catch(e){}
+}
+function pickOpt(i,j){
+  if(done||ans[i]>=0)return;ans[i]=j;
+  document.querySelectorAll('#q'+i+' .opt').forEach((b,k)=>{b.disabled=true;if(k===j)b.classList.add('sel')});upd()
+}
+function upd(){$('prog').textContent=bn(ans.filter(a=>a>=0).length)+'/'+bn(Q.length)}
+function tick(){
+  const m=Math.floor(left/60),s=left%60;$('timer').textContent=bn(String(m).padStart(2,'0'))+':'+bn(String(s).padStart(2,'0'));
+  $('timer').classList.toggle('low',left<=60);
+  if(left<=0){clearInterval(tm);finish();return}left--
+}
+function submitClick(){
+  const miss=[];ans.forEach((a,i)=>{if(a<0)miss.push(i)});
+  if(miss.length){alert('নিচের প্রশ্নগুলোর উত্তর দেওয়া বাকি আছে: '+miss.map(i=>bn(i+1)).join(', '));
+    $('q'+miss[0]).scrollIntoView({behavior:'smooth',block:'center'});return}
+  clearInterval(tm);finish()
+}
+function finish(){
+  if(done)return;done=true;let c=0,w=0,u=0;
+  Q.forEach((q,i)=>{
+    const card=$('q'+i),opts=card.querySelectorAll('.opt');opts.forEach(b=>b.disabled=true);
+    opts[q.a].classList.add('correct');
+    if(ans[i]<0)u++;else if(ans[i]===q.a)c++;else{w++;opts[ans[i]].classList.add('wrong')}
+  });
+  const score=c,pct=Q.length?score/Q.length*100:0;
+  const items=[['মোট প্রশ্ন',bn(Q.length)],['সঠিক',bn(c)],['ভুল',bn(w)],['চূড়ান্ত স্কোর',bn(score.toFixed(2).replace(/\.?0+$/,''))+'/'+bn(Q.length)]];
+  $('stats').innerHTML=items.map(x=>'<div class="stat-box"><b>'+x[1]+'</b>'+x[0]+'</div>').join('');
+  $('prog').textContent='স্কোর: '+bn(score.toFixed(2).replace(/\.?0+$/,''))+'/'+bn(Q.length);
+  $('fb').textContent=pct>=90?'🎉 অসাধারণ! চমৎকার ফলাফল, চালিয়ে যান!':pct>=80?'👏 খুব ভালো! আরও অনুশীলন প্রয়োজন।':pct>=60?'🙂 ভালো, আরও অনুশীলন প্রয়োজন।':'📖 আরও মনোযোগ দিয়ে পড়ুন।';
+  $('submit').parentElement.classList.add('hide');$('result').classList.remove('hide');
+  renderMath($('quiz'));
+  setTimeout(()=>{try{$('result').scrollIntoView({block:'start'})}catch(_){}try{window.scrollTo(0,$('result').getBoundingClientRect().top+window.pageYOffset-70)}catch(_){}},80)
+}
+$('submit').onclick=submitClick;$('again').onclick=start;
+$('theme').onclick=()=>{const d=document.documentElement.dataset.theme==='dark';document.documentElement.dataset.theme=d?'light':'dark';$('theme').textContent=d?'🌙 ডার্ক মোড':'☀️ লাইট মোড'};
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  const k=e.key.toLowerCase(),blk=(e.ctrlKey&&['c','s','u'].includes(k))||e.key==='F12'||e.key==='PrintScreen';
+  if(blk){e.preventDefault();try{navigator.clipboard.writeText('')}catch(_){}alert('এই পেজে কপি/সেভ/সোর্স দেখা নিষিদ্ধ।')}});
+document.addEventListener('keyup',e=>{if(e.key==='PrintScreen'){try{navigator.clipboard.writeText('')}catch(_){}alert('স্ক্রিনশট নেওয়া নিষিদ্ধ।')}});
+window.addEventListener('load',()=>{info();start()});
+</script>
+</body>
+</html>

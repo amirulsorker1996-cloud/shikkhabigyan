@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>শিক্ষকের পেশাগত মূল্যবোধ ও নৈতিকতা - অনলাইন কুইজ পরীক্ষা</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+<style>
+@font-face{font-family:'SolaimanLipi';src:local('SolaimanLipi'),local('Solaiman Lipi'),url('SolaimanLipi.ttf') format('truetype');font-display:swap}
+*{font-family:'SolaimanLipi',Arial,sans-serif !important;box-sizing:border-box}
+.katex,.katex *{font-family:KaTeX_Main,'Times New Roman',serif !important}
+:root{--primary:#006a4e;--primary-d:#004d37;--bg:#f2f6f4;--card:#fff;--text:#1d2b26;--muted:#5d6d66;--border:#d5e2dc;--ok:#1b8a4b;--okbg:#e3f6ea;--bad:#c62828;--badbg:#fdeaea;--shadow:0 2px 10px rgba(0,0,0,.08);--ul:#006a4e}
+[data-theme=dark]{--primary:#4db6ac;--bg:#101816;--card:#1a2622;--text:#e6f0ec;--muted:#9bb0a8;--border:#2c3d37;--ok:#66d28f;--okbg:#17352a;--bad:#ff8a80;--badbg:#3a2020;--shadow:0 2px 10px rgba(0,0,0,.5);--ul:#4db6ac}
+body{margin:0;background:var(--bg);color:var(--text);line-height:1.7;-webkit-user-select:none;-moz-user-select:none;user-select:none}
+.wrap{max-width:900px;margin:0 auto;padding:12px}
+header{background:linear-gradient(135deg,#004d37,#006a4e);color:#fff;text-align:center;padding:22px 14px;border-radius:0 0 18px 18px;box-shadow:var(--shadow)}
+header h1{margin:0;font-size:1.5rem}header p{margin:3px 0 0;font-size:1rem;opacity:.95}
+.card{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:16px;margin:14px 0;border:1px solid var(--border)}
+.chapter-title{margin:0 0 12px;padding-bottom:8px;font-size:1.4rem;color:var(--primary);border-bottom:3px solid var(--ul)}
+.badge{background:var(--bg);border-left:4px solid var(--primary);padding:8px 12px;border-radius:8px;margin:8px 0;font-size:.95rem}
+.warn{background:#fff6e0;color:#6b4a00;border-left:4px solid #f0a500;padding:8px 12px;border-radius:8px;font-size:.95rem}
+#info2,#info3{text-align:center}
+#info3{white-space:nowrap;font-size:clamp(.62rem,3.3vw,.95rem)}
+.wrow{display:flex;justify-content:space-between;gap:10px;margin-bottom:2px}
+[data-theme=dark] .warn{background:#3a3016;color:#ffd98a}
+.bar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--card);padding:10px 14px;border-radius:12px;box-shadow:var(--shadow);border:1px solid var(--border)}
+#timer{font-size:1.3rem;font-weight:700;color:var(--primary)}#timer.low{color:var(--bad)}
+button{cursor:pointer;border:0;border-radius:10px;padding:9px 16px;font-size:1rem;background:var(--primary);color:#fff}
+[data-theme=dark] button{color:#0b1512}
+button:disabled{opacity:.5;cursor:default}
+.qn{font-weight:700;margin-bottom:8px}
+.opt{display:block;width:100%;text-align:left;background:var(--bg);color:var(--text);border:2px solid var(--border);margin:6px 0;padding:9px 12px;border-radius:10px}
+[data-theme=dark] .opt{color:var(--text)}
+.opt.sel{border-color:var(--primary)}
+.opt.correct{background:var(--okbg);border-color:var(--ok)}
+.opt.wrong{background:var(--badbg);border-color:var(--bad)}
+.tag{display:inline-block;font-size:.8rem;background:var(--bg);color:var(--primary);border:1px solid var(--border);border-radius:20px;padding:0 10px;margin-bottom:6px}
+.exp{display:none;margin-top:8px;padding:8px 12px;border-radius:8px;background:var(--bg);border-left:4px solid var(--primary);font-size:.95rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.stat-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;box-shadow:var(--shadow)}
+.stat-box b{display:block;font-size:1.5rem;color:var(--primary)}
+#fb{font-size:1.1rem;font-weight:700;text-align:center;margin:12px 0}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<h2 class="chapter-title">শিক্ষকের পেশাগত মূল্যবোধ ও নৈতিকতা</h2>
+<div class="warn"><div class="wrow"><b id="fullmark"></b><b id="timeinfo"></b></div><div id="info2"></div><div id="info3"></div></div>
+</div>
+<div class="bar"><span>⏱️ <span id="timer">১০:০০</span></span><span id="prog"></span><button id="theme">🌙 ডার্ক মোড</button></div>
+<div id="quiz"></div>
+<div id="result" class="hide">
+<div class="card"><div class="stats" id="stats"></div><div id="fb"></div><div style="text-align:center"><button id="again">পুনরায় কুইজ দাও</button></div></div>
+</div>
+<div class="card" style="text-align:center"><button id="submit">সাবমিট করো</button></div>
+
+</div>
+<script>
+const masterQuestionBank=[["“শিক্ষকের পেশাগত মূল্যবোধ ও নৈতিকতা” অধ্যায় অনুযায়ী শিক্ষা যদি জাতির মেরুদণ্ড হয়, তবে শিক্ষক কীসের মেরুদণ্ড?",["সমাজের","অর্থনীতির","শিক্ষার","রাজনীতির"],2,0],["অধ্যায় অনুযায়ী একজন শিক্ষকের মূল দায়িত্ব কী?",["শিক্ষার্থীর কাঙ্ক্ষিত জ্ঞানের চাহিদা পূরণ করা","পরীক্ষার ফল প্রকাশ করা","প্রতিষ্ঠানের আয় বৃদ্ধি করা","প্রশাসনিক পদে উন্নীত হওয়া"],0,0],["দায়িত্ব ও মূল্যবোধের যথাযথ প্রয়োগই কী?",["গণতান্ত্রিক নির্বাচন","আইনের শাসন","শিক্ষাক্রম প্রণয়ন","স্বচ্ছতা ও জবাবদিহিতা"],3,0],["“শিক্ষার উদ্দেশ্য বড় মাপের মানুষ তৈরি করা”— এ কথাটি কার?",["বার্ট্রান্ড রাসেল","এরিস্টটল","সক্রেটিস","প্লেটো"],1,0],["“শিক্ষা কোনো কিছু অর্জনের মাধ্যম নয়। শিক্ষা শিক্ষার জন্য”— এ কথাটি কার মত?",["এরিস্টটল","সক্রেটিস","প্লেটো","বার্ট্রান্ড রাসেল"],3,0],["বার্ট্রান্ড রাসেলের মতে শিক্ষা মানুষকে কী দেয়?",["পদমর্যাদা","জ্ঞান","সম্পদ","রাজনৈতিক ক্ষমতা"],1,0],["অধ্যায় অনুযায়ী বর্তমান বিশ্বে শিক্ষার একটি উদ্দেশ্য কী?",["মুক্তবুদ্ধি ও মুক্তচিন্তার চর্চা করা","শুধু চাকরির সুযোগ সৃষ্টি করা","শুধু পরীক্ষায় ভালো ফল করা","শুধু বিদেশে যাওয়ার সুযোগ তৈরি করা"],0,0],["শিক্ষকদেরকে সমাজের একজন কী হিসেবে গড়ে উঠতে হবে?",["শাসক","ব্যবসায়ী","মডেল","প্রশাসক"],2,0],["শিক্ষকগণ যেহেতু কেমন মানুষ, তাই তাঁরা বিভিন্ন সময়ে বিভিন্ন মানুষ বা পরিবেশের দ্বারা প্রভাবিত হতে পারেন?",["আদর্শ মানুষ","রক্তমাংসের মানুষ","অশিক্ষিত মানুষ","ক্ষমতাধর মানুষ"],1,0],["একজন শিক্ষকের কোন বিষয়টির গভীরতা ও নির্ভুলতা থাকতে হবে?",["অর্থের","ক্ষমতার","খ্যাতির","জ্ঞানের"],3,0],["নিয়মনীতির ক্ষেত্রে শিক্ষক কেমন থাকবেন?",["নমনীয় ও দুর্বল","পক্ষপাতদুষ্ট ও উদাসীন","নিরপেক্ষ ও কঠোর","উদাসীন ও অনমনীয়"],2,0],["অভিভাবক হিসেবে শিক্ষক শিক্ষার্থীদের সাথে কেমন আচরণ করবেন?",["বন্ধুসুলভ","কঠোর ও রুক্ষ","উদাসীন","নিয়মবিমুখ"],0,0],["অধ্যায়ের ভাষ্য অনুযায়ী শিক্ষক কেমন মানুষ হবেন?",["ক্ষমতা ও খ্যাতিসম্পন্ন","ন্যায়-নীতি ও বিচক্ষণতাবোধসম্পন্ন","শুধু জ্ঞান ও অর্থসম্পন্ন","শুধু আনুগত্যসম্পন্ন"],1,0],["একজন শিক্ষকের দায়বদ্ধতা প্রধানত কার কাছে থাকে?",["প্রতিষ্ঠান প্রধানের কাছে","অভিভাবকের কাছে","সরকারের কাছে","তার নিজের বিবেকের কাছে"],3,0],["শিক্ষকের দায়বদ্ধতার ক্ষেত্রে “সর্বোপরি” কার কাছে দায়বদ্ধতা থাকে বলা হয়েছে?",["প্রতিষ্ঠান প্রধানের কাছে","নিজের বিবেকের কাছে","শিক্ষার্থীর কাছে","অভিভাবকের কাছে"],0,0],["শিক্ষার্থীদের শিখনের কাঙ্ক্ষিত লক্ষ্যে পৌঁছাতে প্রতিষ্ঠান প্রধান শিক্ষকদের মধ্যে দায়িত্ব বণ্টনের জন্য কোন পরিকল্পনা তৈরি করেন?",["annual budget plan","examination routine","time bound action plan","admission policy"],2,0],["স্বচ্ছতা ও জবাবদিহিতা কোন ধরনের মূল্যবোধ?",["ধর্মীয় মূল্যবোধ","অর্থনৈতিক মূল্যবোধ","গণতান্ত্রিক মূল্যবোধ","আইনি মূল্যবোধ"],2,0],["স্বচ্ছতা অর্জনের কার্যকর পদ্ধতি হিসেবে অধ্যায়ে ইংরেজিতে কোন শব্দটি উল্লেখ আছে?",["Self-Analysis","Self-Promotion","Self-Defense","Self-Reliance"],0,0],["স্বচ্ছতা ও জবাবদিহিতা অর্জনের মানসিকতা সৃষ্টিতে কী থাকলে কাজটি অসাধ্য নয়?",["ক্ষমতা, অর্থ ও প্রভাব","পরিচিতি, সুপারিশ ও চাপ","পদবি, সনদ ও অভিজ্ঞতা","সদিচ্ছা, আন্তরিকতা ও প্রতিশ্রুতি"],3,0],["নিচের কোনটি বাংলাদেশের শিক্ষা প্রতিষ্ঠানে স্বচ্ছতা ও জবাবদিহিতার অভাবের কারণ হিসেবে উল্লেখ আছে?",["আইনের শাসন প্রতিষ্ঠা","ঘুষ, দুর্নীতি ও স্বজনপ্রীতি","যোগ্যতার ভিত্তিতে নিয়োগ","অভ্যন্তরীণ নিরীক্ষা কমিটি গঠন"],1,0],["নিচের কোনটি স্বচ্ছতা ও জবাবদিহিতা প্রতিষ্ঠার উপায় হিসেবে উল্লেখ আছে?",["ক্ষমতার অপব্যবহার","আয়-ব্যয়ের হিসাব না রাখা","নিজস্ব লোকদের অবৈধ সুবিধা প্রদান","শিক্ষা প্রতিষ্ঠানে আইনের শাসন প্রতিষ্ঠা করা"],3,0],["স্বচ্ছতা ও জবাবদিহিতার অভাবের একটি কারণ হিসেবে কোন প্রশাসনিক ব্যবস্থার না থাকা বা না মানার কথা বলা হয়েছে?",["বার্ষিক পরীক্ষা ব্যবস্থা","প্রশাসনিক চেইন অব কমান্ড","শিক্ষাক্রম কমিটি","অভিভাবক সমাবেশ"],1,0],["শিক্ষক ও শিক্ষার্থী পরস্পর পরিপূরক হলে শিক্ষকের দায়িত্ব ও মূল্যবোধ শিক্ষার উদ্দেশ্যের মধ্যে নিহিত থাকে — এর কারণ কী?",["কারণ শিক্ষক শিক্ষা এবং শিখন-শেখানো কার্যক্রম নিয়েই কাজ করেন","কারণ শিক্ষক পরীক্ষা নিয়ন্ত্রণ করেন","কারণ শিক্ষক প্রতিষ্ঠানের আয়-ব্যয় দেখেন","কারণ শিক্ষক সরকার নিয়ন্ত্রণ করেন"],0,1],["মূল্যবোধসম্পন্ন শিক্ষক না হলে বড় মাপের মানুষ তৈরি করা যায় না কেন?",["কারণ শিক্ষক সবচেয়ে বেশি বেতন পান","কারণ শিক্ষক প্রশাসনিক ক্ষমতা রাখেন","কারণ শিক্ষকই মানুষ গড়ার কারিগর","কারণ শিক্ষক পরীক্ষার ফল নির্ধারণ করেন"],2,1],["শিক্ষকদেরকে সমাজের একজন মডেল হিসেবে গড়ে উঠতে হবে কেন?",["যেন শিক্ষকরা অধিক সম্মানী পান","যেন শিক্ষার্থীরা তাঁদেরকে অনুকরণীয় ও অনুসরণীয় মনে করতে পারে","যেন শিক্ষকরা পরীক্ষা থেকে অব্যাহতি পান","যেন শিক্ষকরা প্রশাসনিক পদ পান"],1,1],["অধ্যায় অনুযায়ী দায়িত্বশীল শিক্ষকের কাছে “জবাবদিহিতা কোনো কঠিন বিষয় নয়” কেন?",["কারণ তাঁকে কেউ প্রশ্ন করে না","কারণ তিনি দায়িত্ব এড়িয়ে চলেন","কারণ তাঁর কোনো দায়িত্ব নেই","কারণ তিনি মূল্যবোধসম্পন্ন এবং স্বচ্ছতা ও জবাবদিহিতা সম্পর্কে সর্বদা সচেতন ও প্রস্তুত"],3,1],["“স্বচ্ছতা অর্জিত হলে জবাবদিহিতা স্বতঃস্ফূর্ত হবে”— কথাটির অর্থ কী?",["জবাবদিহিতা কখনোই প্রয়োজন হয় না","স্বচ্ছতা ও জবাবদিহিতা একে অপরের বিপরীত","নিজ কাজের জন্য দায়বদ্ধ থাকলে জবাবদিহিতা স্বাভাবিকভাবেই আসে","জবাবদিহিতা শুধু চাপের মাধ্যমে আসে"],2,1],["শিক্ষককে তাঁর দুর্বলতাগুলো অনুভব করতে পারা এবং সচেতনতার সাথে সেগুলো পরিহার করার মানসিকতা থাকতে হবে — কথাটির অর্থ কী?",["শিক্ষক নিজের ত্রুটি চিহ্নিত করে তা সংশোধনে সচেতন থাকবেন","শিক্ষক নিজের ভুল সবসময় গোপন করবেন","শিক্ষক শুধু অন্যের ভুল ধরবেন","শিক্ষক নিজেকে সবসময় নির্ভুল মনে করবেন"],0,1],["রহিম স্যার প্রতিষ্ঠান প্রধানের নির্ধারিত দায়িত্ব যথাযথভাবে পালন করে শিক্ষার্থীদের শিখনের কাঙ্ক্ষিত লক্ষ্যে পৌঁছাতে সহায়তা করেন। এতে তাঁর কাজে কী তৈরি হয়?",["অস্পষ্টতা","স্বচ্ছতা","স্বেচ্ছাচারিতা","স্বজনপ্রীতি"],1,2],["একটি কলেজের ম্যানেজিং কমিটির সদস্যরা অশিক্ষিত ও দুর্নীতিপরায়ণ। এটি স্বচ্ছতা ও জবাবদিহিতার অভাবের কোন কারণের সাথে সম্পর্কিত?",["কর্মকর্তাদের সমন্বয়","আইনের সঠিক ব্যাখ্যা","যোগ্য প্রধান নিয়োগ","অশিক্ষিত ও দুর্নীতিপরায়ণ ব্যক্তিদের গভর্নিং বডির সদস্য হিসেবে মনোনীত করা"],3,2],["একটি কলেজে আয়-ব্যয়ের সঠিক হিসাব রাখা হয় না এবং হিসাব প্রদানে কালক্ষেপণ করা হয়। এটি কীসের কারণ হিসেবে উল্লেখ আছে?",["স্বচ্ছতা ও জবাবদিহিতার অভাবের কারণ","স্বচ্ছতা প্রতিষ্ঠার উপায়","গণতান্ত্রিক মূল্যবোধের উদাহরণ","শিক্ষকের মডেল হওয়ার উপায়"],0,2],["একটি কলেজে অধ্যক্ষ রাজনৈতিক চাপ ছাড়াই স্বাধীনভাবে কাজ করার সুযোগ পাচ্ছেন। এটি স্বচ্ছতা ও জবাবদিহিতা প্রতিষ্ঠার কোন উপায়ের সাথে সঙ্গতিপূর্ণ?",["স্বজনপ্রীতির মাধ্যমে নিয়োগ","অভ্যন্তরীণ নিরীক্ষা কমিটি বাতিল","রাজনৈতিক চাপ বন্ধ করে স্বাধীনভাবে কাজ করার সংস্কৃতি তৈরি করা","ক্ষমতার অপব্যবহার"],2,2],["হঠাৎ কোনো বিষয় জানতে চাইলে এক শিক্ষক নির্দ্বিধায়, স্পষ্টভাবে ও দৃঢ়তার সাথে জবাব উপস্থাপন করতে পারলেন। এখানে কী প্রকাশ পেয়েছে?",["স্বেচ্ছাচারিতা","স্বজনপ্রীতি","স্বচ্ছতা ও জবাবদিহিতা","ক্ষমতার অপব্যবহার"],2,2],["এক শিক্ষক নিজের কাজ ও আচরণ নিজেই পর্যালোচনা করে ত্রুটি খুঁজে বের করছেন। অধ্যায়ের কোন ধারণাটি এখানে প্রকাশ পেয়েছে?",["আত্মবিশ্লেষণ (Self-Analysis)","আইনের অপপ্রয়োগ","স্বজনপ্রীতি","প্রশাসনিক চাপ"],0,2],["একটি কলেজে অভ্যন্তরীণ নিরীক্ষা কমিটি নেই বা থাকলেও কার্যকর নয়। অধ্যায় অনুযায়ী এই কারণ দূর করার জন্য কোন উপায়টি উপযুক্ত?",["রাজনৈতিক চাপ বৃদ্ধি করা","আইনের ভুল ব্যাখ্যা করা","শিক্ষকদের বেতন বাড়ানো","অভ্যন্তরীণ নিরীক্ষা কমিটি গঠন ও এর কার্যকারিতা তদারকি করা"],3,3],["কোনো কলেজে ঘুষখোর ও দুর্নীতিবাজ ব্যক্তিরা প্রভাব বিস্তার করছে। অধ্যায় অনুযায়ী সবচেয়ে উপযুক্ত পদক্ষেপ কোনটি?",["তাদের গভর্নিং বডির সদস্য করা","তাদের আইনের আওতায় আনা এবং শাস্তি নিশ্চিত করা","তাদের অভিযোগ উপেক্ষা করা","তাদের পুরস্কার প্রদান করা"],1,3],["এরিস্টটল ও বার্ট্রান্ড রাসেলের শিক্ষা-ভাবনার তুলনায় কোন বিবৃতিটি অধ্যায় অনুযায়ী সঠিক?",["এরিস্টটলের মতে শিক্ষা শিক্ষার জন্য; রাসেলের মতে শিক্ষার উদ্দেশ্য বড় মাপের মানুষ তৈরি","উভয়ের মতে শিক্ষা কেবল চাকরির মাধ্যম","উভয়ের মতে শিক্ষকের কোনো মূল্যবোধ দরকার নেই","এরিস্টটলের মতে শিক্ষার উদ্দেশ্য বড় মাপের মানুষ তৈরি করা; রাসেলের মতে শিক্ষা শিক্ষার জন্য"],3,3],["স্বচ্ছতা অর্জনের মানসিকতা সৃষ্টির জন্য প্রয়োজন—<br>i. সদিচ্ছা<br>ii. আন্তরিকতা ও প্রতিশ্রুতি<br>iii. ক্ষমতার অপব্যবহার<br>নিচের কোনটি সঠিক?",["i ও ii","i ও iii","ii ও iii","i, ii ও iii"],0,3],["বাংলাদেশের শিক্ষা প্রতিষ্ঠানে স্বচ্ছতা ও জবাবদিহিতার অভাবের কারণ —<br>i. ঘুষ, দুর্নীতি ও স্বজনপ্রীতি<br>ii. আইনের শাসন প্রতিষ্ঠা<br>iii. ক্ষমতার অপব্যবহার ও স্বেচ্ছাচারিতা<br>নিচের কোনটি সঠিক?",["i ও ii","i ও iii","ii ও iii","i, ii ও iii"],1,3],["স্বচ্ছতা ও জবাবদিহিতা প্রতিষ্ঠার উপায় হিসেবে —<br>i. আইনের শাসন প্রতিষ্ঠা করা<br>ii. অভ্যন্তরীণ নিরীক্ষা কমিটি গঠন করা<br>iii. যোগ্যতার ভিত্তিতে শিক্ষা প্রশাসক নিয়োগ দেওয়া<br>নিচের কোনটি সঠিক?",["i ও ii","i ও iii","ii ও iii","i, ii ও iii"],3,3]].map(r=>({q:r[0],o:r[1],a:r[2],t:r[3]}));
+/* t: 0=জ্ঞানমূলক 1=অনুধাবনমূলক 2=প্রয়োগমূলক 3=উচ্চতর দক্ষতা */
+const N=20,TIME=600,QUOTA=[11,3,3,3],TN=["জ্ঞানমূলক","অনুধাবনমূলক","প্রয়োগমূলক","উচ্চতর দক্ষতা"];
+const bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
+const $=id=>document.getElementById(id);
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const L=['ক','খ','গ','ঘ'];
+let Q=[],ans=[],left=TIME,tm=null,done=false;
+function renderMath(el){try{if(window.renderMathInElement)renderMathInElement(el,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false})}catch(e){}}
+function info(){
+  const n=masterQuestionBank.length,t=Math.min(N,n);
+  $('fullmark').textContent='পূর্ণমান: '+bn(t);$('timeinfo').textContent='সময়: '+bn(TIME/60)+' মিনিট';
+  $('info2').textContent='['+bn(n)+' টি প্রশ্ন আছে]';
+  $('info3').textContent='প্রতিবার '+bn(t)+'টা প্রশ্ন আসবে। (অপশনসহ এলোমেলো)'
+}
+function start(){
+  clearInterval(tm);done=false;left=TIME;
+  const take=Math.min(N,masterQuestionBank.length);let pick=[];
+  QUOTA.forEach((n,t)=>{pick=pick.concat(shuf(masterQuestionBank.filter(x=>x.t===t)).slice(0,n))});
+  if(pick.length<take){const rest=shuf(masterQuestionBank.filter(x=>!pick.includes(x)));pick=pick.concat(rest.slice(0,take-pick.length))}
+  pick=shuf(pick.slice(0,take));
+  Q=pick.map(x=>{const idx=shuf(x.o.map((t,i)=>i));return{q:x.q,t:x.t,o:idx.map(i=>x.o[i]),a:idx.indexOf(x.a)}});
+  ans=Q.map(()=>-1);
+  $('result').classList.add('hide');$('submit').disabled=false;$('submit').parentElement.classList.remove('hide');
+  const box=$('quiz');box.innerHTML='';
+  Q.forEach((q,i)=>{
+    const c=document.createElement('div');c.className='card';c.id='q'+i;
+    c.innerHTML='<div class="qn">'+bn(i+1)+'। '+q.q+'</div>'+q.o.map((t,j)=>'<button class="opt" data-i="'+i+'" data-j="'+j+'">'+t+'</button>').join('');
+    box.appendChild(c)});
+  box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>pickOpt(+b.dataset.i,+b.dataset.j));
+  upd();tick();tm=setInterval(tick,1000);
+  renderMath(box);try{window.scrollTo(0,0)}catch(e){}
+}
+function pickOpt(i,j){
+  if(done||ans[i]>=0)return;ans[i]=j;
+  document.querySelectorAll('#q'+i+' .opt').forEach((b,k)=>{b.disabled=true;if(k===j)b.classList.add('sel')});upd()
+}
+function upd(){$('prog').textContent=bn(ans.filter(a=>a>=0).length)+'/'+bn(Q.length)}
+function tick(){
+  const m=Math.floor(left/60),s=left%60;$('timer').textContent=bn(String(m).padStart(2,'0'))+':'+bn(String(s).padStart(2,'0'));
+  $('timer').classList.toggle('low',left<=60);
+  if(left<=0){clearInterval(tm);finish();return}left--
+}
+function submitClick(){
+  const miss=[];ans.forEach((a,i)=>{if(a<0)miss.push(i)});
+  if(miss.length){alert('নিচের প্রশ্নগুলোর উত্তর দেওয়া বাকি আছে: '+miss.map(i=>bn(i+1)).join(', '));
+    $('q'+miss[0]).scrollIntoView({behavior:'smooth',block:'center'});return}
+  clearInterval(tm);finish()
+}
+function finish(){
+  if(done)return;done=true;let c=0,w=0,u=0;
+  Q.forEach((q,i)=>{
+    const card=$('q'+i),opts=card.querySelectorAll('.opt');opts.forEach(b=>b.disabled=true);
+    opts[q.a].classList.add('correct');
+    if(ans[i]<0)u++;else if(ans[i]===q.a)c++;else{w++;opts[ans[i]].classList.add('wrong')}
+  });
+  const score=c,pct=Q.length?score/Q.length*100:0;
+  const items=[['মোট প্রশ্ন',bn(Q.length)],['সঠিক',bn(c)],['ভুল',bn(w)],['চূড়ান্ত স্কোর',bn(score.toFixed(2).replace(/\.?0+$/,''))+'/'+bn(Q.length)]];
+  $('stats').innerHTML=items.map(x=>'<div class="stat-box"><b>'+x[1]+'</b>'+x[0]+'</div>').join('');
+  $('prog').textContent='স্কোর: '+bn(score.toFixed(2).replace(/\.?0+$/,''))+'/'+bn(Q.length);
+  $('fb').textContent=pct>=90?'🎉 অসাধারণ! চমৎকার ফলাফল, চালিয়ে যান!':pct>=80?'👏 খুব ভালো! আরও অনুশীলন প্রয়োজন।':pct>=60?'🙂 ভালো, আরও অনুশীলন প্রয়োজন।':'📖 আরও মনোযোগ দিয়ে পড়ুন।';
+  $('submit').parentElement.classList.add('hide');$('result').classList.remove('hide');
+  renderMath($('quiz'));
+  setTimeout(()=>{try{$('result').scrollIntoView({block:'start'})}catch(_){}try{window.scrollTo(0,$('result').getBoundingClientRect().top+window.pageYOffset-70)}catch(_){}},80)
+}
+$('submit').onclick=submitClick;$('again').onclick=start;
+$('theme').onclick=()=>{const d=document.documentElement.dataset.theme==='dark';document.documentElement.dataset.theme=d?'light':'dark';$('theme').textContent=d?'🌙 ডার্ক মোড':'☀️ লাইট মোড'};
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  const k=e.key.toLowerCase(),blk=(e.ctrlKey&&['c','s','u'].includes(k))||e.key==='F12'||e.key==='PrintScreen';
+  if(blk){e.preventDefault();try{navigator.clipboard.writeText('')}catch(_){}alert('এই পেজে কপি/সেভ/সোর্স দেখা নিষিদ্ধ।')}});
+document.addEventListener('keyup',e=>{if(e.key==='PrintScreen'){try{navigator.clipboard.writeText('')}catch(_){}alert('স্ক্রিনশট নেওয়া নিষিদ্ধ।')}});
+window.addEventListener('load',()=>{info();start()});
+</script>
+</body>
+</html>

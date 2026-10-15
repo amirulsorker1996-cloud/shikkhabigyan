@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>একীভূত শিক্ষা - অনলাইন কুইজ পরীক্ষা</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+<style>
+@font-face{font-family:'SolaimanLipi';src:local('SolaimanLipi'),local('Solaiman Lipi'),url('SolaimanLipi.ttf') format('truetype');font-display:swap}
+*{font-family:'SolaimanLipi',Arial,sans-serif !important;box-sizing:border-box}
+.katex,.katex *{font-family:KaTeX_Main,'Times New Roman',serif !important}
+:root{--primary:#006a4e;--primary-d:#004d37;--bg:#f2f6f4;--card:#fff;--text:#1d2b26;--muted:#5d6d66;--border:#d5e2dc;--ok:#1b8a4b;--okbg:#e3f6ea;--bad:#c62828;--badbg:#fdeaea;--shadow:0 2px 10px rgba(0,0,0,.08);--ul:#006a4e}
+[data-theme=dark]{--primary:#4db6ac;--bg:#101816;--card:#1a2622;--text:#e6f0ec;--muted:#9bb0a8;--border:#2c3d37;--ok:#66d28f;--okbg:#17352a;--bad:#ff8a80;--badbg:#3a2020;--shadow:0 2px 10px rgba(0,0,0,.5);--ul:#4db6ac}
+body{margin:0;background:var(--bg);color:var(--text);line-height:1.7;-webkit-user-select:none;-moz-user-select:none;user-select:none}
+.wrap{max-width:900px;margin:0 auto;padding:12px}
+header{background:linear-gradient(135deg,#004d37,#006a4e);color:#fff;text-align:center;padding:22px 14px;border-radius:0 0 18px 18px;box-shadow:var(--shadow)}
+header h1{margin:0;font-size:1.5rem}header p{margin:3px 0 0;font-size:1rem;opacity:.95}
+.card{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:16px;margin:14px 0;border:1px solid var(--border)}
+.chapter-title{margin:0 0 12px;padding-bottom:8px;font-size:1.4rem;color:var(--primary);border-bottom:3px solid var(--ul)}
+.badge{background:var(--bg);border-left:4px solid var(--primary);padding:8px 12px;border-radius:8px;margin:8px 0;font-size:.95rem}
+.warn{background:#fff6e0;color:#6b4a00;border-left:4px solid #f0a500;padding:8px 12px;border-radius:8px;font-size:.95rem}
+#info2,#info3{text-align:center}
+#info3{white-space:nowrap;font-size:clamp(.62rem,3.3vw,.95rem)}
+.wrow{display:flex;justify-content:space-between;gap:10px;margin-bottom:2px}
+[data-theme=dark] .warn{background:#3a3016;color:#ffd98a}
+.bar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--card);padding:10px 14px;border-radius:12px;box-shadow:var(--shadow);border:1px solid var(--border)}
+#timer{font-size:1.3rem;font-weight:700;color:var(--primary)}#timer.low{color:var(--bad)}
+button{cursor:pointer;border:0;border-radius:10px;padding:9px 16px;font-size:1rem;background:var(--primary);color:#fff}
+[data-theme=dark] button{color:#0b1512}
+button:disabled{opacity:.5;cursor:default}
+.qn{font-weight:700;margin-bottom:8px}
+.opt{display:block;width:100%;text-align:left;background:var(--bg);color:var(--text);border:2px solid var(--border);margin:6px 0;padding:9px 12px;border-radius:10px}
+[data-theme=dark] .opt{color:var(--text)}
+.opt.sel{border-color:var(--primary)}
+.opt.correct{background:var(--okbg);border-color:var(--ok)}
+.opt.wrong{background:var(--badbg);border-color:var(--bad)}
+.tag{display:inline-block;font-size:.8rem;background:var(--bg);color:var(--primary);border:1px solid var(--border);border-radius:20px;padding:0 10px;margin-bottom:6px}
+.exp{display:none;margin-top:8px;padding:8px 12px;border-radius:8px;background:var(--bg);border-left:4px solid var(--primary);font-size:.95rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.stat-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;box-shadow:var(--shadow)}
+.stat-box b{display:block;font-size:1.5rem;color:var(--primary)}
+#fb{font-size:1.1rem;font-weight:700;text-align:center;margin:12px 0}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<h2 class="chapter-title">একীভূত শিক্ষা</h2>
+<div class="warn"><div class="wrow"><b id="fullmark"></b><b id="timeinfo"></b></div><div id="info2"></div><div id="info3"></div></div>
+</div>
+<div class="bar"><span>⏱️ <span id="timer">১০:০০</span></span><span id="prog"></span><button id="theme">🌙 ডার্ক মোড</button></div>
+<div id="quiz"></div>
+<div id="result" class="hide">
+<div class="card"><div class="stats" id="stats"></div><div id="fb"></div><div style="text-align:center"><button id="again">পুনরায় কুইজ দাও</button></div></div>
+</div>
+<div class="card" style="text-align:center"><button id="submit">সাবমিট করো</button></div>
+
+</div>
+<script>
+const masterQuestionBank=[["একীভূত শিক্ষা হলো এমন একটি কৌশল যা শিক্ষার্থীদের কোন চাহিদা পূরণে সহায়ক?",["বহুমুখী শিখন চাহিদা","শুধু আর্থিক চাহিদা","শুধু পারিবারিক চাহিদা","শুধু শারীরিক চাহিদা"],0,0],["একীভূত শিক্ষার ধারণাটি প্রথম আন্তর্জাতিকভাবে স্বীকৃত হয় কোন সালে?",["১৯৮৪ সালে","২০০০ সালে","১৯৯৪ সালে","১৯৯০ সালে"],2,0],["একীভূত শিক্ষার ধারণাটি কোথায় অনুষ্ঠিত আন্তর্জাতিক সম্মেলনে প্রথম স্বীকৃত হয়?",["ইংল্যান্ডের লন্ডনে","জার্মানির বার্লিনে","ভারতের দিল্লিতে","স্পেনের সালামাংকায়"],3,0],["একীভূত শিক্ষাকে কোন স্লোগান বাস্তবায়নের প্রধান কৌশল বলা হয়েছে?",["শিক্ষাই জাতির মেরুদণ্ড","সবার জন্য শিক্ষা","জ্ঞানই শক্তি","সবার জন্য স্বাস্থ্য"],1,0],["একীভূত শিক্ষার মূল উদ্দেশ্য কী?",["শুধু মেধাবীদের পুরস্কৃত করা","বিভিন্ন পারগতা বিশিষ্ট শিক্ষার্থীদের শিক্ষালাভের মৌলিক অধিকার অর্জনে সহায়তা করা","শুধু প্রতিবন্ধীদের আলাদা বিদ্যালয়ে পাঠানো","পরীক্ষার ফল বৃদ্ধি করা"],1,0],["পিডিএফ অনুযায়ী একীভূত শিক্ষা শিক্ষার কয়টি স্তরে সকল শিক্ষার্থীকে সহায়তা করে?",["২টি","৩টি","৫টি","৪টি"],3,0],["একীভূত শিক্ষার লক্ষ্য কয়টি উল্লেখ করা হয়েছে?",["৩টি","২টি","৪টি","৫টি"],0,0],["একীভূত শিক্ষা যাদের জন্য তাদের মধ্যে কারা অন্তর্ভুক্ত?",["শুধু উচ্চ মেধাসম্পন্ন শিক্ষার্থী","শুধু ধনী পরিবারের শিক্ষার্থী","শারীরিক, দৃষ্টি, শ্রবণ ও বুদ্ধি প্রতিবন্ধী","শুধু শহরের শিক্ষার্থী"],2,0],["একীভূত শিক্ষা বাস্তবায়নে বিবেচ্য বিষয়ের সংখ্যা কয়টি?",["৫টি","৬টি","৮টি","১০টি"],2,0],["একীভূত শিক্ষা বাস্তবায়নের বিবেচ্য বিষয়সমূহের মধ্যে প্রথমটি কোনটি?",["শিক্ষকদের একীভূত শিক্ষা বিষয়ক প্রশিক্ষণ","শ্রুতি লেখক নিয়োগ","নমনীয় মূল্যায়ন","তহবিল গঠন"],0,0],["সহায়ক উপকরণের উদাহরণ হিসেবে কোনটি উল্লেখ করা হয়েছে?",["ক্যালকু লেটর","ব্রেইল প্লেট ও স্টাইলাস","মাইক্রোস্কোপ","ঘড়ি"],1,0],["শারীরিক প্রতিবন্ধী শিক্ষার্থী যাতে শ্রেণিকক্ষে প্রবেশ করতে পারে, সেজন্য কী ব্যবস্থা থাকতে হবে?",["শুধু আলাদা কক্ষ","শুধু পরীক্ষা মাফ","শুধু ছুটি প্রদান","হুইল চেয়ারসহ প্রবেশের ব্যবস্থা"],3,0],["পিডিএফ অনুযায়ী 'Special Need' শিক্ষার্থীদের জন্য কোন শিক্ষক নিয়োগের ব্যবস্থার কথা বলা হয়েছে?",["শুধু খণ্ডকালীন শিক্ষক","শুধু অবসরপ্রাপ্ত শিক্ষক","শুধু অভিভাবক","বিশেষ পারদর্শিতা সম্পন্ন শিক্ষক"],3,0],["একীভূত শিক্ষা বাস্তবায়নের বিবেচ্য বিষয়ের মধ্যে কোনটি অন্তর্ভুক্ত?",["পরীক্ষা বাতিল","শ্রুতি লেখক নিয়োগ","শ্রেণি বাতিল","বিদ্যালয় বন্ধ"],1,0],["শ্রেণিকক্ষে একীভূত শিক্ষা অনুশীলনের কৌশল কয়টি?",["৩টি","৪টি","৫টি","৬টি"],2,0],["শ্রেণিকক্ষে একীভূত শিক্ষা অনুশীলনের কৌশলসমূহের মধ্যে প্রথমটি কোনটি?",["সহযোগিতামূলক শিক্ষণ","সম্মিলিতভাবে সমস্যা সমাধান","কার্যকরি শিক্ষণ পদ্ধতি ও কৌশল প্রয়োগ","বিভিন্ন পারদর্শিতা সমন্বয়ে দল গঠন"],0,0],["'Heterogeneous Grouping' বলতে পিডিএফে কী বোঝানো হয়েছে?",["একই পারদর্শিতার শিক্ষার্থীদের দল","বিভিন্ন পারদর্শিতা বিশিষ্ট শিক্ষার্থী সমন্বয়ে গঠিত দল","শুধু ছাত্রদের দল","শুধু শিক্ষকদের দল"],1,0],["সহযোগিতামূলক শিক্ষণে 'Regular Education Teacher'-এর পাশাপাশি কোন শিক্ষক নিয়োগের ব্যবস্থা থাকতে হবে?",["Visiting Teacher","Assistant Teacher","Private Tutor","Special Education Teacher"],3,0],["সহযোগিতামূলক শিখনে কাদের সহায়তায় শিক্ষার্থীর জ্ঞানমূলক ও অনুভূতিমূলক শিখন ফলপ্রসূ হয়?",["অভিভাবকদের","শুধু শিক্ষকদের","সতীর্থদের","শুধু প্রধান শিক্ষকের"],2,0],["শ্রেণিকক্ষে শিক্ষার্থীদের অনাকাঙ্ক্ষিত আচরণ নিয়ন্ত্রণে কোন কৌশল গুরুত্বপূর্ণ ভূমিকা পালন করে?",["সম্মিলিতভাবে সমস্যা সমাধান","শুধু শাস্তি প্রদান","শুধু বহিষ্কার","শুধু পরীক্ষা গ্রহণ"],0,0],["উপরে উল্লিখিত উপায়গুলো উপযুক্ত শিক্ষণ পদ্ধতি ও কৌশল প্রয়োগ করে কিসের মাধ্যমে একীভূত শিক্ষাকে ফলপ্রসূ করা যায়?",["পরীক্ষা বাতিল","বিদ্যালয় বন্ধ","ফিডব্যাক প্রদান","শ্রেণি বিভাজন"],2,0],["'শিক্ষার্থী বান্ধব' বলতে কী বোঝায়?",["শুধু আনন্দদায়ক","শুধু নিরাপদ","শুধু শিক্ষককেন্দ্রিক","শিক্ষার্থীর জন্য সর্বতোভাবে উপযুক্ত, আনন্দদায়ক ও নিরাপদ"],3,0],["একীভূত শিক্ষার উপকারের মধ্যে আর্থ-সামাজিক, সাংস্কৃতিক ও একাডেমিক পরিবেশভেদে কাদের অন্তর্ভুক্তি বৃদ্ধির কথা বলা হয়েছে?",["শুধু প্রাথমিক শিক্ষার্থীর","মাধ্যমিক শিক্ষায় যোগ্য শিক্ষার্থীর","শুধু উচ্চ শিক্ষার্থীর","শুধু প্রাক-প্রাথমিক শিক্ষার্থীর"],1,0],["একীভূত শিক্ষা প্রবর্তন ও কার্যকর করার জন্য সরকার কাদের সাথে একযোগে কাজ করবে?",["শুধু প্রধান শিক্ষক","জেলা শিক্ষা অফিস, এসএমসি এবং প্রধান শিক্ষকসহ সকল শিক্ষক ও অভিভাবক","শুধু শিক্ষার্থী","শুধু এনজিও"],1,0],["আদিবাসী শিক্ষার্থীদের প্রধান ভাষা কোনটি নয় বলে পিডিএফে উল্লেখ আছে?",["ইংরেজি","আরবি","হিন্দি","বাংলা"],3,0],["নিচের কোনটি একীভূত শিক্ষা বাস্তবায়নের চ্যালেঞ্জ হিসেবে উল্লেখ করা হয়েছে?",["অত্যধিক প্রত্যাশা","নমনীয় মূল্যায়ন","শ্রুতি লেখক নিয়োগ","সহযোগিতামূলক শিখন"],0,0],["চ্যালেঞ্জ হিসেবে উল্লিখিত 'পার্থক্যকরণ' বলতে কী বোঝানো হয়েছে?",["সকলকে সমানভাবে দেখা","সকলকে একই দলে রাখা","এক শিক্ষার্থীকে অন্যজন থেকে ভিন্নভাবে দেখা","সকলকে একই শিক্ষক দেওয়া"],2,0],["'Education for all' অর্জনে 'We don't want to run alone, we want to run with all our people' — এই নীতি প্রয়োগের কথা পিডিএফে কোথায় বলা হয়েছে?",["একীভূত শিক্ষার লক্ষ্যে","শিক্ষার্থীর বিভিন্নতার তালিকায়","একীভূত শিক্ষার চ্যালেঞ্জ উত্তরণের উপায়ে","শ্রেণিকক্ষ কৌশলে"],2,0],["একীভূত শিক্ষার মূল কথা, 'শিক্ষা ব্যবস্থায় পরিবর্তন এনে তা বিভিন্ন সামর্থ্য বিশিষ্ট শিক্ষার্থীর জন্য উন্মুক্ত করা' — এর অর্থ কী?",["শিক্ষার্থীকে ব্যবস্থার উপযোগী করা","বিশেষ শিক্ষার্থীদের বাদ দেওয়া","শিক্ষার্থীকে নয়, শিক্ষা ব্যবস্থাকেই শিক্ষার্থীর উপযোগী করা","শুধু মেধাবীদের সুযোগ দেওয়া"],2,1],["একীভূত শিক্ষায় শিক্ষার্থীদের 'বিভিন্নতা'-কে সমস্যা না ভেবে চ্যালেঞ্জ হিসেবে নেওয়ার কারণ কী?",["বিভিন্নতা দূর করা সহজ","বিভিন্নতা অপ্রয়োজনীয়","বিভিন্নতা কেবল প্রতিবন্ধীদের জন্য","এতে শিক্ষক-শিক্ষার্থীর মধ্যে সহজ ও স্বাচ্ছন্দ্য পরিবেশ তৈরি হয়"],3,1],["'কোনো শিক্ষার্থীই শিক্ষা থেকে বঞ্চিত হয় না' — একীভূত শিক্ষার ক্ষেত্রে বাক্যটির তাৎপর্য কী?",["শুধু মেধাবীদের জন্য শিক্ষা","সব শিক্ষার্থীর জন্য শিক্ষার প্রতিবন্ধকতা দূরীকরণ বা প্রশমিত করা","শুধু প্রতিবন্ধীদের জন্য আলাদা শিক্ষা","পরীক্ষা ছাড়া উত্তীর্ণ করা"],1,1],["সহযোগিতামূলক শিখনে নমনীয় ও সুবিবেচনা প্রসূত দল গঠনের ফলে কী ঘটে?",["শিক্ষার্থীরা পরস্পর বিচ্ছিন্ন হয়","শিক্ষার্থীরা শিখনে একে অপরের কাছ থেকে লাভবান হয়","শুধু একজন লাভবান হয়","শিক্ষকের ভূমিকা বাড়ে না"],1,1],["একটি শিক্ষার্থীবান্ধব বিদ্যালয়ে শিক্ষার্থীর কোন অধিকার থাকে?",["শুধু পরীক্ষায় অংশগ্রহণের অধিকার","শুধু পাঠ্যবই পাওয়ার অধিকার","শুধু ভর্তির অধিকার","সম্পূর্ণ সামর্থ্য বিকাশের জন্য উপযুক্ত সহায়তা লাভের অধিকার"],3,1],["একীভূত শিক্ষায় প্রতিটি শিক্ষার্থীর চাহিদা, সামর্থ্য ও ক্ষমতা অনুযায়ী বিষয়বস্তু নির্ধারণের ফল কী?",["শিক্ষণ-শিখন মানসম্মত হয়","শিক্ষণ-শিখন কঠিন হয়","শিক্ষার্থীর সংখ্যা কমে","পরীক্ষা বন্ধ হয়"],0,1],["বাংলাদেশে প্রত্যেক শ্রেণির শিক্ষার্থীকে আলাদা শিক্ষা দেওয়ার মতো ভৌত অবকাঠামো নেই — এ উক্তি কী নির্দেশ করে?",["আলাদা বিদ্যালয় প্রয়োজন","শিক্ষা বন্ধ রাখা উচিত","একই বিদ্যালয়ে ভিন্ন মেধার শিশুদের সমান সুযোগ দেওয়া প্রয়োজন","শুধু প্রতিবন্ধীদের শিক্ষা বাদ দেওয়া উচিত"],2,1],["রিয়া হুইল চেয়ার ব্যবহার করে, কিন্তু বিদ্যালয়ে শ্রেণিকক্ষে ঢোকার জন্য শুধু সিঁড়ি আছে। এখানে কোন বিবেচ্য বিষয়ের অভাব রয়েছে?",["সহযোগিতামূলক শিখন","শ্রুতি লেখক নিয়োগ","শ্রেণিকক্ষ প্রবেশ উপযোগী করা","নমনীয় মূল্যায়ন"],2,2],["দৃষ্টি প্রতিবন্ধী শিক্ষার্থী করিমের জন্য বিদ্যালয় ব্রেইল প্লেট ও স্টাইলাস এবং সাদা ছড়ি সংগ্রহ করল। এটি কোন বিবেচ্য বিষয়ের উদাহরণ?",["শ্রুতি লেখক","নমনীয় মূল্যায়ন","তহবিল গঠন","সহায়ক উপকরণ"],3,2],["সুমি লিখতে অসুবিধায় ভোগে। পরীক্ষায় তার জন্য কোন ব্যবস্থা নেওয়া উচিত?",["পরীক্ষা বাতিল","শ্রুতি লেখক নিয়োগ","বিদ্যালয় থেকে বহিষ্কার","শ্রেণি পরিবর্তন"],1,2],["রনির শুনতে সমস্যা হয়। শিক্ষক তাকে সহায়তার জন্য কোন সহায়ক উপকরণ দিতে পারেন?",["ব্রেইল প্লেট","হেয়ারিং এইড","সাদা ছড়ি","হুইল চেয়ার"],1,2],["রহিম স্যার ক্লাসে পাঠদানের সময় বিদ্যালয়ের বিশেষ শিক্ষকের সহায়তা নিলেন। এটি কোন কৌশলের উদাহরণ?",["সহযোগিতামূলক শিক্ষণ","বিভিন্ন পারদর্শিতা সমন্বয়ে দল গঠন","সম্মিলিতভাবে সমস্যা সমাধান","কার্যকরী শিক্ষণ"],0,2],["শিক্ষিকা মিতা ক্লাসে মেধাবী, গড়পড়তা ও দুর্বল শিক্ষার্থী মিলিয়ে দল গঠন করলেন। এটি কোন কৌশলের উদাহরণ?",["Co-operative Teaching","Collaborative Problem Solving","Heterogeneous Grouping","Effective Teaching"],2,2],["শ্রেণিকক্ষে কিছু শিক্ষার্থী প্রায়ই অনাকাঙ্ক্ষিত আচরণ করে। শিক্ষক সকলকে নিয়ে দলগতভাবে সমস্যার সমাধান করতে বললেন। এতে শিক্ষার্থীরা কী শিখবে?",["শুধু পরীক্ষার উত্তর লিখতে","শুধু ছবি আঁকতে","নিজেদের আচরণ নিয়ন্ত্রণ করতে","শুধু শিক্ষককে মান্য করতে"],2,2],["এক শিক্ষক বলেন, 'প্রতিবন্ধী শিক্ষার্থীকে দিয়ে কিছু হবে না।' এখানে কোন চ্যালেঞ্জটি ফু টে উঠেছে?",["নেতিবাচক দৃষ্টিভঙ্গি","প্রয়োজনীয় জ্ঞানের অভাব","সুস্পষ্ট নীতিমালার অভাব","ত্রুটিপূর্ণ শিক্ষাদান পদ্ধতি"],0,2],["একটি বিদ্যালয়ে বিভিন্ন চাহিদার শিক্ষার্থী ভর্তি হয়েছে, কিন্তু বিশেষ পারদর্শিতাসম্পন্ন কোনো শিক্ষক নেই। এ সমস্যা সমাধানে পিডিএফের আলোকে কোনটি সবচেয়ে প্রাসঙ্গিক?",["শিক্ষার্থী ভর্তি বন্ধ করা","শ্রেণিকক্ষ সংখ্যা কমানো","মূল্যায়ন বাদ দেওয়া","'Special Need' শিক্ষার্থীদের জন্য পারদর্শী শিক্ষক নিয়োগ ও কর্মকালীন প্রশিক্ষণ"],3,3],["কেউ মত দিলেন, 'শিক্ষার্থীকে শিক্ষা ব্যবস্থার উপযোগী করে তুলতে হবে।' একীভূত শিক্ষার ধারণার আলোকে এ মতের মূল্যায়ন কী?",["এটি একীভূত শিক্ষার মূল কথা","এটি একীভূত শিক্ষার ধারণার বিপরীত","এটি লক্ষ্যের সাথে সংগতিপূর্ণ","এটি পিডিএফে সমর্থিত"],1,3],["সকল শিশুকে শিক্ষা দেওয়ার দায়িত্ব কার — এ বিষয়ে পিডিএফের সিদ্ধান্ত কোনটি?",["শুধু বিশেষ শিক্ষা ব্যবস্থার","সাধারণ শিক্ষা ব্যবস্থার, বিশেষ শিক্ষা ব্যবস্থার নয়","শুধু এনজিওর","শুধু অভিভাবকের"],1,3],["একজন বললেন, 'প্রতিবন্ধী শিশুদের আলাদা বিদ্যালয়ে পাঠানোই সঠিক।' একীভূত শিক্ষার আলোকে এর বিপরীতে যুক্তি কোনটি?",["আলাদা বিদ্যালয়ে খরচ কম","শিক্ষার্থী সংখ্যা বাড়ে","শিক্ষক বেশি লাগে না","একীভূত শিক্ষা সকলের জন্য সমসুযোগ ও সামাজিক অংশগ্রহণ নিশ্চিত করে"],3,3],["একটি বিদ্যালয়ে শিক্ষক সকল শিক্ষার্থীকে একই পদ্ধতিতে পড়ান এবং ভিন্নতা উপেক্ষা করেন। পিডিএফ অনুযায়ী এটি কোন চ্যালেঞ্জের সাথে সবচেয়ে সংগতিপূর্ণ?",["ত্রুটিপূর্ণ শিক্ষাদান পদ্ধতি","অত্যধিক প্রত্যাশা","পার্থক্যকরণ","নমনীয় মূল্যায়ন"],0,3],["দেশের জনগোষ্ঠীর মধ্যে একীভূত শিক্ষা সম্পর্কে ভুল ধারণা ও নেতিবাচক মনোভাব বেশি। পিডিএফ অনুযায়ী কোন উপায় সবচেয়ে কার্যকর?",["শিক্ষা কার্যক্রম বন্ধ রাখা","পরীক্ষা বাড়ানো","রেডিও, টিভি ও ইলেকট্রনিক প্রিন্ট মিডিয়ায় প্রচার এবং দৃষ্টিভঙ্গি পরিবর্তন","বিদ্যালয়ের সময় কমানো"],2,3],["বাংলাদেশে জন্মগতভাবে, রোগ-শোক ও মনুষ্য সৃষ্ট কারণে প্রতিবন্ধী মানুষের সংখ্যা দিন দিন বাড়ছে। পিডিএফের আলোকে সরকারের জন্য সঠিক সিদ্ধান্ত কোনটি?",["প্রতিবন্ধী শিক্ষার্থীদের ভর্তি বন্ধ করা","শিক্ষা কার্যক্রম কমানো","একই বিদ্যালয়ে ভিন্ন মেধা ও পরিবেশ থেকে আসা শিশুকে সমান শিক্ষার সুযোগ দেওয়া","শুধু শহরে সুযোগ দেওয়া"],2,3]].map(r=>({q:r[0],o:r[1],a:r[2],t:r[3]}));
+/* t: 0=জ্ঞানমূলক 1=অনুধাবনমূলক 2=প্রয়োগমূলক 3=উচ্চতর দক্ষতা */
+const N=20,TIME=600,QUOTA=[11,3,3,3],TN=["জ্ঞানমূলক","অনুধাবনমূলক","প্রয়োগমূলক","উচ্চতর দক্ষতা"];
+const bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
+const $=id=>document.getElementById(id);
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const L=['ক','খ','গ','ঘ'];
+let Q=[],ans=[],left=TIME,tm=null,done=false;
+function renderMath(el){try{if(window.renderMathInElement)renderMathInElement(el,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false})}catch(e){}}
+function info(){
+  const n=masterQuestionBank.length,t=Math.min(N,n);
+  $('fullmark').textContent='পূর্ণমান: '+bn(t);$('timeinfo').textContent='সময়: '+bn(TIME/60)+' মিনিট';
+  $('info2').textContent='['+bn(n)+' টি প্রশ্ন আছে]';
+  $('info3').textContent='প্রতিবার '+bn(t)+'টা প্রশ্ন আসবে। (অপশনসহ এলোমেলো)'
+}
+function start(){
+  clearInterval(tm);done=false;left=TIME;
+  const take=Math.min(N,masterQuestionBank.length);let pick=[];
+  QUOTA.forEach((n,t)=>{pick=pick.concat(shuf(masterQuestionBank.filter(x=>x.t===t)).slice(0,n))});
+  if(pick.length<take){const rest=shuf(masterQuestionBank.filter(x=>!pick.includes(x)));pick=pick.concat(rest.slice(0,take-pick.length))}
+  pick=shuf(pick.slice(0,take));
+  Q=pick.map(x=>{const idx=shuf(x.o.map((t,i)=>i));return{q:x.q,t:x.t,o:idx.map(i=>x.o[i]),a:idx.indexOf(x.a)}});
+  ans=Q.map(()=>-1);
+  $('result').classList.add('hide');$('submit').disabled=false;$('submit').parentElement.classList.remove('hide');
+  const box=$('quiz');box.innerHTML='';
+  Q.forEach((q,i)=>{
+    const c=document.createElement('div');c.className='card';c.id='q'+i;
+    c.innerHTML='<div class="qn">'+bn(i+1)+'। '+q.q+'</div>'+q.o.map((t,j)=>'<button class="opt" data-i="'+i+'" data-j="'+j+'">'+t+'</button>').join('');
+    box.appendChild(c)});
+  box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>pickOpt(+b.dataset.i,+b.dataset.j));
+  upd();tick();tm=setInterval(tick,1000);
+  renderMath(box);try{window.scrollTo(0,0)}catch(e){}
+}
+function pickOpt(i,j){
+  if(done||ans[i]>=0)return;ans[i]=j;
+  document.querySelectorAll('#q'+i+' .opt').forEach((b,k)=>{b.disabled=true;if(k===j)b.classList.add('sel')});upd()
+}
+function upd(){$('prog').textContent=bn(ans.filter(a=>a>=0).length)+'/'+bn(Q.length)}
+function tick(){
+  const m=Math.floor(left/60),s=left%60;$('timer').textContent=bn(String(m).padStart(2,'0'))+':'+bn(String(s).padStart(2,'0'));
+  $('timer').classList.toggle('low',left<=60);
+  if(left<=0){clearInterval(tm);finish();return}left--
+}
+function submitClick(){
+  const miss=[];ans.forEach((a,i)=>{if(a<0)miss.push(i)});
+  if(miss.length){alert('নিচের প্রশ্নগুলোর উত্তর দেওয়া বাকি আছে: '+miss.map(i=>bn(i+1)).join(', '));
+    $('q'+miss[0]).scrollIntoView({behavior:'smooth',block:'center'});return}
+  clearInterval(tm);finish()
+}
+function finish(){
+  if(done)return;done=true;let c=0,w=0,u=0;
+  Q.forEach((q,i)=>{
+    const card=$('q'+i),opts=card.querySelectorAll('.opt');opts.forEach(b=>b.disabled=true);
+    opts[q.a].classList.add('correct');
+    if(ans[i]<0)u++;else if(ans[i]===q.a)c++;else{w++;opts[ans[i]].classList.add('wrong')}
+  });
+  const score=c,pct=Q.length?score/Q.length*100:0;
+  const items=[['মোট প্রশ্ন',bn(Q.length)],['সঠিক',bn(c)],['ভুল',bn(w)],['চূড়ান্ত স্কোর',bn(score.toFixed(2).replace(/\.?0+$/,''))+'/'+bn(Q.length)]];
+  $('stats').innerHTML=items.map(x=>'<div class="stat-box"><b>'+x[1]+'</b>'+x[0]+'</div>').join('');
+  $('prog').textContent='স্কোর: '+bn(score.toFixed(2).replace(/\.?0+$/,''))+'/'+bn(Q.length);
+  $('fb').textContent=pct>=90?'🎉 অসাধারণ! চমৎকার ফলাফল, চালিয়ে যান!':pct>=80?'👏 খুব ভালো! আরও অনুশীলন প্রয়োজন।':pct>=60?'🙂 ভালো, আরও অনুশীলন প্রয়োজন।':'📖 আরও মনোযোগ দিয়ে পড়ুন।';
+  $('submit').parentElement.classList.add('hide');$('result').classList.remove('hide');
+  renderMath($('quiz'));
+  setTimeout(()=>{try{$('result').scrollIntoView({block:'start'})}catch(_){}try{window.scrollTo(0,$('result').getBoundingClientRect().top+window.pageYOffset-70)}catch(_){}},80)
+}
+$('submit').onclick=submitClick;$('again').onclick=start;
+$('theme').onclick=()=>{const d=document.documentElement.dataset.theme==='dark';document.documentElement.dataset.theme=d?'light':'dark';$('theme').textContent=d?'🌙 ডার্ক মোড':'☀️ লাইট মোড'};
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  const k=e.key.toLowerCase(),blk=(e.ctrlKey&&['c','s','u'].includes(k))||e.key==='F12'||e.key==='PrintScreen';
+  if(blk){e.preventDefault();try{navigator.clipboard.writeText('')}catch(_){}alert('এই পেজে কপি/সেভ/সোর্স দেখা নিষিদ্ধ।')}});
+document.addEventListener('keyup',e=>{if(e.key==='PrintScreen'){try{navigator.clipboard.writeText('')}catch(_){}alert('স্ক্রিনশট নেওয়া নিষিদ্ধ।')}});
+window.addEventListener('load',()=>{info();start()});
+</script>
+</body>
+</html>

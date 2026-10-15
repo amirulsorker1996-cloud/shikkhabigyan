@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>জীবন দক্ষতাভিত্তিক শিক্ষা - অনলাইন কুইজ পরীক্ষা</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+<style>
+@font-face{font-family:'SolaimanLipi';src:local('SolaimanLipi'),local('Solaiman Lipi'),url('SolaimanLipi.ttf') format('truetype');font-display:swap}
+*{font-family:'SolaimanLipi',Arial,sans-serif !important;box-sizing:border-box}
+.katex,.katex *{font-family:KaTeX_Main,'Times New Roman',serif !important}
+:root{--primary:#006a4e;--primary-d:#004d37;--bg:#f2f6f4;--card:#fff;--text:#1d2b26;--muted:#5d6d66;--border:#d5e2dc;--ok:#1b8a4b;--okbg:#e3f6ea;--bad:#c62828;--badbg:#fdeaea;--shadow:0 2px 10px rgba(0,0,0,.08);--ul:#006a4e}
+[data-theme=dark]{--primary:#4db6ac;--bg:#101816;--card:#1a2622;--text:#e6f0ec;--muted:#9bb0a8;--border:#2c3d37;--ok:#66d28f;--okbg:#17352a;--bad:#ff8a80;--badbg:#3a2020;--shadow:0 2px 10px rgba(0,0,0,.5);--ul:#4db6ac}
+body{margin:0;background:var(--bg);color:var(--text);line-height:1.7;-webkit-user-select:none;-moz-user-select:none;user-select:none}
+.wrap{max-width:900px;margin:0 auto;padding:12px}
+header{background:linear-gradient(135deg,#004d37,#006a4e);color:#fff;text-align:center;padding:22px 14px;border-radius:0 0 18px 18px;box-shadow:var(--shadow)}
+header h1{margin:0;font-size:1.5rem}header p{margin:3px 0 0;font-size:1rem;opacity:.95}
+.card{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:16px;margin:14px 0;border:1px solid var(--border)}
+.chapter-title{margin:0 0 12px;padding-bottom:8px;font-size:1.4rem;color:var(--primary);border-bottom:3px solid var(--ul)}
+.badge{background:var(--bg);border-left:4px solid var(--primary);padding:8px 12px;border-radius:8px;margin:8px 0;font-size:.95rem}
+.warn{background:#fff6e0;color:#6b4a00;border-left:4px solid #f0a500;padding:8px 12px;border-radius:8px;font-size:.95rem}
+#info2,#info3{text-align:center}
+#info3{white-space:nowrap;font-size:clamp(.62rem,3.3vw,.95rem)}
+.wrow{display:flex;justify-content:space-between;gap:10px;margin-bottom:2px}
+[data-theme=dark] .warn{background:#3a3016;color:#ffd98a}
+.bar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--card);padding:10px 14px;border-radius:12px;box-shadow:var(--shadow);border:1px solid var(--border)}
+#timer{font-size:1.3rem;font-weight:700;color:var(--primary)}#timer.low{color:var(--bad)}
+button{cursor:pointer;border:0;border-radius:10px;padding:9px 16px;font-size:1rem;background:var(--primary);color:#fff}
+[data-theme=dark] button{color:#0b1512}
+button:disabled{opacity:.5;cursor:default}
+.qn{font-weight:700;margin-bottom:8px}
+.opt{display:block;width:100%;text-align:left;background:var(--bg);color:var(--text);border:2px solid var(--border);margin:6px 0;padding:9px 12px;border-radius:10px}
+[data-theme=dark] .opt{color:var(--text)}
+.opt.sel{border-color:var(--primary)}
+.opt.correct{background:var(--okbg);border-color:var(--ok)}
+.opt.wrong{background:var(--badbg);border-color:var(--bad)}
+.tag{display:inline-block;font-size:.8rem;background:var(--bg);color:var(--primary);border:1px solid var(--border);border-radius:20px;padding:0 10px;margin-bottom:6px}
+.exp{display:none;margin-top:8px;padding:8px 12px;border-radius:8px;background:var(--bg);border-left:4px solid var(--primary);font-size:.95rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.stat-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;box-shadow:var(--shadow)}
+.stat-box b{display:block;font-size:1.5rem;color:var(--primary)}
+#fb{font-size:1.1rem;font-weight:700;text-align:center;margin:12px 0}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<h2 class="chapter-title">জীবন দক্ষতাভিত্তিক শিক্ষা</h2>
+<div class="warn"><div class="wrow"><b id="fullmark"></b><b id="timeinfo"></b></div><div id="info2"></div><div id="info3"></div></div>
+</div>
+<div class="bar"><span>⏱️ <span id="timer">১০:০০</span></span><span id="prog"></span><button id="theme">🌙 ডার্ক মোড</button></div>
+<div id="quiz"></div>
+<div id="result" class="hide">
+<div class="card"><div class="stats" id="stats"></div><div id="fb"></div><div style="text-align:center"><button id="again">পুনরায় কুইজ দাও</button></div></div>
+</div>
+<div class="card" style="text-align:center"><button id="submit">সাবমিট করো</button></div>
+
+</div>
+<script>
+const masterQuestionBank=[["“জীবন দক্ষতাভিত্তিক শিক্ষা” অধ্যায় অনুযায়ী গুহাবাসী আদিম মানুষের জীবনের একটি প্রধান সমস্যা কোনটি ছিল?",["যানজটের সমস্যা","বিদ্যুৎ সংকটের সমস্যা","ক্ষুধা নিবারণের জন্য খাদ্যের সমস্যা","ইন্টারনেট সংযোগের সমস্যা"],2,0],["জীবন দক্ষতাভিত্তিক শিক্ষা অধ্যায়ে বর্তমান যুগকে কোন যুগ বলা হয়েছে?",["তথ্য প্রযুক্তির যুগ","কৃষি যুগ","প্রস্তর যুগ","শিল্প বিপ্লবের যুগ"],0,0],["তথ্য প্রযুক্তির চরম উন্নতির ফলে এই বিরাট পৃথিবী কী হয়ে গেছে?",["একটি বিচ্ছিন্ন মহাদেশ","একটি বিশাল মরুভূমি","একটি স্থবির সমাজ","একটা ক্ষুদ্র গ্লোবাল ভিলেজ"],3,0],["বিশ্ব স্বাস্থ্য সংস্থা ঝুঁকি মোকাবেলায় সক্ষম করে তোলার জন্য কোন সংস্থার মাধ্যমে জীবন দক্ষতা শিক্ষা চালু করেছে?",["ইউনেস্কো","ইউনিসেফ","বিশ্বব্যাংক","এনসিটিবি"],1,0],["জীবন দক্ষতা শিক্ষা চালুকৃত দেশ হিসেবে বাংলাদেশ ও পাকিস্তানের পাশাপাশি অধ্যায়ে কোন দেশের নাম উল্লেখ আছে?",["ভারত","নেপাল","মালদ্বীপ","শ্রীলঙ্কা"],3,0],["জীবন দক্ষতা কাকে বলে?",["শুধু চাকরির দক্ষতাকে","জীবনের জন্য প্রয়োজনীয় দক্ষতাকে","শুধু কায়িক পরিশ্রমের দক্ষতাকে","শুধু কম্পিউটার চালানোর দক্ষতাকে"],1,0],["জীবন দক্ষতার একটি প্রণিধানযোগ্য সংজ্ঞা কোন সংস্থা দিয়েছে?",["বিশ্ব স্বাস্থ্য সংস্থা","ইউনিসেফ","জাতিসংঘ","বিশ্বব্যাংক"],0,0],["বিশ্ব স্বাস্থ্য সংস্থা মোট কয়টি জীবন দক্ষতা নির্ধারণ করেছে?",["৫টি","৮টি","১০টি","১২টি"],2,0],["নিচের কোনটি বিশ্ব স্বাস্থ্য সংস্থা নির্ধারিত জীবন দক্ষতার অন্তর্ভুক্ত?",["সেলাই দক্ষতা","আবেগ নিয়ন্ত্রণ দক্ষতা","গাড়ি চালানোর দক্ষতা","কম্পিউটার প্রোগ্রামিং দক্ষতা"],1,0],["বাংলাদেশে জীবন দক্ষতা নিয়ে কাজ করা বিশেষজ্ঞগণ ১০টি জীবন দক্ষতাকে কয়টি মূল জীবন দক্ষতায় ভাগ করেছেন?",["দুইটি","চারটি","পাঁচটি","তিনটি"],3,0],["বিশেষজ্ঞদের ভাগ করা তিনটি মূল জীবন দক্ষতার একটি কোনটি?",["গণনা ও পরিমাপ দক্ষতা","পঠন ও লিখন দক্ষতা","অভিযোজন ও আত্মনিয়ন্ত্রণ দক্ষতা","নেতৃত্ব ও ব্যবস্থাপনা দক্ষতা"],2,0],["জীবন দক্ষতা শিক্ষা শিক্ষার্থীকে কোন ধরনের আচরণ পরিহার করতে শেখায়?",["ঝুঁকিপূর্ণ আচরণ","ইতিবাচক আচরণ","সামাজিক আচরণ","অভ্যাসগত আচরণ"],0,0],["নিচের কোনটি জীবন দক্ষতা শিক্ষায় ঝুঁকিপূর্ণ আচরণের উদাহরণ হিসেবে উল্লেখ করা হয়েছে?",["নিয়মিত ব্যায়াম","বাল্যবিবাহ","বই পড়া","বৃক্ষরোপণ"],1,0],["জীবন দক্ষতা শিক্ষার শিক্ষাক্রম ও পাঠ্যসূচি কেমন?",["শুধু ছেলেদের জন্য নির্দিষ্ট","শুধু মেয়েদের জন্য নির্দিষ্ট","পরীক্ষানির্ভর","জেন্ডারবান্ধব"],3,0],["জীবন দক্ষতা শিক্ষার শিক্ষাক্রম কীসের প্রতি লক্ষ্য রেখে প্রস্তুত করা হয়?",["শিশু অধিকার ও মানবাধিকারের প্রতি","শুধু পরীক্ষার ফলাফলের প্রতি","শুধু চাকরির বাজারের প্রতি","শুধু শিক্ষকের সুবিধার প্রতি"],0,0],["জীবন দক্ষতা শিক্ষার সফল বাস্তবায়নের জন্য কী একান্ত প্রয়োজন?",["ব্যয়বহুল ভবন নির্মাণ","পরীক্ষার সংখ্যা বৃদ্ধি","শিশু স্বাস্থ্যসেবা এবং শিখনবান্ধব পরিবেশ সৃষ্টি","শিক্ষার্থী সংখ্যা সীমিত করা"],2,0],["জীবন দক্ষতা শিক্ষায় শিখন-শেখানো কার্যক্রম কোন পদ্ধতিতে পরিচালনা করতে হয়?",["বক্তৃতা পদ্ধতিতে","মুখস্থ পদ্ধতিতে","অংশগ্রহণমূলক পদ্ধতিতে","একক পরীক্ষা পদ্ধতিতে"],2,0],["কোন শিক্ষানীতিতে জীবন দক্ষতাভিত্তিক শিক্ষার উপর গুরুত্ব আরোপ করা হয়েছে?",["জাতীয় শিক্ষানীতি-২০১০","জাতীয় শিক্ষানীতি-১৯৯৯","জাতীয় শিক্ষানীতি-২০২০","জাতীয় শিক্ষানীতি-২০০০"],0,0],["জীবন দক্ষতাভিত্তিক শিক্ষার লক্ষ্য কী?",["শুধু পরীক্ষায় ভালো ফল করানো","শুধু বিদেশে চাকরির সুযোগ তৈরি করা","শুধু শিক্ষক নিয়োগ বৃদ্ধি করা","ভবিষ্যৎ প্রজন্মকে জীবনের সকল সমস্যা ও চ্যালেঞ্জ মোকাবেলার সক্ষমতা অর্জন করানো"],3,0],["জীবন দক্ষতার উদ্দেশ্য অনুযায়ী কত সালের মধ্যে বাংলাদেশকে উন্নত রাষ্ট্রে পরিণত করার কথা বলা হয়েছে?",["২০২১ সালের মধ্যে","২০৪১ সালের মধ্যে","২০৩১ সালের মধ্যে","২০৫১ সালের মধ্যে"],1,0],["জীবন দক্ষতা শিক্ষার উদ্দেশ্য অনুযায়ী মানসিক চাপ ও বিপদের মুহূর্তে কী নিয়ন্ত্রণ করতে শেখানো হয়?",["ক্ষুধা","ঘুম","স্মৃতিশক্তি","আবেগ"],3,0],["জীবন দক্ষতাভিত্তিক শিক্ষার মাধ্যমে শিক্ষার্থীরা কীসের সক্ষমতা অর্জন করে?",["শুধু পরীক্ষা পাসের","স্থান, কাল ও পাত্র অনুযায়ী পরিবেশের সাথে অভিযোজনের","শুধু বিদেশ যাত্রার","শুধু ব্যবসা পরিচালনার"],1,0],["জীবন দক্ষতা শিক্ষা শিক্ষার্থীকে কীভাবে নিজেকে মানিয়ে নিতে সক্ষম করে?",["দৈনন্দিন জীবনের সমস্যা ও চ্যালেঞ্জ সফলভাবে মোকাবেলা করার মাধ্যমে","সমস্যা এড়িয়ে চলতে শিখিয়ে","শুধু পাঠ্য বই মুখস্থ করিয়ে","অন্যের ওপর নির্ভর করতে শিখিয়ে"],0,1],["জীবন দক্ষতা শিক্ষা শিক্ষার্থীকে “ঝুঁকিপূর্ণ আচরণ পরিহার” করতে শেখায়— কথাটির অর্থ কী?",["সব ধরনের সামাজিক কাজ থেকে দূরে থাকা","বিদ্যালয়ে যাওয়া বন্ধ করা","মদ, এইচআইভি এইডস, চুরি ইত্যাদি থেকে দূরে থাকা","বন্ধুদের সঙ্গে মেশা বন্ধ করা"],2,1],["জীবন দক্ষতা শিক্ষা শিক্ষার্থীকে “কঠিন বাস্তবতায় আলোকবর্তিকা” হয়ে সাহায্য করে— এর তাৎপর্য কী?",["কঠিন বাস্তবতাকে অস্বীকার করা","সুন্দর ভবিষ্যতের স্বপ্ন দেখিয়ে অভীষ্ট লক্ষ্যে পরিচালিত করা","শুধু বিদ্যুতের ব্যবস্থা করা","শুধু অন্ধকারে চলা শেখানো"],1,1],["বিশ্বব্যাপী তরুণ প্রজন্মের জন্য জীবন দক্ষতাভিত্তিক শিক্ষা প্রয়োজন কেন?",["তাদের পাশ্চাত্য সংস্কৃতিতে অভ্যস্ত করার জন্য","তাদের প্রযুক্তি থেকে দূরে রাখার জন্য","তাদের শুধু চাকরির জন্য প্রস্তুত করার জন্য","তাদের ভেতরের শক্তিকে বিকশিত করে জীবনের অসমতল পথকে মসৃণ ও সুগম করার জন্য"],3,1],["শিক্ষণ দক্ষতাভিত্তিক এবং অংশগ্রহণমূলক হওয়ায় কীসের উন্নতি ঘটে?",["পরীক্ষার সংখ্যা বৃদ্ধি","শিক্ষকের বেতন বৃদ্ধি","শিক্ষক-শিক্ষার্থীর মধ্যে সম্পর্কের উন্নতি","শ্রেণিকক্ষের আয়তন বৃদ্ধি"],2,1],["জীবন দক্ষতাকে “উপদক্ষতা ও অণুদক্ষতায় বিভাজন করা যায়”— কথাটির অর্থ কী?",["একটি জীবন দক্ষতাকে আরও ছোট ছোট অংশে ভাগ করা যায়","জীবন দক্ষতার সংখ্যা কমিয়ে ফেলা যায়","জীবন দক্ষতা কেবল বড়দের জন্য","জীবন দক্ষতা পরিমাপ করা যায় না"],0,1],["পরীক্ষার ফল খারাপ হওয়ায় রিমি প্রচণ্ড রেগে গিয়েও নিজেকে শান্ত রাখল। রিমির মধ্যে বিশ্ব স্বাস্থ্য সংস্থা নির্ধারিত কোন দক্ষতা প্রকাশ পেয়েছে?",["সৃজনশীল চিন্তন দক্ষতা","আবেগ নিয়ন্ত্রণ দক্ষতা","সহমর্মিতার দক্ষতা","সিদ্ধান্ত গ্রহণ দক্ষতা"],1,2],["আয়েশা তার সহপাঠীর কষ্ট উপলব্ধি করে তার পাশে দাঁড়াল। আয়েশার মধ্যে কোন জীবন দক্ষতা প্রকাশ পেয়েছে?",["চাপ মোকাবেলার দক্ষতা","আবেগ নিয়ন্ত্রণ দক্ষতা","সমস্যা সমাধান দক্ষতা","সহমর্মিতার দক্ষতা"],3,2],["তুহিন নিজের শক্তি ও দুর্বলতা সম্পর্কে ভালোভাবে জানে এবং সে অনুযায়ী লক্ষ্য ঠিক করে। তার মধ্যে কোন দক্ষতা প্রকাশ পেয়েছে?",["আত্মসচেতনতামূলক দক্ষতা","যোগাযোগ দক্ষতা","সহমর্মিতার দক্ষতা","আবেগ নিয়ন্ত্রণ দক্ষতা"],0,2],["একটি নতুন সমস্যায় পড়ে কবির বিভিন্ন সমাধানের কথা ভেবে সবচেয়ে উপযুক্তটি বাস্তবায়ন করল। কবির মধ্যে কোন দক্ষতা দেখা যায়?",["আত্মসচেতনতামূলক দক্ষতা","সহমর্মিতার দক্ষতা","সমস্যা সমাধান দক্ষতা","আবেগ নিয়ন্ত্রণ দক্ষতা"],2,2],["সুমন মাদকসেবন ও বাল্যবিবাহের প্রস্তাব দৃঢ়ভাবে এড়িয়ে চলে। সুমনের আচরণে জীবন দক্ষতা শিক্ষার কোন বৈশিষ্ট্যটি প্রকাশ পেয়েছে?",["আবেগপ্রবণতা","বিদ্যালয় ত্যাগ","ঝুঁকিপূর্ণ আচরণ পরিহার","অনৈতিক কাজে আগ্রহ"],2,2],["একটি শিক্ষাক্রমে ছাত্র-ছাত্রী উভয়ের স্বার্থের প্রতিফলন ঘটেছে। শিক্ষাক্রমটির কোন বৈশিষ্ট্য প্রকাশ পেয়েছে?",["জেন্ডারবান্ধব","পরীক্ষানির্ভর","বক্তৃতাভিত্তিক","শিক্ষককেন্দ্রিক"],0,2],["২০৪১ সালের মধ্যে বাংলাদেশকে উন্নত রাষ্ট্রে পরিণত করার লক্ষ্যে জীবন দক্ষতা শিক্ষা কীভাবে ভূমিকা রাখে?",["শিক্ষার্থী সংখ্যা কমিয়ে","পাঠ্যসূচি থেকে নৈতিকতা বাদ দিয়ে","শুধু বিদেশি প্রযুক্তি আমদানি করে","দক্ষ ও কর্মমুখী জনসম্পদ তৈরি করার মাধ্যমে"],3,3],["গুহাবাসী আদিম মানুষ ও বর্তমান মানুষের জীবন সম্পর্কে অধ্যায়ের ভাষ্য অনুযায়ী কোন বিবৃতিটি সঠিক?",["আদিম মানুষের কোনো সমস্যা ছিল না; আজও নেই","আদিম মানুষের ক্ষুধা, শীত ও হিংস্র পশুর সমস্যা ছিল; আজও মানুষের জীবনে সমস্যা আছে","আদিম মানুষের সমস্যা ছিল; প্রযুক্তির ফলে আজ সব সমস্যা শেষ","শুধু বর্তমান মানুষের জীবনেই সমস্যা আছে"],1,3],["বর্তমান তরুণ প্রজন্ম মাদক, জঙ্গিবাদ ও এইচআইভি এইডসের মতো ঝুঁকির মুখে। অধ্যায়ের ধারণা অনুযায়ী সবচেয়ে উপযুক্ত সমাধান কোনটি?",["তাদের প্রযুক্তি ব্যবহার সম্পূর্ণ বন্ধ করা","তাদের শিক্ষা থেকে দূরে রাখা","সমস্যাগুলো উপেক্ষা করা","জীবন দক্ষতাভিত্তিক শিক্ষার মাধ্যমে তাদের ভেতরের শক্তিকে বিকশিত করা"],3,3],["জীবন দক্ষতা শিক্ষার গুরুত্ব হিসেবে —<br>i. দেশপ্রেম জাগ্রত হয়<br>ii. শিক্ষার্থী আত্মবিশ্বাসী হয়<br>iii. শিক্ষার্থী মাদক ও ধূমপানে আসক্ত হয়<br>নিচের কোনটি সঠিক?",["i ও ii","i ও iii","ii ও iii","i, ii ও iii"],0,3],["বিশ্ব স্বাস্থ্য সংস্থা নির্ধারিত জীবন দক্ষতার অন্তর্ভুক্ত—<br>i. সিদ্ধান্ত গ্রহণ দক্ষতা<br>ii. গাড়ি চালনার দক্ষতা<br>iii. সহমর্মিতার দক্ষতা<br>নিচের কোনটি সঠিক?",["i ও ii","i ও iii","ii ও iii","i, ii ও iii"],1,3],["জীবন দক্ষতা শিক্ষার বৈশিষ্ট্য হিসেবে —<br>i. শিক্ষাক্রম শিশু অধিকার ও মানবাধিকারকে উপেক্ষা করে<br>ii. শিখন-শেখানো কার্যক্রম অংশগ্রহণমূলক পদ্ধতিতে পরিচালিত হয়<br>iii. শিক্ষক-শিক্ষার্থীর সম্পর্কের উন্নতি ঘটে<br>নিচের কোনটি সঠিক?",["i ও ii","i ও iii","ii ও iii","i, ii ও iii"],2,3]].map(r=>({q:r[0],o:r[1],a:r[2],t:r[3]}));
+/* t: 0=জ্ঞানমূলক 1=অনুধাবনমূলক 2=প্রয়োগমূলক 3=উচ্চতর দক্ষতা */
+const N=20,TIME=600,QUOTA=[11,3,3,3],TN=["জ্ঞানমূলক","অনুধাবনমূলক","প্রয়োগমূলক","উচ্চতর দক্ষতা"];
+const bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
+const $=id=>document.getElementById(id);
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const L=['ক','খ','গ','ঘ'];
+let Q=[],ans=[],left=TIME,tm=null,done=false;
+function renderMath(el){try{if(window.renderMathInElement)renderMathInElement(el,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false})}catch(e){}}
+function info(){
+  const n=masterQuestionBank.length,t=Math.min(N,n);
+  $('fullmark').textContent='পূর্ণমান: '+bn(t);$('timeinfo').textContent='সময়: '+bn(TIME/60)+' মিনিট';
+  $('info2').textContent='['+bn(n)+' টি প্রশ্ন আছে]';
+  $('info3').textContent='প্রতিবার '+bn(t)+'টা প্রশ্ন আসবে। (অপশনসহ এলোমেলো)'
+}
+function start(){
+  clearInterval(tm);done=false;left=TIME;
+  const take=Math.min(N,masterQuestionBank.length);let pick=[];
+  QUOTA.forEach((n,t)=>{pick=pick.concat(shuf(masterQuestionBank.filter(x=>x.t===t)).slice(0,n))});
+  if(pick.length<take){const rest=shuf(masterQuestionBank.filter(x=>!pick.includes(x)));pick=pick.concat(rest.slice(0,take-pick.length))}
+  pick=shuf(pick.slice(0,take));
+  Q=pick.map(x=>{const idx=shuf(x.o.map((t,i)=>i));return{q:x.q,t:x.t,o:idx.map(i=>x.o[i]),a:idx.indexOf(x.a)}});
+  ans=Q.map(()=>-1);
+  $('result').classList.add('hide');$('submit').disabled=false;$('submit').parentElement.classList.remove('hide');
+  const box=$('quiz');box.innerHTML='';
+  Q.forEach((q,i)=>{
+    const c=document.createElement('div');c.className='card';c.id='q'+i;
+    c.innerHTML='<div class="qn">'+bn(i+1)+'। '+q.q+'</div>'+q.o.map((t,j)=>'<button class="opt" data-i="'+i+'" data-j="'+j+'">'+t+'</button>').join('');
+    box.appendChild(c)});
+  box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>pickOpt(+b.dataset.i,+b.dataset.j));
+  upd();tick();tm=setInterval(tick,1000);
+  renderMath(box);try{window.scrollTo(0,0)}catch(e){}
+}
+function pickOpt(i,j){
+  if(done||ans[i]>=0)return;ans[i]=j;
+  document.querySelectorAll('#q'+i+' .opt').forEach((b,k)=>{b.disabled=true;if(k===j)b.classList.add('sel')});upd()
+}
+function upd(){$('prog').textContent=bn(ans.filter(a=>a>=0).length)+'/'+bn(Q.length)}
+function tick(){
+  const m=Math.floor(left/60),s=left%60;$('timer').textContent=bn(String(m).padStart(2,'0'))+':'+bn(String(s).padStart(2,'0'));
+  $('timer').classList.toggle('low',left<=60);
+  if(left<=0){clearInterval(tm);finish();return}left--
+}
+function submitClick(){
+  const miss=[];ans.forEach((a,i)=>{if(a<0)miss.push(i)});
+  if(miss.length){alert('নিচের প্রশ্নগুলোর উত্তর দেওয়া বাকি আছে: '+miss.map(i=>bn(i+1)).join(', '));
+    $('q'+miss[0]).scrollIntoView({behavior:'smooth',block:'center'});return}
+  clearInterval(tm);finish()
+}
+function finish(){
+  if(done)return;done=true;let c=0,w=0,u=0;
+  Q.forEach((q,i)=>{
+    const card=$('q'+i),opts=card.querySelectorAll('.opt');opts.forEach(b=>b.disabled=true);
+    opts[q.a].classList.add('correct');
+    if(ans[i]<0)u++;else if(ans[i]===q.a)c++;else{w++;opts[ans[i]].classList.add('wrong')}
+  });
+  const score=c,pct=Q.length?score/Q.length*100:0;
+  const items=[['মোট প্রশ্ন',bn(Q.length)],['সঠিক',bn(c)],['ভুল',bn(w)],['চূড়ান্ত স্কোর',bn(score.toFixed(2).replace(/\.?0+$/,''))+'/'+bn(Q.length)]];
+  $('stats').innerHTML=items.map(x=>'<div class="stat-box"><b>'+x[1]+'</b>'+x[0]+'</div>').join('');
+  $('prog').textContent='স্কোর: '+bn(score.toFixed(2).replace(/\.?0+$/,''))+'/'+bn(Q.length);
+  $('fb').textContent=pct>=90?'🎉 অসাধারণ! চমৎকার ফলাফল, চালিয়ে যাও!':pct>=80?'👏 খুব ভালো! আর একটু চেষ্টায় পুরো নম্বর সম্ভব।':pct>=60?'🙂 ভালো, তবে আরও অনুশীলন প্রয়োজন।':'📖 আরও মনোযোগ দিয়ে অধ্যায়টি পড়ো ও আবার চেষ্টা করো।';
+  $('submit').parentElement.classList.add('hide');$('result').classList.remove('hide');
+  renderMath($('quiz'));
+  setTimeout(()=>{try{$('result').scrollIntoView({block:'start'})}catch(_){}try{window.scrollTo(0,$('result').getBoundingClientRect().top+window.pageYOffset-70)}catch(_){}},80)
+}
+$('submit').onclick=submitClick;$('again').onclick=start;
+$('theme').onclick=()=>{const d=document.documentElement.dataset.theme==='dark';document.documentElement.dataset.theme=d?'light':'dark';$('theme').textContent=d?'🌙 ডার্ক মোড':'☀️ লাইট মোড'};
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  const k=e.key.toLowerCase(),blk=(e.ctrlKey&&['c','s','u'].includes(k))||e.key==='F12'||e.key==='PrintScreen';
+  if(blk){e.preventDefault();try{navigator.clipboard.writeText('')}catch(_){}alert('এই পেজে কপি/সেভ/সোর্স দেখা নিষিদ্ধ।')}});
+document.addEventListener('keyup',e=>{if(e.key==='PrintScreen'){try{navigator.clipboard.writeText('')}catch(_){}alert('স্ক্রিনশট নেওয়া নিষিদ্ধ।')}});
+window.addEventListener('load',()=>{info();start()});
+</script>
+</body>
+</html>

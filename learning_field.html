@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>সূচিপত্র - অনলাইন কুইজ | হাজী জসীম উদ্দীন ডিগ্রী কলেজ</title>
+<style>
+@font-face{font-family:'SolaimanLipi';src:local('SolaimanLipi'),local('Solaiman Lipi'),url('SolaimanLipi.ttf') format('truetype');font-display:swap}
+*{font-family:'SolaimanLipi',Arial,sans-serif !important;box-sizing:border-box}
+:root{--primary:#006a4e;--hc:#006a4e;--tc:#1d4ed8;--bg:#eef3f1;--paper:#fff;--text:#1d2b26;--muted:#6a7a73;--border:#d5e2dc}
+[data-theme=dark]{--primary:#4db6ac;--hc:#4db6ac;--tc:#90caf9;--bg:#101816;--paper:#1a2622;--text:#e6f0ec;--muted:#9bb0a8;--border:#2c3d37}
+body{margin:0;background:var(--bg);color:var(--text);line-height:1.6;-webkit-user-select:none;user-select:none}
+header{background:linear-gradient(135deg,#004d37,#006a4e);color:#fff;text-align:center;padding:18px 12px}
+header h1{margin:0;font-size:1.4rem}header p{margin:2px 0 0;font-size:.95rem}
+.cover{width:210mm;max-width:100%;margin:0 auto}
+.cv{position:relative;overflow:hidden;color:#fff;text-align:center;padding:clamp(18px,5vw,40px) clamp(10px,3vw,24px);background:radial-gradient(circle at 15% 10%,rgba(245,197,66,.28),transparent 40%),radial-gradient(circle at 90% 95%,rgba(255,255,255,.14),transparent 45%),linear-gradient(150deg,#003d2b,#006a4e 55%,#0a8c68)}
+.cv::before,.cv::after{content:"";position:absolute;border-radius:50%;border:2px solid rgba(245,197,66,.35)}
+.cv::before{width:260px;height:260px;left:-90px;top:-90px}.cv::after{width:300px;height:300px;right:-110px;bottom:-120px}
+.cv>*{position:relative;z-index:1}
+.cv-title{font-size:clamp(2.4rem,11vw,4.6rem);font-weight:700;line-height:1.2;color:#ffd54a;text-shadow:0 3px 0 #8a6a00,0 6px 14px rgba(0,0,0,.45)}
+.cv-sub{margin:8px auto 18px;font-size:clamp(.95rem,3.6vw,1.35rem);color:#eafff6;line-height:1.7}
+.cv-mid{display:flex;align-items:center;justify-content:center;gap:clamp(6px,2vw,16px);margin:6px 0 18px}
+.cv-card{flex:1;max-width:62%;background:#fffaf0;color:#064d38;border:3px solid #ffd54a;border-radius:16px;padding:12px 8px;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.cv-card h3{margin:0 0 4px;font-size:clamp(1.1rem,4.6vw,1.8rem);color:#b3261e}
+.cv-card p{margin:0;font-size:clamp(.8rem,3.2vw,1.15rem);line-height:1.55;font-weight:700}
+.cv-badge{flex:0 0 auto;width:clamp(64px,19vw,120px);aspect-ratio:1;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 25%,#ffe27a,#f5a623);color:#063d2c;border:3px solid #fff;box-shadow:0 5px 14px rgba(0,0,0,.4)}
+.cv-badge small{font-size:clamp(.7rem,2.6vw,1rem);font-weight:700}
+.cv-badge b{font-size:clamp(1.3rem,6vw,2.4rem);line-height:1}
+.cv-quiz{display:inline-block;padding:4px clamp(28px,9vw,64px);font-size:clamp(1.5rem,6.5vw,2.6rem);font-weight:700;color:#063d2c;background:linear-gradient(#ffe27a,#f5a623);border:3px solid #fff;border-radius:50px;box-shadow:0 5px 14px rgba(0,0,0,.4)}
+.cv-tag{margin-top:12px;font-size:clamp(1rem,4.4vw,1.7rem);letter-spacing:.06em;color:#d9fff0;font-style:italic}
+.top{max-width:210mm;margin:10px auto 0;padding:0 10px;text-align:right}
+button{cursor:pointer;border:0;border-radius:10px;padding:8px 14px;font-size:1rem;background:var(--primary);color:#fff}
+[data-theme=dark] button{color:#0b1512}
+.page{width:210mm;max-width:100%;margin:10px auto 24px;background:var(--paper);border:1px solid var(--border);border-radius:6px;box-shadow:0 2px 12px rgba(0,0,0,.1);padding:14mm 12mm}
+.page h2.t{text-align:center;margin:0 0 12px;font-size:1.6rem}
+.sec{--sc:var(--hc);margin:18px 0 4px;font-weight:700;font-size:1.1rem;color:var(--sc);background:color-mix(in srgb,var(--sc) 12%,transparent);border-bottom:3px solid var(--sc);border-radius:8px 8px 0 0;padding:6px 8px}
+.row{display:flex;gap:12px;padding:4px 6px;border-radius:6px;text-decoration:none;color:var(--text);cursor:pointer}
+.row{--sc:var(--tc);border-left:4px solid var(--sc)}
+.row .c{flex:0 0 72px;color:var(--sc);font-weight:700}
+.row .n{flex:1}
+.row.on .n{color:var(--sc);font-weight:700;text-decoration:underline}
+.row:hover{background:color-mix(in srgb,var(--sc) 10%,transparent)}
+.row:hover{background:var(--bg)}
+[data-theme=dark] [data-theme=dark] [data-theme=dark] [data-theme=dark] [data-theme=dark] [data-theme=dark] [data-theme=dark] #msg{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#333;color:#fff;padding:9px 16px;border-radius:20px;display:none;z-index:9;max-width:90%;text-align:center}
+@media print{.cover{page-break-after:always}header,.top,#msg{display:none}.page{box-shadow:none;border:0;margin:0}}
+</style>
+</head>
+<body>
+<div class="cover"><div class="cv">
+<div class="cv-title">শিক্ষাবিজ্ঞান</div>
+<div class="cv-sub">উচ্চমাধ্যমিক স্তরের কলেজ শিক্ষকগণের<br>শিক্ষাবিজ্ঞান ও বিষয়ভিত্তিক প্রশিক্ষণ ম্যানুয়াল</div>
+<div class="cv-mid">
+<div class="cv-badge"><small>Batch</small><b>110</b></div>
+<div class="cv-card"><h3>মোঃ আমিরুল ইসলাম</h3><p>প্রভাষক (পদার্থবিজ্ঞান)</p><p>হাজী জসীম উদ্দীন ডিগ্রী কলেজ</p><p>দুবলিয়া, পাবনা সদর, পাবনা।</p></div>
+<div class="cv-badge"><small>Reg</small><b>24</b></div>
+</div>
+<div class="cv-quiz">কুইজ</div>
+<div class="cv-tag">Practice Makes Perfect</div>
+</div></div>
+<div class="top"><button id="theme">🌙 ডার্ক মোড</button></div>
+<div class="page" id="toc"><h2 class="t">সূচিপত্র</h2></div>
+<div id="msg"></div>
+<script>
+/* ফাইলের নাম স্বয়ংক্রিয়: learning_field_ক্ষেত্র_কোড+ক্রম.html — যেমন learning_field_1_shini02.html। ফাইলটি এই পেজের পাশে রাখলেই লিংক চালু হবে। */
+const EN=['shini','shim','shishi','shimu','shibi','shipro','soshika'];
+const SECTIONS=[
+["শিখনক্ষেত্র-১: শিক্ষানীতি ও শিক্ষা ব্যবস্থাপনা (শিনী)","শিনী",["শিক্ষা ও প্রশিক্ষণ","জাতীয় শিক্ষানীতি-২০১০","শিক্ষায় তথ্যপ্রযুক্তি ব্যবস্থাপনা","শিক্ষায় একবিংশ শতাব্দির চ্যালেঞ্জ","শিক্ষা ব্যবস্থাপনা ও সংগঠনভিত্তিক কার্যাবলি","শ্রেণি সংগঠন ও ব্যবস্থাপনা","শিক্ষা উপকরণ ব্যবস্থাপনা","শিক্ষকের পেশাগত মূল্যবোধ ও নৈতিকতা","জীবন দক্ষতাভিত্তিক শিক্ষা","কর্মসহায়ক গবেষণা"]],
+["শিখনক্ষেত্র-২: শিক্ষা মনোবিজ্ঞান (শিম)","শিম",["মনোবিজ্ঞান ও শিক্ষা মনোবিজ্ঞান","শিখন ও শিখনতত্ত্ব","আধুনিক শিখন তত্ত্ব ও শিখন তত্ত্বের প্রয়োগ","বয়ঃসন্ধিকাল","মনোযোগ","প্রেষণা","শিক্ষায় জেন্ডার ন্যায্যতা উন্নয়ন","শিক্ষায় বংশগতি ও পরিবেশ","একীভূত শিক্ষা","প্রতিবন্ধিতা ও অটিজম"]],
+["শিখনক্ষেত্র-৩: শিক্ষাক্রম এবং শিখন-শিখানো পদ্ধতি ও কৌশল (শিশি)","শিশি",["শিক্ষাক্রম","জাতীয় শিক্ষাক্রম ২০১২ এর বৈশিষ্ট্য ও বিষয় কাঠামো","সহশিক্ষাক্রমিক কার্যাবলি","শিখন-শেখানো পদ্ধতি ও কৌশলের ধারণা","শিখন-শেখানো পদ্ধতি ও কৌশলের অনুশীলন","পাঠ পরিকল্পনা প্রণয়ন কৌশল","পাঠ পরিকল্পনা প্রণয়ন অনুশীলন","মাইক্রোটিচিং ও সিমুলেশন","মডেল সেশন ও ফিডব্যাক","সেমিনার ও এ্যাসাইনমেন্ট"]],
+["শিখনক্ষেত্র-৪: শিক্ষায় মূল্যায়ন (শিমূ)","শিমূ",["ব্লুমস ট্যাক্সোনমি","শিক্ষায় মূল্যায়নের ধারণা, গুরুত্ব ও বাস্তবায়ন","ধারাবাহিক ও সামষ্টিক মূল্যায়ন","সৃজনশীল প্রশ্ন প্রণয়ন কৌশল","সৃজনশীল প্রশ্নের নম্বর বণ্টন নির্দেশিকা","সৃজনশীল প্রশ্ন প্রণয়ন কৌশল অনুশীলন","সৃজনশীল প্রশ্ন প্রণয়ন কৌশল অনুশীলন","বহুনির্বাচনি প্রশ্ন প্রণয়ন কৌশল","বহুনির্বাচনি প্রশ্ন প্রণয়ন কৌশল অনুশীলন","বহুনির্বাচনি প্রশ্ন প্রণয়ন কৌশল অনুশীলন"]],
+["শিখনক্ষেত্র-৫: শিক্ষায় বিবিধ (শিবি)","শিবি",["চাকরি বিধি","ছুটি বিধি","মাসিক বেতন-ভাতা (MPO) প্রাপ্যতা বিধি","প্রাতিষ্ঠানিক সুশাসন","স্বাস্থ্য শিক্ষা","দুর্যোগ ব্যবস্থাপনা","বার্ষিক কর্মসম্পাদন চুক্তি","জাতীয় শুদ্ধাচার কৌশল: সমৃদ্ধ বাংলাদেশ গড়ার রূপরেখা","উদ্ভাবন পরিকল্পনা প্রণয়ন ও মূল্যায়ন","বার্ষিক আয়কর নির্ধারণ","বাংলা শুদ্ধ উচ্চারণ ও বানান রীতি","English Listening and Speaking Skills","English Reading and Writing Skills"]],
+["শিখনক্ষেত্র-৬: শিক্ষায় তথ্য ও যোগাযোগ প্রযুক্তি (শিপ্র)","শিপ্র",["গুগল অ্যাপস্-এর ব্যবহার","জুম অ্যাপ-এর ব্যবহার","গুগল মিট-এর ব্যবহার","মাইক্রোসফট পাওয়ার পয়েন্ট স্লাইডে বাংলা ও ইংরেজি লিখন","মাইক্রোসফট পাওয়ার পয়েন্ট স্লাইডে বাংলা ও ইংরেজি লিখন","মাইক্রোসফট পাওয়ার পয়েন্ট স্লাইডে ডকুমেন্ট, ছবি, চার্ট ও ভিডিও সংযোজন","মাইক্রোসফট পাওয়ার পয়েন্ট স্লাইডে ডকুমেন্ট, ছবি, চার্ট ও ভিডিও সংযোজন","ট্রানজিশন, এনিমেশন ও স্লাইড শো অনুশীলন","প্রশিক্ষক কর্তৃক মডেল ডিজিটাল কন্টেন্ট উপস্থাপন","প্রশিক্ষণার্থী কর্তৃক ডিজিটাল কন্টেন্ট উপস্থাপন","প্রশিক্ষণার্থী কর্তৃক ডিজিটাল কন্টেন্ট উপস্থাপন","প্রশিক্ষণার্থী কর্তৃক ডিজিটাল কন্টেন্ট উপস্থাপন"]],
+["শিখনক্ষেত্র-৭: সহশিক্ষাক্রমিক কার্যাবলি অনুশীলন ও মূল্যায়ন (সশিকা)","সশিকা",["কবিতা আবৃত্তি","সঙ্গীত","নির্ধারিত বক্তব্য / বিতর্ক প্রতিযোগিতা","ধারাবাহিক গল্প বলা","সহশিক্ষাক্রমিক কার্যাবলি মূল্যায়ন","সহশিক্ষাক্রমিক কার্যাবলি মূল্যায়ন"]]
+];
+const bn=n=>String(n).padStart(2,'0').replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
+const toc=document.getElementById('toc'),msg=document.getElementById('msg');let tm;
+function soon(t){msg.textContent='"'+t+'" — এই কুইজটি শীঘ্রই আসছে।';msg.style.display='block';clearTimeout(tm);tm=setTimeout(()=>msg.style.display='none',2500)}
+SECTIONS.forEach((s,k)=>{
+  const h=document.createElement('div');h.className='sec';h.textContent=s[0];toc.appendChild(h);
+  s[2].forEach((t,i)=>{
+    const code=s[1]+'-'+bn(i+1),file='learning_field_'+(k+1)+'_'+EN[k]+String(i+1).padStart(2,'0')+'.html';
+    const r=document.createElement('div');r.className='row on';
+    r.innerHTML='<span class="c">'+code+'</span><span class="n"></span>';
+    r.querySelector('.n').textContent=t;
+    r.onclick=()=>{
+      if(!/^https?:/.test(location.protocol)){location.href=file;return}
+      fetch(file,{method:'HEAD'}).then(x=>x.ok?location.href=file:soon(t)).catch(()=>location.href=file)};
+    toc.appendChild(r)})
+});
+document.getElementById('theme').onclick=function(){const d=document.documentElement.dataset.theme==='dark';document.documentElement.dataset.theme=d?'light':'dark';this.textContent=d?'🌙 ডার্ক মোড':'☀️ লাইট মোড'};
+document.addEventListener('contextmenu',e=>e.preventDefault());
+</script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>জাতীয় শিক্ষাক্রম ২০১২ এর বৈশিষ্ট্য ও বিষয় কাঠামো - অনলাইন কুইজ পরীক্ষা</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+<style>
+@font-face{font-family:'SolaimanLipi';src:local('SolaimanLipi'),local('Solaiman Lipi'),url('SolaimanLipi.ttf') format('truetype');font-display:swap}
+*{font-family:'SolaimanLipi',Arial,sans-serif !important;box-sizing:border-box}
+.katex,.katex *{font-family:KaTeX_Main,'Times New Roman',serif !important}
+:root{--primary:#006a4e;--primary-d:#004d37;--bg:#f2f6f4;--card:#fff;--text:#1d2b26;--muted:#5d6d66;--border:#d5e2dc;--ok:#1b8a4b;--okbg:#e3f6ea;--bad:#c62828;--badbg:#fdeaea;--shadow:0 2px 10px rgba(0,0,0,.08);--ul:#006a4e}
+[data-theme=dark]{--primary:#4db6ac;--bg:#101816;--card:#1a2622;--text:#e6f0ec;--muted:#9bb0a8;--border:#2c3d37;--ok:#66d28f;--okbg:#17352a;--bad:#ff8a80;--badbg:#3a2020;--shadow:0 2px 10px rgba(0,0,0,.5);--ul:#4db6ac}
+body{margin:0;background:var(--bg);color:var(--text);line-height:1.7;-webkit-user-select:none;-moz-user-select:none;user-select:none}
+.wrap{max-width:900px;margin:0 auto;padding:12px}
+header{background:linear-gradient(135deg,#004d37,#006a4e);color:#fff;text-align:center;padding:22px 14px;border-radius:0 0 18px 18px;box-shadow:var(--shadow)}
+header h1{margin:0;font-size:1.5rem}header p{margin:3px 0 0;font-size:1rem;opacity:.95}
+.card{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:16px;margin:14px 0;border:1px solid var(--border)}
+.chapter-title{margin:0 0 12px;padding-bottom:8px;font-size:1.4rem;color:var(--primary);border-bottom:3px solid var(--ul)}
+.badge{background:var(--bg);border-left:4px solid var(--primary);padding:8px 12px;border-radius:8px;margin:8px 0;font-size:.95rem}
+.warn{background:#fff6e0;color:#6b4a00;border-left:4px solid #f0a500;padding:8px 12px;border-radius:8px;font-size:.95rem}
+#info2,#info3{text-align:center}
+#info3{white-space:nowrap;font-size:clamp(.62rem,3.3vw,.95rem)}
+.wrow{display:flex;justify-content:space-between;gap:10px;margin-bottom:2px}
+[data-theme=dark] .warn{background:#3a3016;color:#ffd98a}
+.bar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--card);padding:10px 14px;border-radius:12px;box-shadow:var(--shadow);border:1px solid var(--border)}
+#timer{font-size:1.3rem;font-weight:700;color:var(--primary)}#timer.low{color:var(--bad)}
+button{cursor:pointer;border:0;border-radius:10px;padding:9px 16px;font-size:1rem;background:var(--primary);color:#fff}
+[data-theme=dark] button{color:#0b1512}
+button:disabled{opacity:.5;cursor:default}
+.qn{font-weight:700;margin-bottom:8px}
+.opt{display:block;width:100%;text-align:left;background:var(--bg);color:var(--text);border:2px solid var(--border);margin:6px 0;padding:9px 12px;border-radius:10px}
+[data-theme=dark] .opt{color:var(--text)}
+.opt.sel{border-color:var(--primary)}
+.opt.correct{background:var(--okbg);border-color:var(--ok)}
+.opt.wrong{background:var(--badbg);border-color:var(--bad)}
+.tag{display:inline-block;font-size:.8rem;background:var(--bg);color:var(--primary);border:1px solid var(--border);border-radius:20px;padding:0 10px;margin-bottom:6px}
+.exp{display:none;margin-top:8px;padding:8px 12px;border-radius:8px;background:var(--bg);border-left:4px solid var(--primary);font-size:.95rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.stat-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;box-shadow:var(--shadow)}
+.stat-box b{display:block;font-size:1.5rem;color:var(--primary)}
+#fb{font-size:1.1rem;font-weight:700;text-align:center;margin:12px 0}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<h2 class="chapter-title">জাতীয় শিক্ষাক্রম ২০১২ এর বৈশিষ্ট্য ও বিষয় কাঠামো</h2>
+<div class="warn"><div class="wrow"><b id="fullmark"></b><b id="timeinfo"></b></div><div id="info2"></div><div id="info3"></div></div>
+</div>
+<div class="bar"><span>⏱️ <span id="timer">১০:০০</span></span><span id="prog"></span><button id="theme">🌙 ডার্ক মোড</button></div>
+<div id="quiz"></div>
+<div id="result" class="hide">
+<div class="card"><div class="stats" id="stats"></div><div id="fb"></div><div style="text-align:center"><button id="again">পুনরায় কুইজ দাও</button></div></div>
+</div>
+<div class="card" style="text-align:center"><button id="submit">সাবমিট করো</button></div>
+
+</div>
+<script>
+const masterQuestionBank=[["জাতীয় শিক্ষাক্রম ২০১২ কোন নীতির নির্দেশনায় প্রণীত হয়?",["শিক্ষাক্রম ১৯৯৫","জাতীয় শিক্ষানীতি ১৯৭৪","জাতীয় শিক্ষানীতি ২০১০","জাতীয় শিক্ষানীতি ২০২০"],2,0],["একুশ শতকের চ্যালেঞ্জ মোকাবিলায় বর্তমান বিশ্বের অধিকাংশ দেশ কোন ধরনের শিক্ষাক্রম অনুসরণ করছে?",["যোগ্যতাভিত্তিক শিক্ষাক্রম","পরীক্ষাভিত্তিক শিক্ষাক্রম","মুখস্থনির্ভর শিক্ষাক্রম","বিষয়বস্তুভিত্তিক শিক্ষাক্রম"],0,0],["বাংলাদেশে শিক্ষাক্রম রূপরেখাটি কোন ধারণাকে কেন্দ্র করে উন্নয়ন করা হয়েছে?",["পরীক্ষার ধারণা","বিষয়বস্তুর ধারণা","শ্রেণি সংখ্যার ধারণা","যোগ্যতার ধারণা"],3,0],["জ্ঞান, দক্ষতা এবং কী সমন্বিতভাবে অর্জিত হলে শিক্ষার্থীর মাঝে যোগ্যতা গড়ে ওঠে?",["পরীক্ষার নম্বর","ইতিবাচক মূল্যবোধ ও দৃষ্টিভঙ্গি","বংশগত বৈশিষ্ট্য","আর্থিক সচ্ছলতা"],1,0],["জাতীয় শিক্ষাক্রম ২০১২ কোন শ্রেণি থেকে কোন শ্রেণি পর্যন্ত শিক্ষার্থীদের জন্য?",["প্রথম থেকে পঞ্চম শ্রেণি","ষষ্ঠ থেকে দ্বাদশ শ্রেণি","প্রথম থেকে দশম শ্রেণি","নবম থেকে দ্বাদশ শ্রেণি"],1,0],["জাতীয় শিক্ষাক্রম ২০১২ প্রণয়নের লক্ষ্য অর্জনে কোন শিক্ষাক্রম পরিমার্জন করা হয়?",["শিক্ষাক্রম ১৯৮৫","শিক্ষাক্রম ২০০০","শিক্ষাক্রম ২০১০","শিক্ষাক্রম ১৯৯৫"],3,0],["শিখনের তিনটি ক্ষেত্র কোনগুলো?",["বুদ্ধিবৃত্তীয়, মনোপেশিজ ও আবেগীয়","বুদ্ধিবৃত্তীয়, সামাজিক ও অর্থনৈতিক","মনোপেশিজ, রাজনৈতিক ও আবেগীয়","শারীরিক, সামাজিক ও ধর্মীয়"],0,0],["জাতীয় শিক্ষাক্রম ২০১২-এ প্রতিটি বিষয়ের শিখনফল ও বিষয়বস্তু কীসের সংখ্যা অনুযায়ী ডিজাইন করা হয়েছে?",["শিক্ষার্থীর সংখ্যা","শিক্ষকের সংখ্যা","শিক্ষাবছরের কর্মদিবসের সংখ্যা","পাঠ্যপুস্তকের পৃষ্ঠা সংখ্যা"],2,0],["ভাষা শিক্ষায় শ্রেণিকক্ষে অনুশীলনের জন্য কোন চারটি দক্ষতার কথা বলা হয়েছে?",["দেখা, শোনা, ছোঁয়া ও বলা","পড়া, লেখা, গণনা ও অঙ্কন","শোনা, বলা, পড়া ও লেখা","বলা, গাওয়া, আঁকা ও লেখা"],2,0],["ষষ্ঠ থেকে দশম শ্রেণি পর্যন্ত সকল ধারার শিক্ষার্থীদের জন্য কোন বিষয়টি আবশ্যিক হিসেবে অন্তর্ভুক্ত করা হয়েছে?",["তথ্য ও যোগাযোগ প্রযুক্তি","উচ্চতর গণিত","ভূগোল","কৃষিশিক্ষা"],0,0],["জাতীয় শিক্ষাক্রম ২০১২-এ সবগুলো ধর্মশিক্ষার বিষয়ের নাম কী রাখা হয়েছে?",["ধর্মতত্ত্ব","নৈতিকতা ও সুশাসন","ধর্ম ও সংস্কৃতি","ধর্ম ও নৈতিক শিক্ষা"],3,0],["একাদশ ও দ্বাদশ শ্রেণিতে কোন বিষয়টি নতুন করে অন্তর্ভুক্ত করা হয়েছে?",["সমরবিদ্যা","ফিন্যান্স ও ব্যাংকিং এবং বীমা","নাট্যকলা","মৃত্তিকা বিজ্ঞান"],1,0],["জাতীয় শিক্ষাক্রম ২০১২ অনুযায়ী প্রতি শিক্ষাবর্ষে কয়টি সাময়িক পরীক্ষা অনুষ্ঠিত হবে?",["১টি","২টি","৩টি","৪টি"],1,0],["জাতীয় শিক্ষাক্রম ২০১২ অনুযায়ী প্রতিটি ক্লাসের ব্যাপ্তি কত মিনিট?",["৪৫ মিনিট","৫০ মিনিট","৯০ মিনিট","৬০ মিনিট"],3,0],["যুগের চাহিদা অনুসারে অন্তর্ভুক্ত বিষয়বস্তুর একটি উদাহরণ কোনটি?",["জলবায়ু পরিবর্তন","মহাকাশ গবেষণা","ডিজিটাল মুদ্রা","নগর পরিকল্পনা"],0,0],["একাদশ ও দ্বাদশ শ্রেণির সকল শাখার জন্য আবশ্যিক বিষয় কোনগুলো?",["বাংলা, ইংরেজি এবং উচ্চতর গণিত","বাংলা, ইংরেজি এবং রসায়ন","বাংলা, ইংরেজি এবং তথ্য ও যোগাযোগ প্রযুক্তি","বাংলা, ইংরেজি এবং ইতিহাস"],2,0],["বিজ্ঞান শাখার শাখাভিত্তিক আবশ্যিক বিষয় কোনগুলো?",["পদার্থবিজ্ঞান, হিসাববিজ্ঞান এবং ভূগোল","রসায়ন, অর্থনীতি এবং ইতিহাস","পদার্থবিজ্ঞান, রসায়ন এবং জীববিজ্ঞান/উচ্চতর গণিত","জীববিজ্ঞান, শিশুর বিকাশ এবং আরবি"],2,0],["মানবিক শাখায় শাখাভিত্তিক আবশ্যিক বিষয় হিসেবে কয়টি বিষয় নিতে হবে?",["যেকোনো ৩টি","যেকোনো ২টি","যেকোনো ৪টি","সবগুলো ৬টি"],0,0],["নিচের কোনটি ব্যবসায় শিক্ষা শাখার শাখাভিত্তিক আবশ্যিক বিষয়?",["পদার্থবিজ্ঞান","শিশুর বিকাশ","লঘু সংগীত","হিসাববিজ্ঞান"],3,0],["নিচের কোনটি গার্হস্থ্য বিজ্ঞান শাখার শাখাভিত্তিক আবশ্যিক বিষয়?",["হিসাববিজ্ঞান","শিশুর বিকাশ","রসায়ন","উচ্চাঙ্গ সংগীত"],1,0],["সংগীত শাখার শাখাভিত্তিক আবশ্যিক বিষয়ের মধ্যে কোন দুটি সংগীত বিষয় রয়েছে?",["লঘু সংগীত ও আরবি","লঘু সংগীত ও উচ্চাঙ্গ সংগীত","উচ্চাঙ্গ সংগীত ও হিসাববিজ্ঞান","লঘু সংগীত ও পদার্থবিজ্ঞান"],1,0],["নিচের কোনটি ইসলাম শিক্ষা শাখার শাখাভিত্তিক আবশ্যিক বিষয়?",["হিসাববিজ্ঞান","রসায়ন","শিশুর বিকাশ","আরবি"],3,0],["‘জ্ঞান, দক্ষতা এবং ইতিবাচক মূল্যবোধ ও দৃষ্টিভঙ্গি সমন্বিতভাবে অর্জিত হলে যোগ্যতা গড়ে ওঠে’ — এর অর্থ কী?",["এই তিনটি উপাদান একত্রে অর্জিত হলেই শিক্ষার্থীর মধ্যে যোগ্যতা তৈরি হয়","শুধু জ্ঞান অর্জন করলেই যোগ্যতা তৈরি হয়","যোগ্যতার সাথে মূল্যবোধের কোনো সম্পর্ক নেই","যোগ্যতা কেবল পরীক্ষার নম্বর দিয়ে বোঝা যায়"],0,1],["‘গতানুগতিক মুখস্থ করার প্রবণতাকে নিরুৎসাহিত করা হয়েছে’ — এর অর্থ কী?",["মুখস্থ করা সম্পূর্ণ বাধ্যতামূলক করা হয়েছে","পাঠদানে শিক্ষকের ভূমিকা বাদ দেওয়া হয়েছে","মুখস্থের পরিবর্তে শিক্ষার্থীকেন্দ্রিক ও কার্যক্রমভিত্তিক শিখন-শেখানো পদ্ধতি ব্যবহারে উৎসাহিত করা হয়েছে","শিক্ষার্থীদের পরীক্ষা বন্ধ করা হয়েছে"],2,1],["শিখনের তিনটি ক্ষেত্রের মধ্যে সমন্বয় করার ফলে শিক্ষার্থীর ক্ষেত্রে কী হবে বলে আশা করা হয়েছে?",["শুধু বুদ্ধিবৃত্তীয় বিকাশ ঘটবে","শুধু দৈহিক বিকাশ ঘটবে","চিন্তন, দৈহিক, মানসিক ও আধ্যাত্মিক বিকাশ ভারসাম্যপূর্ণ হবে","আবেগীয় বিকাশ বাদ পড়বে"],2,1],["শিক্ষাবছরের কর্মদিবস অনুযায়ী শিখনফল ও বিষয়বস্তু ডিজাইন করার ফল কী?",["বিষয়বস্তুর ভার এবং ক্লাস সংখ্যা প্রাসঙ্গিকভাবে সুসামঞ্জস্য হয়েছে","বিষয়বস্তুর ভার অনেক বেড়ে গেছে","ক্লাস সংখ্যা অপ্রাসঙ্গিক হয়ে গেছে","শিখনফল বাদ পড়েছে"],0,1],["ভাষা শিক্ষায় শোনা, বলা, পড়া ও লেখার অনুশীলনের সুযোগ সৃষ্টির মূল তাৎপর্য কী?",["শুধু লেখার দক্ষতা অর্জনের ওপর জোর দেওয়া","কেবল বইয়ের বিষয়বস্তু মুখস্থ করা","ভাষা শিক্ষা থেকে মূল্যায়ন বাদ দেওয়া","বিষয়বস্তু মুখস্থ না করে শ্রেণিকক্ষে দক্ষতা অনুশীলনের মাধ্যমে শেখা"],3,1],["তাত্ত্বিক জ্ঞানের সাথে ব্যবহারিক কার্যক্রমের সমন্বয় করার উদ্দেশ্য কী?",["ব্যবহারিক কাজকে তত্ত্ব থেকে আলাদা রাখা","শিক্ষার্থী তত্ত্ব ও ব্যবহারিকের মধ্যে সম্পর্ক খুঁজে পাবে","তাত্ত্বিক অংশ বাদ দেওয়া","শুধু পরীক্ষার নম্বর বাড়ানো"],1,1],["বিজ্ঞান শাখার একজন শিক্ষার্থী ঐচ্ছিক বিষয় হিসেবে নিচের কোনটি নিতে পারবে?",["হিসাববিজ্ঞান","মনোবিজ্ঞান","লঘু সংগীত","আরবি"],1,2],["একজন ব্যবসায় শিক্ষা শাখার শিক্ষার্থী ঐচ্ছিক বিষয় হিসেবে নিচের কোনটি নিতে পারবে?",["পদার্থবিজ্ঞান","লঘু সংগীত","মনোবিজ্ঞান","পরিসংখ্যান"],3,2],["মানবিক শাখার একজন শিক্ষার্থী শাখাভিত্তিক আবশ্যিক ৩টি বিষয়ের মধ্যে কোনটি নিতে পারবে না?",["হিসাববিজ্ঞান","ভূগোল","যুক্তিবিদ্যা","পৌরনীতি ও সুশাসন"],0,2],["সংগীত শাখার একজন শিক্ষার্থী ৬ নম্বর বিষয় হিসেবে কোনটি নিতে পারবে?",["রসায়ন","হিসাববিজ্ঞান","ইতিহাস","আরবি"],2,2],["একটি কলেজ প্রতিটি ক্লাসের ব্যাপ্তি ৭৫ মিনিট নির্ধারণ করেছে। জাতীয় শিক্ষাক্রম ২০১২ অনুযায়ী ক্লাসের সঠিক ব্যাপ্তি কত?",["৪৫ মিনিট","৯০ মিনিট","৬০ মিনিট","১২০ মিনিট"],2,2],["একজন শিক্ষক ইংরেজি ক্লাসে শিক্ষার্থীদের শুধু বিষয়বস্তু মুখস্থ করাচ্ছেন। জাতীয় শিক্ষাক্রম ২০১২ অনুযায়ী তাঁর কী করা উচিত?",["শোনা, বলা, পড়া ও লেখা — এ চারটি দক্ষতা অনুশীলনের সুযোগ সৃষ্টি করা","মুখস্থের ওপর আরও জোর দেওয়া","শুধু লেখার অনুশীলন করানো","ইংরেজি ক্লাস বন্ধ রাখা"],0,2],["জাতীয় শিক্ষাক্রম ২০১২ যোগ্যতাভিত্তিক হওয়ার পেছনে প্রধান যুক্তি কোনটি?",["শুধু পরীক্ষার সংখ্যা কমানো","শিক্ষকের কাজ বাড়ানো","পাঠ্যপুস্তকের বিষয় সংখ্যা বাড়ানো","একুশ শতকের চ্যালেঞ্জ মোকাবিলায় সক্ষম নাগরিক গড়ে তোলা এবং বিশ্বের অধিকাংশ দেশের অনুসৃত ধারার সাথে সংগতি রাখা"],3,3],["কার্যক্রমভিত্তিক শিখন-শেখানো পদ্ধতিকে শিক্ষার্থীর সৃজনশীল প্রশ্ন পদ্ধতির পরীক্ষা প্রস্তুতিতে সহায়ক বলার যুক্তি কী?",["কার্যক্রম পরীক্ষার প্রশ্নপত্র আগেই জানিয়ে দেয়","মুখস্থের বদলে কাজের মাধ্যমে শেখায় শিক্ষার্থীর চিন্তন ও সৃজনশীলতার বিকাশ ঘটে","কার্যক্রম শুধু স্মৃতিশক্তি বাড়ায়","কার্যক্রম পরীক্ষা পদ্ধতি বাতিল করে"],1,3],["বিজ্ঞান ও মানবিক শাখার শাখাভিত্তিক আবশ্যিক বিষয় কাঠামোর মধ্যে কোন তুলনাটি সঠিক?",["উভয় শাখায় একই তিনটি বিষয় আবশ্যিক","বিজ্ঞানে পদার্থবিজ্ঞান, রসায়ন ও জীববিজ্ঞান/উচ্চতর গণিত নির্দিষ্ট; মানবিকে তালিকা থেকে যেকোনো ৩টি নিতে হয়","মানবিকে সব বিষয় নির্দিষ্ট; বিজ্ঞানে যেকোনো ৩টি নিতে হয়","দুই শাখার কোনোটিতেই আবশ্যিক বিষয় নেই"],1,3],["ফিন্যান্স ও ব্যাংকিং এবং বীমা এবং জলবায়ু পরিবর্তন, তথ্য অধিকার, অটিজমের মতো বিষয় অন্তর্ভুক্ত করার সম্মিলিত যুক্তি কী?",["শিক্ষাক্রমকে পুরোনো ধারায় ধরে রাখা","বিষয়ের সংখ্যা কমানো","শিক্ষার্থীর ব্যবহারিক কাজ বন্ধ করা","শিক্ষাক্রমকে সমকালীন চাহিদা ও যুগের প্রয়োজনের সাথে সংগতিপূর্ণ করা"],3,3],["সব ধর্মশিক্ষার বিষয়ের নাম ‘ধর্ম ও নৈতিক শিক্ষা’ রাখার মূল যুক্তি কী?",["ধর্মশিক্ষার মাধ্যমে নৈতিক শিক্ষার ওপর গুরুত্ব আরোপ করা","ধর্মশিক্ষা বাদ দেওয়া","শুধু একটি ধর্মের শিক্ষাকে প্রাধান্য দেওয়া","নৈতিক শিক্ষাকে অপ্রয়োজনীয় মনে করা"],0,3],["ইসলাম শিক্ষা ও গার্হস্থ্য বিজ্ঞান শাখার ঐচ্ছিক বিষয়ের তালিকার তুলনায় কোন মন্তব্যটি সঠিক?",["যুক্তিবিদ্যা উভয় শাখার ঐচ্ছিক তালিকায় রয়েছে","কৃষিশিক্ষা উভয় শাখার ঐচ্ছিক তালিকায় রয়েছে","মনোবিজ্ঞান উভয় শাখার ঐচ্ছিক তালিকায় রয়েছে","শিল্পকলা ও বস্ত্র পরিচ্ছদ উভয় শাখার ঐচ্ছিক তালিকায় রয়েছে"],2,3]].map(([q,o,a,t])=>({q,o,a,t}));
+/* t: 0=জ্ঞানমূলক 1=অনুধাবনমূলক 2=প্রয়োগমূলক 3=উচ্চতর দক্ষতা */
+const N=20,TIME=600,QUOTA=[11,3,3,3],TN=["জ্ঞানমূলক","অনুধাবনমূলক","প্রয়োগমূলক","উচ্চতর দক্ষতা"];
+const bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
+const $=id=>document.getElementById(id);
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const L=['ক','খ','গ','ঘ'];
+let Q=[],ans=[],left=TIME,tm=null,done=false;
+function renderMath(el){try{if(window.renderMathInElement)renderMathInElement(el,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false})}catch(e){}}
+function info(){
+  const n=masterQuestionBank.length,t=Math.min(N,n);
+  $('fullmark').textContent='পূর্ণমান: '+bn(t);$('timeinfo').textContent='সময়: '+bn(TIME/60)+' মিনিট';
+  $('info2').textContent='['+bn(n)+' টি প্রশ্ন আছে]';
+  $('info3').textContent='প্রতিবার '+bn(t)+'টা প্রশ্ন আসবে। (অপশনসহ এলোমেলো)'
+}
+function start(){
+  clearInterval(tm);done=false;left=TIME;
+  const take=Math.min(N,masterQuestionBank.length);let pick=[];
+  QUOTA.forEach((n,t)=>{pick=pick.concat(shuf(masterQuestionBank.filter(x=>x.t===t)).slice(0,n))});
+  if(pick.length<take){const rest=shuf(masterQuestionBank.filter(x=>!pick.includes(x)));pick=pick.concat(rest.slice(0,take-pick.length))}
+  pick=shuf(pick.slice(0,take));
+  Q=pick.map(x=>{const idx=shuf(x.o.map((t,i)=>i));return{q:x.q,t:x.t,o:idx.map(i=>x.o[i]),a:idx.indexOf(x.a)}});
+  ans=Q.map(()=>-1);
+  $('result').classList.add('hide');$('submit').disabled=false;$('submit').parentElement.classList.remove('hide');
+  const box=$('quiz');box.innerHTML='';
+  Q.forEach((q,i)=>{
+    const c=document.createElement('div');c.className='card';c.id='q'+i;
+    c.innerHTML='<div class="qn">'+bn(i+1)+'। '+q.q+'</div>'+q.o.map((t,j)=>'<button class="opt" data-i="'+i+'" data-j="'+j+'">'+t+'</button>').join('');
+    box.appendChild(c)});
+  box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>pickOpt(+b.dataset.i,+b.dataset.j));
+  upd();tick();tm=setInterval(tick,1000);
+  renderMath(box);try{window.scrollTo(0,0)}catch(e){}
+}
+function pickOpt(i,j){
+  if(done||ans[i]>=0)return;ans[i]=j;
+  document.querySelectorAll('#q'+i+' .opt').forEach((b,k)=>{b.disabled=true;if(k===j)b.classList.add('sel')});upd()
+}
+function upd(){$('prog').textContent=bn(ans.filter(a=>a>=0).length)+'/'+bn(Q.length)}
+function tick(){
+  const m=Math.floor(left/60),s=left%60;$('timer').textContent=bn(String(m).padStart(2,'0'))+':'+bn(String(s).padStart(2,'0'));
+  $('timer').classList.toggle('low',left<=60);
+  if(left<=0){clearInterval(tm);finish();return}left--
+}
+function submitClick(){
+  const miss=[];ans.forEach((a,i)=>{if(a<0)miss.push(i)});
+  if(miss.length){alert('নিচের প্রশ্নগুলোর উত্তর দেওয়া বাকি আছে: '+miss.map(i=>bn(i+1)).join(', '));
+    $('q'+miss[0]).scrollIntoView({behavior:'smooth',block:'center'});return}
+  clearInterval(tm);finish()
+}
+function finish(){
+  if(done)return;done=true;let c=0,w=0,u=0;
+  Q.forEach((q,i)=>{
+    const card=$('q'+i),opts=card.querySelectorAll('.opt');opts.forEach(b=>b.disabled=true);
+    opts[q.a].classList.add('correct');
+    if(ans[i]<0)u++;else if(ans[i]===q.a)c++;else{w++;opts[ans[i]].classList.add('wrong')}
+  });
+  const score=c,pct=Q.length?score/Q.length*100:0;
+  const items=[['মোট প্রশ্ন',bn(Q.length)],['সঠিক',bn(c)],['ভুল',bn(w)],['চূড়ান্ত স্কোর',bn(score.toFixed(2).replace(/\.?0+$/,''))+'/'+bn(Q.length)]];
+  $('stats').innerHTML=items.map(x=>'<div class="stat-box"><b>'+x[1]+'</b>'+x[0]+'</div>').join('');
+  $('prog').textContent='স্কোর: '+bn(score.toFixed(2).replace(/\.?0+$/,''))+'/'+bn(Q.length);
+  $('fb').textContent=pct>=90?'🎉 অসাধারণ! চমৎকার ফলাফল, চালিয়ে যান!':pct>=80?'👏 খুব ভালো! আরও অনুশীলন প্রয়োজন।':pct>=60?'🙂 ভালো, আরও অনুশীলন প্রয়োজন।':'📖 আরও মনোযোগ দিয়ে পড়ুন।';
+  $('submit').parentElement.classList.add('hide');$('result').classList.remove('hide');
+  renderMath($('quiz'));
+  setTimeout(()=>{try{$('result').scrollIntoView({block:'start'})}catch(_){}try{window.scrollTo(0,$('result').getBoundingClientRect().top+window.pageYOffset-70)}catch(_){}},80)
+}
+$('submit').onclick=submitClick;$('again').onclick=start;
+$('theme').onclick=()=>{const d=document.documentElement.dataset.theme==='dark';document.documentElement.dataset.theme=d?'light':'dark';$('theme').textContent=d?'🌙 ডার্ক মোড':'☀️ লাইট মোড'};
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  const k=e.key.toLowerCase(),blk=(e.ctrlKey&&['c','s','u'].includes(k))||e.key==='F12'||e.key==='PrintScreen';
+  if(blk){e.preventDefault();try{navigator.clipboard.writeText('')}catch(_){}alert('এই পেজে কপি/সেভ/সোর্স দেখা নিষিদ্ধ।')}});
+document.addEventListener('keyup',e=>{if(e.key==='PrintScreen'){try{navigator.clipboard.writeText('')}catch(_){}alert('স্ক্রিনশট নেওয়া নিষিদ্ধ।')}});
+window.addEventListener('load',()=>{info();start()});
+</script>
+</body>
+</html>

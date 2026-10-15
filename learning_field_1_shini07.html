@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>শিক্ষা উপকরণ ব্যবস্থাপনা - অনলাইন কুইজ পরীক্ষা</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+<style>
+@font-face{font-family:'SolaimanLipi';src:local('SolaimanLipi'),local('Solaiman Lipi'),url('SolaimanLipi.ttf') format('truetype');font-display:swap}
+*{font-family:'SolaimanLipi',Arial,sans-serif !important;box-sizing:border-box}
+.katex,.katex *{font-family:KaTeX_Main,'Times New Roman',serif !important}
+:root{--primary:#006a4e;--primary-d:#004d37;--bg:#f2f6f4;--card:#fff;--text:#1d2b26;--muted:#5d6d66;--border:#d5e2dc;--ok:#1b8a4b;--okbg:#e3f6ea;--bad:#c62828;--badbg:#fdeaea;--shadow:0 2px 10px rgba(0,0,0,.08);--ul:#006a4e}
+[data-theme=dark]{--primary:#4db6ac;--bg:#101816;--card:#1a2622;--text:#e6f0ec;--muted:#9bb0a8;--border:#2c3d37;--ok:#66d28f;--okbg:#17352a;--bad:#ff8a80;--badbg:#3a2020;--shadow:0 2px 10px rgba(0,0,0,.5);--ul:#4db6ac}
+body{margin:0;background:var(--bg);color:var(--text);line-height:1.7;-webkit-user-select:none;-moz-user-select:none;user-select:none}
+.wrap{max-width:900px;margin:0 auto;padding:12px}
+header{background:linear-gradient(135deg,#004d37,#006a4e);color:#fff;text-align:center;padding:22px 14px;border-radius:0 0 18px 18px;box-shadow:var(--shadow)}
+header h1{margin:0;font-size:1.5rem}header p{margin:3px 0 0;font-size:1rem;opacity:.95}
+.card{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:16px;margin:14px 0;border:1px solid var(--border)}
+.chapter-title{margin:0 0 12px;padding-bottom:8px;font-size:1.4rem;color:var(--primary);border-bottom:3px solid var(--ul)}
+.badge{background:var(--bg);border-left:4px solid var(--primary);padding:8px 12px;border-radius:8px;margin:8px 0;font-size:.95rem}
+.warn{background:#fff6e0;color:#6b4a00;border-left:4px solid #f0a500;padding:8px 12px;border-radius:8px;font-size:.95rem}
+#info2,#info3{text-align:center}
+#info3{white-space:nowrap;font-size:clamp(.62rem,3.3vw,.95rem)}
+.wrow{display:flex;justify-content:space-between;gap:10px;margin-bottom:2px}
+[data-theme=dark] .warn{background:#3a3016;color:#ffd98a}
+.bar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--card);padding:10px 14px;border-radius:12px;box-shadow:var(--shadow);border:1px solid var(--border)}
+#timer{font-size:1.3rem;font-weight:700;color:var(--primary)}#timer.low{color:var(--bad)}
+button{cursor:pointer;border:0;border-radius:10px;padding:9px 16px;font-size:1rem;background:var(--primary);color:#fff}
+[data-theme=dark] button{color:#0b1512}
+button:disabled{opacity:.5;cursor:default}
+.qn{font-weight:700;margin-bottom:8px}
+.opt{display:block;width:100%;text-align:left;background:var(--bg);color:var(--text);border:2px solid var(--border);margin:6px 0;padding:9px 12px;border-radius:10px}
+[data-theme=dark] .opt{color:var(--text)}
+.opt.sel{border-color:var(--primary)}
+.opt.correct{background:var(--okbg);border-color:var(--ok)}
+.opt.wrong{background:var(--badbg);border-color:var(--bad)}
+.tag{display:inline-block;font-size:.8rem;background:var(--bg);color:var(--primary);border:1px solid var(--border);border-radius:20px;padding:0 10px;margin-bottom:6px}
+.exp{display:none;margin-top:8px;padding:8px 12px;border-radius:8px;background:var(--bg);border-left:4px solid var(--primary);font-size:.95rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.stat-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;box-shadow:var(--shadow)}
+.stat-box b{display:block;font-size:1.5rem;color:var(--primary)}
+#fb{font-size:1.1rem;font-weight:700;text-align:center;margin:12px 0}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<h2 class="chapter-title">শিক্ষা উপকরণ ব্যবস্থাপনা</h2>
+<div class="warn"><div class="wrow"><b id="fullmark"></b><b id="timeinfo"></b></div><div id="info2"></div><div id="info3"></div></div>
+</div>
+<div class="bar"><span>⏱️ <span id="timer">১০:০০</span></span><span id="prog"></span><button id="theme">🌙 ডার্ক মোড</button></div>
+<div id="quiz"></div>
+<div id="result" class="hide">
+<div class="card"><div class="stats" id="stats"></div><div id="fb"></div><div style="text-align:center"><button id="again">পুনরায় কুইজ দাও</button></div></div>
+</div>
+<div class="card" style="text-align:center"><button id="submit">সাবমিট করো</button></div>
+
+</div>
+<script>
+const masterQuestionBank=[["“শিক্ষা উপকরণ ব্যবস্থাপনা” অধ্যায় অনুযায়ী ব্রিটিশ শিক্ষাবিদ জন অ্যাডাম কত সালে শিখন কার্যক্রমে সর্বপ্রথম শিক্ষা উপকরণ ব্যবহার করেন?",["১৮১০ সালে","১৮৫১ সালে","১৮০১ সালে","১৯০১ সালে"],2,0],["শিক্ষা উপকরণ ব্যবহারের ধারণা অনুযায়ী জন অ্যাডাম কোন দেশের শিক্ষাবিদ?",["ব্রিটেনের","যুক্তরাষ্ট্রের","ফ্রান্সের","জার্মানির"],0,0],["শিক্ষা উপকরণ ব্যবহার করলে শিক্ষার্থীর কোন শক্তির বিকাশ ঘটে?",["শারীরিক শক্তির","আর্থিক শক্তির","স্মরণ-বিস্মরণ শক্তির","সৃজনশীল ও কল্পনা শক্তির"],3,0],["শিক্ষা উপকরণের শ্রেণিবিভাগে “হার্ডওয়্যার উপকরণ” কাকে বলে?",["যে উপকরণ অব্যবহৃত জিনিসপত্র থেকে তৈরি হয়","যে উপকরণের একটি শক্ত কাঠামো আছে এবং হাত দিয়ে স্পর্শ করা যায়","যে উপকরণের কোনো শক্ত খোলস নেই","যে উপকরণ শুধু শ্রবণ ইন্দ্রিয়কে সক্রিয় করে"],1,0],["নিচের কোনটি হার্ডওয়্যার শিক্ষা উপকরণের উদাহরণ হিসেবে উল্লেখ করা হয়েছে?",["পাঠ্যপুস্তক","জার্নাল","ম্যাগাজিন","ফ্লানেল বোর্ড"],3,0],["ডিজিটাল শিক্ষা উপকরণ কোন প্রোগ্রামের মাধ্যমে তৈরি করা হয় বলে উল্লেখ আছে?",["পেইন্ট ব্রাশ","পাওয়ার পয়েন্ট","নোটপ্যাড","ক্যালকুলেটর"],1,0],["শিক্ষক ডিজিটাল শিক্ষা উপকরণ কোন মাধ্যমে শ্রেণিকক্ষে প্রদর্শন করেন?",["মাল্টিমিডিয়া বা প্রজেক্টরের মাধ্যমে","ব্ল্যাকবোর্ডের মাধ্যমে","রেডিওর মাধ্যমে","পোস্টারের মাধ্যমে"],0,0],["সফটওয়্যার শিক্ষা উপকরণ কেমন?",["শক্ত কাঠামোবিশিষ্ট","অত্যন্ত ব্যয়বহুল","তথ্যভিত্তিক, যার কোনো শক্ত খোলস নেই","শুধু বিদ্যুৎ-নির্ভর"],2,0],["নিচের কোনটি সফটওয়্যার শিক্ষা উপকরণের উদাহরণ?",["স্লাইড প্রজেক্টর","জার্নাল","কম্পিউটার","রেডিও"],1,0],["মূল্যসাশ্রয়ী শিক্ষা উপকরণ কোন জিনিসপত্র থেকে তৈরি করা যায়?",["জাতীয় বাজারের নতুন যন্ত্রপাতি","আন্তর্জাতিক বাজারের সরঞ্জাম","সরকারি অনুদানের সামগ্রী","অব্যবহৃত জিনিসপত্র"],3,0],["নিচের কোনটি মূল্যসাশ্রয়ী উপকরণের উদাহরণ হিসেবে উল্লেখ করা হয়েছে?",["ল্যাপটপ","ও.এইচ.পি","পানীয়ের বোতল","মনিটর"],2,0],["স্বল্প মূল্যের উপকরণের উদাহরণ হিসেবে কোনটি উল্লেখ আছে?",["বাঁশ ও বেতের তৈরি মডেল","ল্যাপটপ","ভিসিপি","টেপ রেকর্ডার"],0,0],["মূল্যবান শিক্ষা উপকরণ কোথা থেকে সংগ্রহ করা হয়?",["ফেলে দেওয়া জিনিস থেকে","জাতীয় বা আন্তর্জাতিক বাজার থেকে অর্থের বিনিময়ে","বাড়ির আসবাব থেকে","শিক্ষার্থীদের হাতে তৈরি করে"],1,0],["নিচের কোনটি মূল্যবান শিক্ষা উপকরণের উদাহরণ?",["পুরাতন বাল্ব","টিনের বাক্স","ফুল ও পাতা","বিজ্ঞানাগারের যন্ত্রপাতি ও রাসায়নিক দ্রব্য"],3,0],["শ্রবণ উপকরণকে ইংরেজিতে কী বলে?",["Audio Teaching Aids","Visual Teaching Aids","Audio-Visual Teaching Aids","Digital Teaching Aids"],0,0],["নিচের কোনটি শ্রবণ উপকরণের উদাহরণ?",["চার্ট","ম্যাপ","অডিও সিডি","পোস্টার"],2,0],["দর্শন উপকরণ শিক্ষার্থীর কোন ইন্দ্রিয়কে সক্রিয় করে?",["কেবল শ্রবণ ইন্দ্রিয়কে","দর্শন ও শ্রবণ উভয় ইন্দ্রিয়কে","কেবল দর্শন ইন্দ্রিয়কে","স্পর্শ ইন্দ্রিয়কে"],2,0],["দর্শন-শ্রবণ উপকরণকে ইংরেজিতে কী বলে?",["Audio-Visual Teaching Aids","Audio Teaching Aids","Visual Teaching Aids","Digital Teaching Aids"],0,0],["নিচের কোনটি দর্শন-শ্রবণ উপকরণের উদাহরণ হিসেবে উল্লেখ আছে?",["ম্যাগাজিন","পোস্টার","ম্যাপ","চলচ্চিত্র"],3,0],["শিক্ষা উপকরণ ব্যবহারের নীতিমালা অনুযায়ী উপকরণ ব্যবহারের পূর্বে শিক্ষককে কী রপ্ত করতে হবে?",["উপকরণের মূল্য","উপকরণ ব্যবহারের কৌশল","উপকরণের আমদানি পদ্ধতি","উপকরণের নির্মাতার নাম"],1,0],["শিক্ষা উপকরণ সংরক্ষণ পরিকল্পনায় সংরক্ষণের জন্য কী ব্যবহার করতে হবে?",["একটি মানচিত্র","একটি ঘণ্টা","একটি পোস্টার","একটি রেজিস্টার"],3,0],["শিক্ষা উপকরণ ব্যবহারে শিক্ষকদের আগ্রহ ও দক্ষতা বাড়ার ক্ষেত্রে অধ্যায়ে কোন প্রকল্পের উল্লেখ আছে?",["ইউজিসি","এটুআই","এনসিটিবি","বিসিএস"],1,0],["দর্শন-শ্রবণ উপকরণ ব্যবহারে শিখন দীর্ঘস্থায়ী হয় কেন?",["কারণ শিক্ষার্থীর দুটি ইন্দ্রিয় একসাথে সক্রিয় থাকে","কারণ উপকরণ খুব দামি","কারণ শিক্ষক কম কথা বলেন","কারণ পাঠদানের সময় বেড়ে যায়"],0,1],["“শিক্ষা উপকরণ বিমূর্ত ধারণাকে মূর্ত করে তোলে”— কথাটির অর্থ কী?",["ধারণাকে আরও জটিল করে তোলে","শুধু ছবি আঁকা শেখায়","অদেখা বা কঠিন ধারণাকে বাস্তবে দেখা ও বোঝার উপযোগী করে","পাঠ্য বইয়ের প্রয়োজন শেষ করে"],2,1],["পাঠ্যপুস্তককে সফটওয়্যার শিক্ষা উপকরণ বলা হয় কেন?",["কারণ এটি কম্পিউটারে চালানো হয়","কারণ এটি তথ্যভিত্তিক এবং এর কোনো শক্ত খোলস নেই","কারণ এটি বিদ্যুতে চলে","কারণ এটি আন্তর্জাতিক বাজার থেকে কেনা হয়"],1,1],["শ্রবণ উপকরণ ব্যবহারের ফলে শিক্ষার্থীর কোন দক্ষতা বৃদ্ধি পায়?",["লিখন দক্ষতা","স্পর্শ দক্ষতা","দৌড়ানোর দক্ষতা","শ্রবণ দক্ষতা"],3,1],["শিক্ষা উপকরণ ব্যবহার করলে শিক্ষকের মনোবল বৃদ্ধি পায় কেন?",["কারণ শিক্ষকের বেতন বাড়ে","কারণ শ্রেণির সময় কমে যায়","কারণ এতে শিক্ষকের প্রস্তুতি ভালো হয়","কারণ শিক্ষার্থী সংখ্যা কমে"],2,1],["প্রযুক্তিনির্ভর “ডিজিটাল কনটেন্ট” ব্যবহার বর্তমানে পাঠকে কীভাবে প্রভাবিত করছে?",["পাঠকে আকর্ষণীয় করছে","পাঠকে একঘেয়ে করছে","পাঠদানকে অসম্ভব করছে","শিক্ষার্থীর কল্পনা শক্তি কমাচ্ছে"],0,1],["রহিম স্যার পুরাতন ক্যালেন্ডার ও পানীয়ের বোতল দিয়ে পাঠদানের জন্য একটি মডেল তৈরি করলেন। উপকরণটি কোন শ্রেণির?",["মূল্যবান উপকরণ","মূল্যসাশ্রয়ী উপকরণ","ডিজিটাল উপকরণ","শ্রবণ উপকরণ"],1,2],["একজন ভাষা শিক্ষক ক্লাসে অডিও সিডি বাজিয়ে শিক্ষার্থীদের উচ্চারণ শোনালেন। এটি কোন ধরনের শিক্ষা উপকরণ ব্যবহার?",["দর্শন উপকরণ","সফটওয়্যার উপকরণ","স্বল্প মূল্যের উপকরণ","শ্রবণ উপকরণ"],3,2],["একজন শিক্ষক টেলিভিশনে একটি চলচ্চিত্র দেখিয়ে পাঠ ব্যাখ্যা করলেন। এখানে শিক্ষার্থীদের কোন কোন ইন্দ্রিয় সক্রিয় হয়েছে?",["দর্শন ও শ্রবণ","শুধু দর্শন","শুধু শ্রবণ","শুধু স্পর্শ"],0,2],["মিসেস সুমি দেয়ালে পোস্টার ও চার্ট ঝুলিয়ে পাঠদান করলেন। এই উপকরণ কোন শ্রেণির অন্তর্ভুক্ত?",["শ্রবণ উপকরণ","দর্শন-শ্রবণ উপকরণ","দর্শন উপকরণ","মূল্যবান উপকরণ"],2,2],["একজন শিক্ষক শ্রেণিতে চার্ট ব্যবহার করছেন, কিন্তু শেষ সারির শিক্ষার্থীরা তা দেখতে পাচ্ছে না। নীতিমালা অনুযায়ী তাঁর কী করা উচিত?",["উপকরণ ব্যবহার বন্ধ করে দেওয়া","শুধু সামনের সারির জন্য ব্যবহার করা","উপকরণ এমনভাবে ব্যবহার করা যাতে শ্রেণির সব শিক্ষার্থী দেখতে পারে","চার্টের লেখা আরও জটিল করা"],2,2],["একটি কলেজের রসায়ন বিভাগে রাসায়নিক পদার্থ ও আধুনিক সরঞ্জাম আছে। সংরক্ষণ পরিকল্পনা অনুযায়ী এগুলো কীভাবে রাখতে হবে?",["নিরাপদ স্থানে সংরক্ষণ করতে হবে","শিক্ষার্থীদের হাতের নাগালে রাখতে হবে","খোলা জায়গায় ফেলে রাখতে হবে","অন্য উপকরণের সঙ্গে মিশিয়ে রাখতে হবে"],0,2],["টেলিভিশনকে অধ্যায়ে নিচের কোন কোন শ্রেণির উদাহরণ হিসেবে উল্লেখ করা হয়েছে?",["সফটওয়্যার, মূল্যসাশ্রয়ী ও শ্রবণ উপকরণ","ডিজিটাল, স্বল্প মূল্যের ও শ্রবণ উপকরণ","সফটওয়্যার, স্বল্প মূল্যের ও দর্শন উপকরণ","হার্ডওয়্যার, মূল্যবান ও দর্শন-শ্রবণ উপকরণ"],3,3],["কলেজের তহবিল সীমিত হলে শিক্ষক শিক্ষা উপকরণ সংগ্রহে নীতিমালা অনুযায়ী কোন সিদ্ধান্ত নেবেন?",["শুধু আন্তর্জাতিক বাজার থেকে কিনবেন","মূল্যহীন বা স্বল্প মূল্যের উপকরণ নিজে তৈরি করবেন বা শিক্ষার্থীদের উদ্বুদ্ধ করবেন","উপকরণ ব্যবহার বন্ধ রাখবেন","একই উপকরণ সব বিষয়ে ব্যবহার করবেন"],1,3],["একজন অধ্যক্ষ কলেজ শিক্ষকদের আধুনিক প্রযুক্তিনির্ভর শিক্ষা উপকরণ ব্যবহারে দক্ষ ও আগ্রহী করে তুলতে চান। অধ্যায় অনুযায়ী কোন পদক্ষেপ উপযুক্ত?",["উপকরণ ব্যবহার নিষিদ্ধ করা","শুধু পুরাতন উপকরণ ব্যবহারে বাধ্য করা","প্রশিক্ষণ ছাড়াই উপকরণ কিনে দেওয়া","সংশ্লিষ্ট বিষয়ে প্রশিক্ষণের ব্যবস্থা করা"],3,3],["দর্শন-শ্রবণ উপকরণ সম্পর্কে —<br>i. শিক্ষার্থীর দর্শন ও শ্রবণ ইন্দ্রিয় একই সাথে সক্রিয় হয়<br>ii. টেলিভিশন ও চলচ্চিত্র এর উদাহরণ<br>iii. এতে শুধু শ্রবণ ইন্দ্রিয় সক্রিয় থাকে<br>নিচের কোনটি সঠিক?",["i ও ii","i ও iii","ii ও iii","i, ii ও iii"],0,3],["শিক্ষা উপকরণ ব্যবহারের প্রয়োজনীয়তা হিসেবে —<br>i. শিখন দীর্ঘস্থায়ী হয়<br>ii. পাঠদানে একঘেয়েমি বাড়ে<br>iii. শিক্ষার্থীর সৃজনশীলতা বিকাশে সহায়তা করে<br>নিচের কোনটি সঠিক?",["i ও ii","i ও iii","ii ও iii","i, ii ও iii"],1,3],["শিক্ষা উপকরণ সংরক্ষণ পরিকল্পনা অনুযায়ী —<br>i. দামি উপকরণ যেকোনো স্থানে ফেলে রাখা যায়<br>ii. সংরক্ষণের জন্য রেজিস্টার ব্যবহার করতে হবে<br>iii. বিষয়ভিত্তিক উপকরণ পৃথকভাবে সংরক্ষণ করতে হবে<br>নিচের কোনটি সঠিক?",["i ও ii","i ও iii","ii ও iii","i, ii ও iii"],2,3]].map(r=>({q:r[0],o:r[1],a:r[2],t:r[3]}));
+/* t: 0=জ্ঞানমূলক 1=অনুধাবনমূলক 2=প্রয়োগমূলক 3=উচ্চতর দক্ষতা */
+const N=20,TIME=600,QUOTA=[11,3,3,3],TN=["জ্ঞানমূলক","অনুধাবনমূলক","প্রয়োগমূলক","উচ্চতর দক্ষতা"];
+const bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
+const $=id=>document.getElementById(id);
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const L=['ক','খ','গ','ঘ'];
+let Q=[],ans=[],left=TIME,tm=null,done=false;
+function renderMath(el){try{if(window.renderMathInElement)renderMathInElement(el,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false})}catch(e){}}
+function info(){
+  const n=masterQuestionBank.length,t=Math.min(N,n);
+  $('fullmark').textContent='পূর্ণমান: '+bn(t);$('timeinfo').textContent='সময়: '+bn(TIME/60)+' মিনিট';
+  $('info2').textContent='['+bn(n)+' টি প্রশ্ন আছে]';
+  $('info3').textContent='প্রতিবার '+bn(t)+'টা প্রশ্ন আসবে। (অপশনসহ এলোমেলো)'
+}
+function start(){
+  clearInterval(tm);done=false;left=TIME;
+  const take=Math.min(N,masterQuestionBank.length);let pick=[];
+  QUOTA.forEach((n,t)=>{pick=pick.concat(shuf(masterQuestionBank.filter(x=>x.t===t)).slice(0,n))});
+  if(pick.length<take){const rest=shuf(masterQuestionBank.filter(x=>!pick.includes(x)));pick=pick.concat(rest.slice(0,take-pick.length))}
+  pick=shuf(pick.slice(0,take));
+  Q=pick.map(x=>{const idx=shuf(x.o.map((t,i)=>i));return{q:x.q,t:x.t,o:idx.map(i=>x.o[i]),a:idx.indexOf(x.a)}});
+  ans=Q.map(()=>-1);
+  $('result').classList.add('hide');$('submit').disabled=false;$('submit').parentElement.classList.remove('hide');
+  const box=$('quiz');box.innerHTML='';
+  Q.forEach((q,i)=>{
+    const c=document.createElement('div');c.className='card';c.id='q'+i;
+    c.innerHTML='<div class="qn">'+bn(i+1)+'। '+q.q+'</div>'+q.o.map((t,j)=>'<button class="opt" data-i="'+i+'" data-j="'+j+'">'+t+'</button>').join('');
+    box.appendChild(c)});
+  box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>pickOpt(+b.dataset.i,+b.dataset.j));
+  upd();tick();tm=setInterval(tick,1000);
+  renderMath(box);try{window.scrollTo(0,0)}catch(e){}
+}
+function pickOpt(i,j){
+  if(done||ans[i]>=0)return;ans[i]=j;
+  document.querySelectorAll('#q'+i+' .opt').forEach((b,k)=>{b.disabled=true;if(k===j)b.classList.add('sel')});upd()
+}
+function upd(){$('prog').textContent=bn(ans.filter(a=>a>=0).length)+'/'+bn(Q.length)}
+function tick(){
+  const m=Math.floor(left/60),s=left%60;$('timer').textContent=bn(String(m).padStart(2,'0'))+':'+bn(String(s).padStart(2,'0'));
+  $('timer').classList.toggle('low',left<=60);
+  if(left<=0){clearInterval(tm);finish();return}left--
+}
+function submitClick(){
+  const miss=[];ans.forEach((a,i)=>{if(a<0)miss.push(i)});
+  if(miss.length){alert('নিচের প্রশ্নগুলোর উত্তর দেওয়া বাকি আছে: '+miss.map(i=>bn(i+1)).join(', '));
+    $('q'+miss[0]).scrollIntoView({behavior:'smooth',block:'center'});return}
+  clearInterval(tm);finish()
+}
+function finish(){
+  if(done)return;done=true;let c=0,w=0,u=0;
+  Q.forEach((q,i)=>{
+    const card=$('q'+i),opts=card.querySelectorAll('.opt');opts.forEach(b=>b.disabled=true);
+    opts[q.a].classList.add('correct');
+    if(ans[i]<0)u++;else if(ans[i]===q.a)c++;else{w++;opts[ans[i]].classList.add('wrong')}
+  });
+  const score=c,pct=Q.length?score/Q.length*100:0;
+  const items=[['মোট প্রশ্ন',bn(Q.length)],['সঠিক',bn(c)],['ভুল',bn(w)],['চূড়ান্ত স্কোর',bn(score.toFixed(2).replace(/\.?0+$/,''))+'/'+bn(Q.length)]];
+  $('stats').innerHTML=items.map(x=>'<div class="stat-box"><b>'+x[1]+'</b>'+x[0]+'</div>').join('');
+  $('prog').textContent='স্কোর: '+bn(score.toFixed(2).replace(/\.?0+$/,''))+'/'+bn(Q.length);
+  $('fb').textContent=pct>=90?'🎉 অসাধারণ! চমৎকার ফলাফল, চালিয়ে যাও!':pct>=80?'👏 খুব ভালো! আর একটু চেষ্টায় পুরো নম্বর সম্ভব।':pct>=60?'🙂 ভালো, তবে আরও অনুশীলন প্রয়োজন।':'📖 আরও মনোযোগ দিয়ে অধ্যায়টি পড়ো ও আবার চেষ্টা করো।';
+  $('submit').parentElement.classList.add('hide');$('result').classList.remove('hide');
+  renderMath($('quiz'));
+  setTimeout(()=>{try{$('result').scrollIntoView({block:'start'})}catch(_){}try{window.scrollTo(0,$('result').getBoundingClientRect().top+window.pageYOffset-70)}catch(_){}},80)
+}
+$('submit').onclick=submitClick;$('again').onclick=start;
+$('theme').onclick=()=>{const d=document.documentElement.dataset.theme==='dark';document.documentElement.dataset.theme=d?'light':'dark';$('theme').textContent=d?'🌙 ডার্ক মোড':'☀️ লাইট মোড'};
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  const k=e.key.toLowerCase(),blk=(e.ctrlKey&&['c','s','u'].includes(k))||e.key==='F12'||e.key==='PrintScreen';
+  if(blk){e.preventDefault();try{navigator.clipboard.writeText('')}catch(_){}alert('এই পেজে কপি/সেভ/সোর্স দেখা নিষিদ্ধ।')}});
+document.addEventListener('keyup',e=>{if(e.key==='PrintScreen'){try{navigator.clipboard.writeText('')}catch(_){}alert('স্ক্রিনশট নেওয়া নিষিদ্ধ।')}});
+window.addEventListener('load',()=>{info();start()});
+</script>
+</body>
+</html>
