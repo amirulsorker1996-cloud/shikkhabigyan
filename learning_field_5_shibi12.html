@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>English Listening and Speaking Skills - অনলাইন কুইজ পরীক্ষা</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+<style>
+@font-face{font-family:'SolaimanLipi';src:local('SolaimanLipi'),local('Solaiman Lipi'),url('SolaimanLipi.ttf') format('truetype');font-display:swap}
+*{font-family:'SolaimanLipi',Arial,sans-serif !important;box-sizing:border-box}
+.katex,.katex *{font-family:KaTeX_Main,'Times New Roman',serif !important}
+:root{--primary:#006a4e;--primary-d:#004d37;--bg:#f2f6f4;--card:#fff;--text:#1d2b26;--muted:#5d6d66;--border:#d5e2dc;--ok:#1b8a4b;--okbg:#e3f6ea;--bad:#c62828;--badbg:#fdeaea;--shadow:0 2px 10px rgba(0,0,0,.08);--ul:#006a4e}
+[data-theme=dark]{--primary:#4db6ac;--bg:#101816;--card:#1a2622;--text:#e6f0ec;--muted:#9bb0a8;--border:#2c3d37;--ok:#66d28f;--okbg:#17352a;--bad:#ff8a80;--badbg:#3a2020;--shadow:0 2px 10px rgba(0,0,0,.5);--ul:#4db6ac}
+body{margin:0;background:var(--bg);color:var(--text);line-height:1.7;-webkit-user-select:none;-moz-user-select:none;user-select:none}
+.wrap{max-width:900px;margin:0 auto;padding:12px}
+header{background:linear-gradient(135deg,#004d37,#006a4e);color:#fff;text-align:center;padding:22px 14px;border-radius:0 0 18px 18px;box-shadow:var(--shadow)}
+header h1{margin:0;font-size:1.5rem}header p{margin:3px 0 0;font-size:1rem;opacity:.95}
+.card{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:16px;margin:14px 0;border:1px solid var(--border)}
+.chapter-title{margin:0 0 12px;padding-bottom:8px;font-size:1.4rem;color:var(--primary);border-bottom:3px solid var(--ul)}
+.badge{background:var(--bg);border-left:4px solid var(--primary);padding:8px 12px;border-radius:8px;margin:8px 0;font-size:.95rem}
+.warn{background:#fff6e0;color:#6b4a00;border-left:4px solid #f0a500;padding:8px 12px;border-radius:8px;font-size:.95rem}
+#info2,#info3{text-align:center}
+#info3{white-space:nowrap;font-size:clamp(.62rem,3.3vw,.95rem)}
+.wrow{display:flex;justify-content:space-between;gap:10px;margin-bottom:2px}
+[data-theme=dark] .warn{background:#3a3016;color:#ffd98a}
+.bar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--card);padding:10px 14px;border-radius:12px;box-shadow:var(--shadow);border:1px solid var(--border)}
+#timer{font-size:1.3rem;font-weight:700;color:var(--primary)}#timer.low{color:var(--bad)}
+button{cursor:pointer;border:0;border-radius:10px;padding:9px 16px;font-size:1rem;background:var(--primary);color:#fff}
+[data-theme=dark] button{color:#0b1512}
+button:disabled{opacity:.5;cursor:default}
+.qn{font-weight:700;margin-bottom:8px}
+.opt{display:block;width:100%;text-align:left;background:var(--bg);color:var(--text);border:2px solid var(--border);margin:6px 0;padding:9px 12px;border-radius:10px}
+[data-theme=dark] .opt{color:var(--text)}
+.opt.sel{border-color:var(--primary)}
+.opt.correct{background:var(--okbg);border-color:var(--ok)}
+.opt.wrong{background:var(--badbg);border-color:var(--bad)}
+.tag{display:inline-block;font-size:.8rem;background:var(--bg);color:var(--primary);border:1px solid var(--border);border-radius:20px;padding:0 10px;margin-bottom:6px}
+.exp{display:none;margin-top:8px;padding:8px 12px;border-radius:8px;background:var(--bg);border-left:4px solid var(--primary);font-size:.95rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.stat-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;box-shadow:var(--shadow)}
+.stat-box b{display:block;font-size:1.5rem;color:var(--primary)}
+#fb{font-size:1.1rem;font-weight:700;text-align:center;margin:12px 0}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<h2 class="chapter-title">English Listening and Speaking Skills</h2>
+<div class="warn"><div class="wrow"><b id="fullmark"></b><b id="timeinfo"></b></div><div id="info2"></div><div id="info3"></div></div>
+</div>
+<div class="bar"><span>⏱️ <span id="timer">১০:০০</span></span><span id="prog"></span><button id="theme">🌙 ডার্ক মোড</button></div>
+<div id="quiz"></div>
+<div id="result" class="hide">
+<div class="card"><div class="stats" id="stats"></div><div id="fb"></div><div style="text-align:center"><button id="again">পুনরায় কুইজ দাও</button></div></div>
+</div>
+<div class="card" style="text-align:center"><button id="submit">সাবমিট করো</button></div>
+
+</div>
+<script>
+const masterQuestionBank=[["ভাষা শেখার সময় পূর্ণ যোগাযোগের জন্য কয়টি দক্ষতা প্রয়োজন বলা হয়েছে?",["৩টি","৪টি","৫টি","৬টি"],1,0],["মাতৃভাষা শেখার সময় আমরা সাধারণত প্রথমে কোন দক্ষতা শিখি?",["Speaking","Reading","Writing","Listening"],3,0],["মাতৃভাষা শেখার ক্রমে সবশেষে কোন দক্ষতা শেখা হয়?",["Writing","Listening","Speaking","Reading"],0,0],["মাতৃভাষা শেখার ক্রমে Speaking-এর ঠিক পরে কোন দক্ষতা আসে?",["Listening","Writing","Reading","Grammar"],2,0],["পাঠ অনুযায়ী ভাষা (Language) কী?",["A set of fixed written rules only","A list of dictionary words","A collection of grammar tables","A system of arbitrary vocal symbols"],3,0],["আন্তর্জাতিক যোগাযোগ, সহযোগিতা ও সম্প্রীতিপূর্ণ সহাবস্থানের জন্য কোন ভাষা আন্তর্জাতিক ভাষা হিসেবে উঠে এসেছে?",["Hindi","English","French","Bengali"],1,0],["পাঠ অনুযায়ী “Listening” কী?",["Delivery of language through the mouth","Writing language on paper","Receiving language through the ears","Reading language aloud"],2,0],["Listening-এ কানের মাধ্যমে কোন বিষয়গুলো গ্রহণ করা হয় বলে উল্লেখ আছে?",["Letters, stress, rhythm and pauses","Pictures, colours and shapes","Handwriting and spelling","Punctuation marks only"],0,0],["শোনা শব্দকে অর্থপূর্ণ বার্তায় রূপান্তর করতে আমরা কোন অঙ্গ ব্যবহার করি?",["Tongue","Lips","Brain","Lungs"],2,0],["পাঠ অনুযায়ী কারা সাধারণত poor listener?",["People who have difficulty concentrating","People who speak too fast","People who read a lot","People who write diaries"],0,0],["কোন ভাষায় শোনার জন্য আরও বেশি মনোযোগ প্রয়োজন বলা হয়েছে?",["A native language","A written language","A computer language","A second language"],3,0],["Listening দক্ষতা অনুশীলনের জন্য পাঠে কোনটি পরামর্শ দেওয়া হয়েছে?",["Memorizing grammar rules","Listening to live or recorded voices","Writing long essays","Avoiding native speakers always"],1,0],["পাঠ অনুযায়ী “Speaking” কী?",["The delivery of language through the mouth","Receiving language through the ears","Understanding written text","Copying words into a notebook"],0,0],["কথা বলার সময় শব্দ সৃষ্টিতে ব্যবহৃত অঙ্গ হিসেবে কোনটি উল্লেখ আছে?",["Eyes","Ears","Lungs","Nose"],2,0],["চারটি ভাষা-দক্ষতার মধ্যে Speaking কত নম্বর দক্ষতা?",["প্রথম","দ্বিতীয়","তৃতীয়","চতুর্থ"],1,0],["দুই বা ততোধিক ব্যক্তি পরস্পর কথা বললে সেই কথোপকথনকে কী বলা হয়?",["Monologue","Lecture","Dictation","Dialogue"],3,0],["Informal speaking সাধারণত কাদের সঙ্গে ব্যবহৃত হয়?",["Business partners only","Family and friends, or people you know well","Teachers in exams","People you meet for the first time"],1,0],["Formal speaking কোন পরিস্থিতিতে ঘটে?",["With family at home","With close friends at play","While talking to oneself","Business or academic situations, or when meeting people for the first time"],3,0],["চিত্র অনুযায়ী INPUT-এর অন্তর্ভুক্ত দক্ষতা কোনগুলো?",["Listening and reading","Speaking and writing","Listening and speaking","Reading and writing"],0,0],["চিত্র অনুযায়ী OUTPUT-এর অন্তর্ভুক্ত দক্ষতা কোনগুলো?",["Listening and reading","Listening and writing","Speaking and writing","Reading and speaking"],2,0],["ইংরেজিতে কথা বলতে আমরা কেন দ্বিধা করি বলে পাঠে উল্লেখ আছে?",["We have no books to read","English has no grammar","English is spoken in only one country","We feel we lack fluency and may make grammatical mistakes"],3,0],["English Leap-এর সাফল্যের জন্য মোট কয়টি top tips-এর কথা বলা হয়েছে?",["Five","Ten","Seven","Twelve"],1,0],["“Do not hesitate” টিপস অনুযায়ী বন্ধুদের বৃত্তে কী সিদ্ধান্ত নেওয়ার কথা বলা হয়েছে?",["Talk only in the native language","Talk only in writing","Talk only in English with each other","Avoid talking in groups"],2,0],["ডায়েরি রাখার অভ্যাস কোন দক্ষতা চর্চার জন্য চমৎকার উপায়?",["Writing skills","Listening skills","Reading skills","Speaking skills"],0,0],["পত্রিকা পড়ার সময় অজানা শব্দের ক্ষেত্রে কী করার কথা বলা হয়েছে?",["Skip them completely","Replace them with native words","Note down the words and learn their meanings","Ignore the whole article"],2,0],["ইংরেজি সিনেমা দেখার শুরুতে কথোপকথন অনুসরণ করতে কী পড়া যায়?",["Sub-titles","Song lyrics","Dictionary","Diary notes"],0,0],["ইংরেজি গানের কথা বুঝতে সহজ করার জন্য গান শোনার সময় কী করতে বলা হয়েছে?",["Turn off the music","Translate every word first","Record your own voice","Read the lyrics"],3,0],["কথ্য ইংরেজিতে সাধারণত ব্যবহৃত হয় এমন শব্দ কোনটি?",["therefore","um","moreover","hence"],1,0],["কথ্য ইংরেজিতে relative clauses ব্যবহারের সময় কোন শব্দটি বাদ দেওয়া হয়?",["that","which","very","and"],0,0],["পাঠ অনুযায়ী শব্দগুলো আলাদাভাবে বলার চেয়ে একসঙ্গে বললে ভিন্নভাবে উচ্চারিত হওয়াকে কী বলা হয়?",["Formal speech","Planned speech","Connected speech","Silent speech"],2,0],["ইংরেজি শোনার দক্ষতা উন্নত করার সর্বোত্তম উপায় হিসেবে পাঠে কী বলা হয়েছে?",["Memorize a dictionary","Listen a lot","Avoid all speakers","Write every word twice"],1,0],["পাঠ অনুযায়ী কোনটি passive listening-এর চেয়ে ভালো?",["Reading silently","Copying notes","Sleeping while listening","Interacting"],3,0],["পাঠে কোন ধরনের ইংরেজিকে ‘one specialized form of speaking’ বলা হয়েছে?",["Casual English","News English","Slang English","Classroom English"],1,0],["ইংরেজি captions কী কাজে সাহায্য করে?",["Replace listening completely","Teach native language grammar","Increase music volume","Match written words to their spoken pronunciation"],3,0],["পাঠ অনুযায়ী নিজের ভাষার subtitles সম্পর্কে কী বলা হয়েছে?",["They are dangerous","They are the best method","They are required for beginners","They teach pronunciation"],0,0],["ইংরেজি শোনার দক্ষতা বাড়ানোর ১০টি সেরা উপায়ের তালিকায় ১ নম্বরে কোনটি আছে?",["Listen to audio English lessons","Listen to English radio shows","Live and work in a completely English-speaking environment","Watch movies with subtitles in your own language"],2,0],["সেরা ১০ উপায়ের তালিকায় সর্বশেষ (১০ম) উপায় কোনটি?",["Listen to English radio shows","Do a language exchange","Talk one-on-one with a tutor","Listen to audio English lessons"],3,0],["তালিকা অনুযায়ী একজন English speaking tutor-এর সঙ্গে কী করার পরামর্শ আছে?",["Talk once a year","Talk one-on-one a few times a week","Only exchange letters","Only listen silently"],1,0],["উন্নত ইংরেজি বলার জন্য সবচেয়ে গুরুত্বপূর্ণ প্রথম ধাপ কী বলা হয়েছে?",["Read only grammar books","Wait until you are perfect","Speak it as often as you can","Avoid friends and family"],2,0],["মাতৃভাষায় আমরা সাবলীল হই কেন—পাঠ অনুযায়ী?",["Because we speak and hear it more often","Because it has no grammar","Because we never make mistakes","Because it is written only"],0,0],["বই, পত্রিকা ও ম্যাগাজিন পড়লে কী উপকার হয় বলা হয়েছে?",["Lose confidence","Forget new words","Understand the language better and widen vocabulary","Stop listening skills"],2,0],["অন্য ভাষা থেকে অনুবাদ না করে কী করতে বলা হয়েছে?",["Think in English","Think in the native language","Stop speaking","Write everything first"],0,0],["সপ্তাহের শেষে কয়টি নতুন শব্দ ভালোভাবে জানার কথা বলা হয়েছে (প্রতিদিন একটি করে শিখলে)?",["Three words","Ten words","Twenty words","Seven words"],3,0],["নতুন শব্দ শুনলে তার সঙ্গে আর কী খুঁজে বের করার চেষ্টা করতে বলা হয়েছে?",["Its price","Its usage and its antonyms","Its country","Its author"],1,0],["“This vocalized form of language usually requires at least one listener”—এর অর্থ কী?",["কথা বলা সাধারণত অন্তত একজন শ্রোতাকে উদ্দেশ্য করে হয়","কথা বলার জন্য কোনো শ্রোতার প্রয়োজন নেই","কথা বলা শুধু লিখিত রূপেই সম্ভব","শ্রোতা থাকলে কথা বলা নিষিদ্ধ"],0,1],["Listening-এ focus ও attention প্রয়োজন কেন?",["কারণ listening আসলে লেখার একটি রূপ","কারণ শব্দ কানে প্রবেশ করে না","কারণ কানে পাওয়া শব্দ মস্তিষ্ককে অর্থপূর্ণ বার্তায় রূপান্তর করতে হয়","কারণ listening শুধু শিক্ষকদের জন্য"],2,1],["দ্বিতীয় ভাষায় শোনা আরও কঠিন—এ বক্তব্যের মূল অর্থ কী?",["এতে কোনো মনোযোগ লাগে না","মাতৃভাষার তুলনায় এতে আরও বেশি মনোযোগ দিতে হয়","এটি লেখার চেয়ে সহজ","এটি শুধু পড়ার মাধ্যমে হয়"],1,1],["পাঠ অনুযায়ী Informal ও Formal speaking-এর পার্থক্যের মূল ভিত্তি কী?",["কতক্ষণ কথা বলা হচ্ছে","কত জোরে কথা বলা হচ্ছে","কোন রঙের পোশাক পরা হয়েছে","কার সঙ্গে ও কোন পরিস্থিতিতে কথা বলা হচ্ছে"],3,1],["লেখাপড়ায় ইংরেজি জানা থাকা সত্ত্বেও অনেকে কথা বলতে দ্বিধা করে—এর কারণ কী?",["বই পড়ার সুযোগ না থাকা","সাবলীলতার অভাব ও ব্যাকরণগত ভুলের ভয়","ইংরেজি ভাষা লেখা যায় না বলে","শ্রোতা না থাকা"],1,1],["“There is no quick fix” বাক্যটির অর্থ কী?",["ভাষা শেখা এক দিনেই সম্ভব","ভাষা শেখার কোনো উপায় নেই","শুধু ডিকশনারি পড়লেই যথেষ্ট","ভাষায় দক্ষতা অর্জনে সময় ও প্রচেষ্টা লাগে"],3,1],["অপরিচিতদের সঙ্গে ইংরেজিতে কথা শুরু করলে কম অস্বস্তি লাগে কেন?",["কারণ তাদের ব্যক্তিগতভাবে চেনা থাকে না, তাই তাদের মতামত নিয়ে কম সচেতন থাকা যায়","কারণ তারা সবসময় ভুল ধরে না","কারণ তারা ইংরেজি জানে না","কারণ তারা পরিবারের সদস্য"],0,1],["নিজের কণ্ঠ রেকর্ড করে শুনলে লাভ কী?",["ভুল আর কখনো হয় না","শুধু কণ্ঠ ভালো লাগে","কথা বলার সময়কার ব্যাকরণগত ভুল, দ্বিধা ও বিরতি ধরা পড়ে","শোনার প্রয়োজন কমে যায়"],2,1],["শুধু শ্রেণিকক্ষে ইংরেজি শিখলে কথ্য ইংরেজি বোঝায় সমস্যা হয় কেন?",["কারণ শ্রেণিকক্ষে ইংরেজি ভুল শেখানো হয়","কারণ কথ্য ইংরেজিতে কোনো শব্দই নেই","কারণ কথ্য ইংরেজি সব সময় লিখিত ইংরেজির মতো","কারণ কথ্য ইংরেজিতে ভিন্ন শব্দ-বাক্যাংশ, connected speech ও নানা বিষয় থাকে"],3,1],["“You don’t have to understand everything”—এর তাৎপর্য কী?",["ইংরেজি শোনার দরকার নেই","সব বিষয় ও প্রসঙ্গ বোঝা সম্ভব নয়, তাই কিছু না বুঝলেও চলবে","সব শব্দ না বুঝলে শেখা বন্ধ করতে হবে","শুধু একটি বিষয়ই শিখতে হবে"],1,1],["শুধু ইংরেজি রেডিও সংবাদ শুনে দৈনন্দিন কথোপকথন বোঝা যায় না—কেন?",["কারণ সংবাদে ইংরেজি ব্যবহার হয় না","কারণ সংবাদ খুব ধীরে বলা হয়","কারণ news English একটি বিশেষায়িত কথ্যরূপ, যেভাবে কেবল সংবাদ পাঠকরা বলেন","কারণ সংবাদে কোনো শব্দ থাকে না"],2,1],["নিজের ভাষার subtitles বিপজ্জনক কেন?",["কারণ তা মস্তিষ্ককে ‘native language mode’-এ আটকে রাখে","কারণ তা ছবি দেখতে দেয় না","কারণ তা শব্দ বন্ধ করে দেয়","কারণ তা ইংরেজি ভাষা শেখায়"],0,1],["রিনা ইংরেজি সিনেমা দেখে শোনার দক্ষতা বাড়াতে চায়। সে বাংলা subtitles ব্যবহার করে। পাঠ অনুযায়ী তার জন্য কোনটি ভালো পরামর্শ?",["বাংলা subtitles-ই আরও বেশি ব্যবহার করা","সিনেমার শব্দ বন্ধ করে দেওয়া","English captions ব্যবহার করা, যাতে লিখিত শব্দ ও উচ্চারণ মেলানো যায়","শুধু ছবি দেখা"],2,2],["তানভীর প্রতিদিন শুধু ইংরেজি রেডিও সংবাদ শোনে, কিন্তু উন্নতি অনুভব করে না। তার জন্য উপযুক্ত পরামর্শ কী?",["বিভিন্ন ধরনের কথ্যরূপ শোনা","আরও বেশি শুধু সংবাদ শোনা","শোনা বন্ধ করে দেওয়া","শুধু ব্যাকরণের বই পড়া"],0,2],["সাদিয়া একা ঘরে অনুশীলন করে নিজের ভুল ও বিরতি ধরতে চায়। পাঠ অনুযায়ী কোন কাজটি উপযুক্ত?",["শুধু নীরবে পড়া","কথা বলা সম্পূর্ণ বন্ধ করা","শুধু অন্যের লেখা মুখস্থ করা","নিজের কণ্ঠ রেকর্ড করে শোনা"],3,2],["রাফি দৈনন্দিন ঘটনা লিখে লেখার দক্ষতা বাড়াতে চায়। পাঠ অনুযায়ী কোন অভ্যাস তার জন্য উপযুক্ত?",["শুধু গান শোনা","একটি ডায়েরি রাখা এবং নতুন শব্দ ও বাক্যাংশ ব্যবহার করা","শুধু ছবি আঁকা","কথা না বলা"],1,2],["নীলা ইংরেজি গান শোনে, কিন্তু শব্দ বুঝতে পারে না। পাঠ অনুযায়ী তার করণীয় কী?",["গান শোনার সময় lyrics পড়া","গান বন্ধ করে দেওয়া","শুধু সুর শোনা","গানের শিল্পী বদলানো"],0,2],["করিম শব্দভান্ডার বাড়াতে চায়। পাঠ অনুযায়ী কোন কাজটি উপযুক্ত?",["শুধু টিভির সংবাদ শোনা","একা চুপচাপ বসে থাকা","বই, পত্রিকা ও ম্যাগাজিন পড়া","শব্দ না লিখে পড়া"],2,2],["আরিফ নার্ভাস হলে খুব দ্রুত কথা বলে ফেলে। পাঠ অনুযায়ী তার জন্য সবচেয়ে উপযুক্ত পরামর্শ কী?",["আরও দ্রুত কথা বলা","স্বাচ্ছন্দ্যজনক গতিতে ও সঠিক উচ্চারণে কথা বলা","কথা বলা বন্ধ করা","শুধু ফিসফিস করে বলা"],1,2],["শুভ প্রতিদিন একটি করে নতুন শব্দ শিখে ও কথায় ব্যবহার করছে। পাঠ অনুযায়ী সপ্তাহের শেষে তার কত শব্দ ভালোভাবে জানা উচিত?",["তিনটি","দশটি","বিশটি","সাতটি"],3,2],["প্রথমবার পরিচিত হওয়া কয়েকজন ব্যবসায়িক অংশীদারের সঙ্গে সভায় কথা বলা হচ্ছে। এটি কোন ধরনের speaking?",["Informal speaking","Formal speaking","Silent speaking","Monologue"],1,2],["দুই শিক্ষার্থী শখ নিয়ে ইংরেজিতে পরস্পর কথা বলছে। এই কথোপকথনকে কী বলা হয়?",["Speech","Dictation","Presentation","Dialogue"],3,2],["রহিম নিচের দুটির মধ্যে বেছে নেবে। পাঠের তালিকায় কোনটি উঁচু অবস্থানে আছে?",["Talk one-on-one with an English-speaking tutor","Listen to English radio shows","Listen to audio English lessons","Watch videos with native-language subtitles only"],0,2],["সুমি বাংলা বাক্য মনে মনে অনুবাদ করে ইংরেজি বলে এবং প্রায়ই ব্যাকরণগত ভুল করে। পাঠ অনুযায়ী কারণ ও সমাধান কী?",["অনুবাদই সবচেয়ে ভালো পদ্ধতি","ভুল ঠিক করার দরকার নেই","অনুবাদ ভুল ও মান খারাপ করে; তাই ইংরেজিতেই ভাবা উচিত","কথা বলা বন্ধ করা উচিত"],2,2],["চিত্র অনুযায়ী কোন জোড়াটি সঠিক?",["Speaking – INPUT, Reading – OUTPUT","Reading – OUTPUT, Listening – OUTPUT","Writing – INPUT, Speaking – INPUT","Listening – INPUT, Writing – OUTPUT"],3,3],["তালিকা অনুযায়ী নিচের কোন ক্রমটি (উঁচু থেকে নিচু) সঠিক?",["নিজের ভাষার subtitles সহ দেখা → subtitles ছাড়া দেখা → English captions সহ দেখা","English captions সহ দেখা → subtitles ছাড়া দেখা → নিজের ভাষার subtitles সহ দেখা","subtitles ছাড়া দেখা → English captions সহ দেখা → নিজের ভাষার subtitles সহ দেখা","নিজের ভাষার subtitles সহ দেখা → English captions সহ দেখা → subtitles ছাড়া দেখা"],1,3],["তালিকায় ‘language exchange’ কে ‘audio English lessons’-এর চেয়ে উঁচুতে রাখার সঙ্গে পাঠের কোন ধারণা সবচেয়ে সংগতিপূর্ণ?",["Passive listening is always best","Writing is better than speaking","Interacting is better than passive listening","Listening needs no focus"],2,3],["কোনো শিক্ষার্থী শুধু শ্রেণিকক্ষ ও পাঠ্যবইয়ে ইংরেজি শিখেছে। পাঠ অনুযায়ী কথ্য ইংরেজি বুঝতে তার সম্ভাব্য সমস্যার সবচেয়ে সঠিক বিশ্লেষণ কোনটি?",["কথ্য ইংরেজিতে ভিন্ন শব্দ-বাক্যাংশ, connected speech ও নানা বিষয় থাকে, যা পাঠ্যবইয়ে নেই","কথ্য ও লিখিত ইংরেজি সম্পূর্ণ এক","শুধু বানানের কারণে সমস্যা","শুধু ডিকশনারির অভাবে সমস্যা"],0,3],["কোন মন্তব্যটি পাঠের সঙ্গে সংগতিপূর্ণ?",["নিজের ভাষার subtitles সবচেয়ে কার্যকর পদ্ধতি","নিজের ভাষার subtitles কোনো প্রভাবই ফেলে না","নিজের ভাষার subtitles বোঝাতে সাহায্য করে, কিন্তু মস্তিষ্ককে native language mode-এ আটকে রাখে","নিজের ভাষার subtitles ইংরেজি উচ্চারণ শেখায়"],2,3],["বন্ধুদের বৃত্তে শুধু ইংরেজিতে কথা বলার সিদ্ধান্তের দুটি সুফল কোনগুলো?",["দ্বিধা কমে এবং বন্ধুরা ভুল শুধরে দিতে পারে","ভুল করা বন্ধ হয় এবং শ্রোতা লাগে না","লেখা বন্ধ হয় এবং শোনা কমে","দ্বিধা বাড়ে এবং ভুল ধরা পড়ে না"],0,3],["দুটি পদ্ধতির তুলনায় কোন বিবৃতিটি সঠিক?",["পত্রিকা জোরে পড়া comprehension-এর জন্য; news channel শুধু লেখার জন্য","উভয়ই শুধু লেখার জন্য","দুটিই অপ্রয়োজনীয়","English news channel দেখা comprehension উন্নত করে; পত্রিকা জোরে পড়ে অজানা শব্দ লিখে রাখা যায়"],3,3],["“Do not worry about making mistakes” এবং “encourage people to correct you”—এ দুই পরামর্শের সংগতির কারণ কী?",["ভুল করা আদর্শ লক্ষ্য","ভুল শেখার অংশ, আর শুধরে নিলে সঠিকতা ও আত্মবিশ্বাস বাড়ে","ভুল ধরা হলে ভাষা শেখা বন্ধ হয়","সংশোধন করলে আত্মবিশ্বাস কমে"],1,3],["এক শিক্ষার্থী লেখায় ব্যাকরণগত ভুল করে না, কিন্তু কথায় করে। পাঠ অনুযায়ী কোন কৌশলটি সবচেয়ে কার্যকর?",["নিজের কণ্ঠ রেকর্ড করে শুনে পরবর্তী রেকর্ডিংয়ে ভুল শুধরানো","কথা বলা ছেড়ে শুধু লেখা","শুধু ডিকশনারি মুখস্থ করা","রেকর্ড না করে নীরবে পড়া"],0,3],["“Be patient. This isn’t a one day process.”—কোন আচরণ এ পরামর্শের সঙ্গে সবচেয়ে সংগতিপূর্ণ?",["এক দিনের চেষ্টাতেই ভাষা আয়ত্ত করার আশা","এক সপ্তাহ চেষ্টা করে বন্ধ করে দেওয়া","নিয়মিত ও দীর্ঘ সময় ধরে অনুশীলন চালিয়ে যাওয়া","শুধু ফলাফলের জন্য অপেক্ষা করা"],2,3],["কর্মক্ষেত্রে ইংরেজি দক্ষতার গুরুত্ব সম্পর্কে পাঠ থেকে কোন সিদ্ধান্ত নেওয়া যায়?",["ইংরেজি শুধু ভ্রমণের জন্য প্রয়োজন","ইংরেজিতে দক্ষতা নিয়োগ ও পদোন্নতি উভয়ের সিদ্ধান্তে গুরুত্বপূর্ণ কারণ","ইংরেজি দক্ষতা কোনো সিদ্ধান্তে প্রভাব ফেলে না","ইংরেজি শুধু পরীক্ষার জন্য দরকার"],1,3],["কোন জোড়ার দুটি পরিস্থিতিই formal speaking-এর উদাহরণ?",["পরিবারের সঙ্গে গল্প করা এবং বন্ধুদের সঙ্গে আড্ডা","বন্ধুদের সঙ্গে আড্ডা এবং পরিচিতদের সঙ্গে কথা বলা","পরিবারের সঙ্গে গল্প এবং একাকী নীরবে বসে থাকা","একাডেমিক পরিস্থিতিতে কথা বলা এবং প্রথমবার কারও সঙ্গে পরিচিত হওয়া"],3,3]].map(([q,o,a,t])=>({q,o,a,t}));
+/* t: 0=জ্ঞানমূলক 1=অনুধাবনমূলক 2=প্রয়োগমূলক 3=উচ্চতর দক্ষতা */
+const N=20,TIME=600,QUOTA=[11,3,3,3],TN=["জ্ঞানমূলক","অনুধাবনমূলক","প্রয়োগমূলক","উচ্চতর দক্ষতা"];
+const bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
+const $=id=>document.getElementById(id);
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const L=['ক','খ','গ','ঘ'];
+let Q=[],ans=[],left=TIME,tm=null,done=false;
+function renderMath(el){try{if(window.renderMathInElement)renderMathInElement(el,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false})}catch(e){}}
+function info(){
+  const n=masterQuestionBank.length,t=Math.min(N,n);
+  $('fullmark').textContent='পূর্ণমান: '+bn(t);$('timeinfo').textContent='সময়: '+bn(TIME/60)+' মিনিট';
+  $('info2').textContent='['+bn(n)+' টি প্রশ্ন আছে]';
+  $('info3').textContent='প্রতিবার '+bn(t)+'টা প্রশ্ন আসবে। (অপশনসহ এলোমেলো)'
+}
+function start(){
+  clearInterval(tm);done=false;left=TIME;
+  const take=Math.min(N,masterQuestionBank.length);let pick=[];
+  QUOTA.forEach((n,t)=>{pick=pick.concat(shuf(masterQuestionBank.filter(x=>x.t===t)).slice(0,n))});
+  if(pick.length<take){const rest=shuf(masterQuestionBank.filter(x=>!pick.includes(x)));pick=pick.concat(rest.slice(0,take-pick.length))}
+  pick=shuf(pick.slice(0,take));
+  Q=pick.map(x=>{const idx=shuf(x.o.map((t,i)=>i));return{q:x.q,t:x.t,o:idx.map(i=>x.o[i]),a:idx.indexOf(x.a)}});
+  ans=Q.map(()=>-1);
+  $('result').classList.add('hide');$('submit').disabled=false;$('submit').parentElement.classList.remove('hide');
+  const box=$('quiz');box.innerHTML='';
+  Q.forEach((q,i)=>{
+    const c=document.createElement('div');c.className='card';c.id='q'+i;
+    c.innerHTML='<div class="qn">'+bn(i+1)+'। '+q.q+'</div>'+q.o.map((t,j)=>'<button class="opt" data-i="'+i+'" data-j="'+j+'">'+t+'</button>').join('');
+    box.appendChild(c)});
+  box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>pickOpt(+b.dataset.i,+b.dataset.j));
+  upd();tick();tm=setInterval(tick,1000);
+  renderMath(box);try{window.scrollTo(0,0)}catch(e){}
+}
+function pickOpt(i,j){
+  if(done||ans[i]>=0)return;ans[i]=j;
+  document.querySelectorAll('#q'+i+' .opt').forEach((b,k)=>{b.disabled=true;if(k===j)b.classList.add('sel')});upd()
+}
+function upd(){$('prog').textContent=bn(ans.filter(a=>a>=0).length)+'/'+bn(Q.length)}
+function tick(){
+  const m=Math.floor(left/60),s=left%60;$('timer').textContent=bn(String(m).padStart(2,'0'))+':'+bn(String(s).padStart(2,'0'));
+  $('timer').classList.toggle('low',left<=60);
+  if(left<=0){clearInterval(tm);finish();return}left--
+}
+function submitClick(){
+  const miss=[];ans.forEach((a,i)=>{if(a<0)miss.push(i)});
+  if(miss.length){alert('নিচের প্রশ্নগুলোর উত্তর দেওয়া বাকি আছে: '+miss.map(i=>bn(i+1)).join(', '));
+    $('q'+miss[0]).scrollIntoView({behavior:'smooth',block:'center'});return}
+  clearInterval(tm);finish()
+}
+function finish(){
+  if(done)return;done=true;let c=0,w=0,u=0;
+  Q.forEach((q,i)=>{
+    const card=$('q'+i),opts=card.querySelectorAll('.opt');opts.forEach(b=>b.disabled=true);
+    opts[q.a].classList.add('correct');
+    if(ans[i]<0)u++;else if(ans[i]===q.a)c++;else{w++;opts[ans[i]].classList.add('wrong')}
+  });
+  const score=c,pct=Q.length?score/Q.length*100:0;
+  const items=[['মোট প্রশ্ন',bn(Q.length)],['সঠিক',bn(c)],['ভুল',bn(w)],['চূড়ান্ত স্কোর',bn(score.toFixed(2).replace(/\.?0+$/,''))+'/'+bn(Q.length)]];
+  $('stats').innerHTML=items.map(x=>'<div class="stat-box"><b>'+x[1]+'</b>'+x[0]+'</div>').join('');
+  $('prog').textContent='স্কোর: '+bn(score.toFixed(2).replace(/\.?0+$/,''))+'/'+bn(Q.length);
+  $('fb').textContent=pct>=90?'🎉 অসাধারণ! চমৎকার ফলাফল, চালিয়ে যান!':pct>=80?'👏 খুব ভালো! আরও অনুশীলন প্রয়োজন।':pct>=60?'🙂 ভালো, আরও অনুশীলন প্রয়োজন।':'📖 আরও মনোযোগ দিয়ে পড়ুন।';
+  $('submit').parentElement.classList.add('hide');$('result').classList.remove('hide');
+  renderMath($('quiz'));
+  setTimeout(()=>{try{$('result').scrollIntoView({block:'start'})}catch(_){}try{window.scrollTo(0,$('result').getBoundingClientRect().top+window.pageYOffset-70)}catch(_){}},80)
+}
+$('submit').onclick=submitClick;$('again').onclick=start;
+$('theme').onclick=()=>{const d=document.documentElement.dataset.theme==='dark';document.documentElement.dataset.theme=d?'light':'dark';$('theme').textContent=d?'🌙 ডার্ক মোড':'☀️ লাইট মোড'};
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  const k=e.key.toLowerCase(),blk=(e.ctrlKey&&['c','s','u'].includes(k))||e.key==='F12'||e.key==='PrintScreen';
+  if(blk){e.preventDefault();try{navigator.clipboard.writeText('')}catch(_){}alert('এই পেজে কপি/সেভ/সোর্স দেখা নিষিদ্ধ।')}});
+document.addEventListener('keyup',e=>{if(e.key==='PrintScreen'){try{navigator.clipboard.writeText('')}catch(_){}alert('স্ক্রিনশট নেওয়া নিষিদ্ধ।')}});
+window.addEventListener('load',()=>{info();start()});
+</script>
+</body>
+</html>

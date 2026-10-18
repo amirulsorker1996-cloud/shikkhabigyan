@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>দুর্যোগ ব্যবস্থাপনা - অনলাইন কুইজ পরীক্ষা</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+<style>
+@font-face{font-family:'SolaimanLipi';src:local('SolaimanLipi'),local('Solaiman Lipi'),url('SolaimanLipi.ttf') format('truetype');font-display:swap}
+*{font-family:'SolaimanLipi',Arial,sans-serif !important;box-sizing:border-box}
+.katex,.katex *{font-family:KaTeX_Main,'Times New Roman',serif !important}
+:root{--primary:#006a4e;--primary-d:#004d37;--bg:#f2f6f4;--card:#fff;--text:#1d2b26;--muted:#5d6d66;--border:#d5e2dc;--ok:#1b8a4b;--okbg:#e3f6ea;--bad:#c62828;--badbg:#fdeaea;--shadow:0 2px 10px rgba(0,0,0,.08);--ul:#006a4e}
+[data-theme=dark]{--primary:#4db6ac;--bg:#101816;--card:#1a2622;--text:#e6f0ec;--muted:#9bb0a8;--border:#2c3d37;--ok:#66d28f;--okbg:#17352a;--bad:#ff8a80;--badbg:#3a2020;--shadow:0 2px 10px rgba(0,0,0,.5);--ul:#4db6ac}
+body{margin:0;background:var(--bg);color:var(--text);line-height:1.7;-webkit-user-select:none;-moz-user-select:none;user-select:none}
+.wrap{max-width:900px;margin:0 auto;padding:12px}
+header{background:linear-gradient(135deg,#004d37,#006a4e);color:#fff;text-align:center;padding:22px 14px;border-radius:0 0 18px 18px;box-shadow:var(--shadow)}
+header h1{margin:0;font-size:1.5rem}header p{margin:3px 0 0;font-size:1rem;opacity:.95}
+.card{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:16px;margin:14px 0;border:1px solid var(--border)}
+.chapter-title{margin:0 0 12px;padding-bottom:8px;font-size:1.4rem;color:var(--primary);border-bottom:3px solid var(--ul)}
+.badge{background:var(--bg);border-left:4px solid var(--primary);padding:8px 12px;border-radius:8px;margin:8px 0;font-size:.95rem}
+.warn{background:#fff6e0;color:#6b4a00;border-left:4px solid #f0a500;padding:8px 12px;border-radius:8px;font-size:.95rem}
+#info2,#info3{text-align:center}
+#info3{white-space:nowrap;font-size:clamp(.62rem,3.3vw,.95rem)}
+.wrow{display:flex;justify-content:space-between;gap:10px;margin-bottom:2px}
+[data-theme=dark] .warn{background:#3a3016;color:#ffd98a}
+.bar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--card);padding:10px 14px;border-radius:12px;box-shadow:var(--shadow);border:1px solid var(--border)}
+#timer{font-size:1.3rem;font-weight:700;color:var(--primary)}#timer.low{color:var(--bad)}
+button{cursor:pointer;border:0;border-radius:10px;padding:9px 16px;font-size:1rem;background:var(--primary);color:#fff}
+[data-theme=dark] button{color:#0b1512}
+button:disabled{opacity:.5;cursor:default}
+.qn{font-weight:700;margin-bottom:8px}
+.opt{display:block;width:100%;text-align:left;background:var(--bg);color:var(--text);border:2px solid var(--border);margin:6px 0;padding:9px 12px;border-radius:10px}
+[data-theme=dark] .opt{color:var(--text)}
+.opt.sel{border-color:var(--primary)}
+.opt.correct{background:var(--okbg);border-color:var(--ok)}
+.opt.wrong{background:var(--badbg);border-color:var(--bad)}
+.tag{display:inline-block;font-size:.8rem;background:var(--bg);color:var(--primary);border:1px solid var(--border);border-radius:20px;padding:0 10px;margin-bottom:6px}
+.exp{display:none;margin-top:8px;padding:8px 12px;border-radius:8px;background:var(--bg);border-left:4px solid var(--primary);font-size:.95rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.stat-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;box-shadow:var(--shadow)}
+.stat-box b{display:block;font-size:1.5rem;color:var(--primary)}
+#fb{font-size:1.1rem;font-weight:700;text-align:center;margin:12px 0}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<h2 class="chapter-title">দুর্যোগ ব্যবস্থাপনা</h2>
+<div class="warn"><div class="wrow"><b id="fullmark"></b><b id="timeinfo"></b></div><div id="info2"></div><div id="info3"></div></div>
+</div>
+<div class="bar"><span>⏱️ <span id="timer">১০:০০</span></span><span id="prog"></span><button id="theme">🌙 ডার্ক মোড</button></div>
+<div id="quiz"></div>
+<div id="result" class="hide">
+<div class="card"><div class="stats" id="stats"></div><div id="fb"></div><div style="text-align:center"><button id="again">পুনরায় কুইজ দাও</button></div></div>
+</div>
+<div class="card" style="text-align:center"><button id="submit">সাবমিট করো</button></div>
+
+</div>
+<script>
+const masterQuestionBank=[["বাংলাদেশ কোন ধরনের দেশ?",["মরুময় মালভূমির দেশ","পর্বতবেষ্টিত দেশ","দ্বীপভিত্তিক শিল্পপ্রধান দেশ","নদীমাতৃক সাগর পাড়ের পলিমাটি বিধৌত দেশ"],3,0],["বিশ্ব মানচিত্রে বাংলাদেশ কী ধরনের দেশ?",["দুর্যোগমুক্ত দেশ","কেবল ভূমিকম্পপ্রবণ দেশ","কেবল খরাপ্রবণ দেশ","অতিশয় দুর্যোগপ্রবণ দেশ"],3,0],["বিগত ৫০ বছরে বাংলাদেশের উপর দিয়ে কয়টি মহাপ্লাবন বয়ে গেছে?",["০২টি","০৬টি","১৫টি","২০টি"],1,0],["১৩৫ বছরে বাংলাদেশে প্রায় কয়টি বড় ধরনের ভূমিকম্প হয়েছে?",["প্রায় ৫টি","প্রায় ৫০টি","প্রায় ১০০টি","প্রায় ২০টি"],3,0],["'দুর্যোগ' শব্দটির ইংরেজি প্রতিশব্দ কী?",["Disaster","Management","Hazard","Emergency"],0,0],["গ্রিক শব্দ 'Dis' এর অর্থ কী?",["তারা","ভালো","মন্দ বা খারাপ","দুর্যোগ"],2,0],["গ্রিক শব্দ 'Aster' এর অর্থ কী?",["খারাপ","তারা (star)","আকাশ","ঝড়"],1,0],["দুর্যোগ কয় ধরনের হতে পারে?",["এক ধরনের","তিন ধরনের","চার ধরনের","দুই ধরনের"],3,0],["নিচের কোনটি প্রাকৃতিক দুর্যোগ?",["যুদ্ধ","দাঙ্গা","ঘূর্ণিঝড়","বৃক্ষ নিধন"],2,0],["মানুষের কারণে বা মানুষ সৃষ্ট দুর্যোগকে ইংরেজিতে কী বলা হয়?",["Human Induced","Natural Hazard","Climate Change","Risk Assessment"],0,0],["নিচের কোনটি কৃত্রিম (মানুষ সৃষ্ট) দুর্যোগ?",["খরা","ভূমিকম্প","টর্নেডো","বৃক্ষ নিধন"],3,0],["প্রাকৃতিক দুর্যোগ সম্পর্কে কোনটি সঠিক?",["সাধারণত প্রতিরোধ করা যায় না","সবসময় প্রতিরোধ করা যায়","কখনোই অনুমান করা যায় না","শুধু মানুষের কারণে ঘটে"],0,0],["প্রাকৃতিক দুর্যোগ বেশির ভাগ ক্ষেত্রে কীভাবে জানা যায়?",["কখনোই জানা যায় না","ঘটার পরেই জানা যায়","পূর্বাহ্নে অনুমান করা যায়","শুধু বিদেশ থেকে জানা যায়"],2,0],["মানুষ সৃষ্ট দুর্যোগ সম্পর্কে কোনটি সঠিক?",["প্রায়শই প্রতিরোধ করা যায় এবং পূর্বাহ্নে অনুমান করা যায়","কখনও প্রতিরোধ করা যায় না","শুধু প্রকৃতির কারণে ঘটে","পূর্বাহ্নে অনুমান করা যায় না"],0,0],["দুর্যোগ ব্যবস্থাপনা কার্যক্রমকে কয়টি পর্যায়ে ব্যাখ্যা করা যায়?",["০২টি","০৪টি","০৩টি","০৫টি"],2,0],["নিচের কোনটি দুর্যোগ ব্যবস্থাপনার একটি পর্যায়?",["দুর্যোগ সৃষ্টিকালীন ব্যবস্থাপনা","দুর্যোগ পরবর্তী ব্যবস্থাপনা","দুর্যোগ বর্জনকালীন ব্যবস্থাপনা","দুর্যোগ অনুমানকালীন ব্যবস্থাপনা"],1,0],["নিচের কোনটি প্রাক দুর্যোগকালীন সময়ের প্রস্তুতি?",["আশ্রয়কেন্দ্র হতে বাড়ি ফিরতে সাহায্য করা","ঝুঁকিপূর্ণ অঞ্চল ও জনগোষ্ঠীকে চিহ্নিতকরণ","রাস্তার উপর পড়া গাছপালা সরানো","ক্ষতিগ্রস্তদের পুনর্বাসন"],1,0],["দুর্যোগকালীন প্রস্তুতিতে প্রথমে আশ্রয় ঘরগুলোর ব্যাপারে কী করতে হবে?",["ভেঙে ফেলতে হবে","বন্ধ করে রাখতে হবে","বিক্রি করতে হবে","অবস্থা পরীক্ষা করতে হবে"],3,0],["আশ্রয়কেন্দ্রে যাবার সময় বাড়িতে ফেলে আসা মালপত্র কীভাবে রাখতে হবে?",["খোলা উঠানে ফেলে","নিরাপদ স্থানে পলিথিন দিয়ে মুড়িয়ে মাটিতে পুতে","গাছের ডালে ঝুলিয়ে","নদীতে ভাসিয়ে"],1,0],["বিপদসংকেত পাওয়া মাত্র কাদেরকে নিকটবর্তী আশ্রয়কেন্দ্রে দ্রুত সরাতে হবে?",["শুধু যুবকদের","শুধু পুরুষদের","বাড়ির মেয়ে ও বৃদ্ধদের","শুধু প্রতিবেশীদের"],2,0],["বাড়ি ছেড়ে যাবার সময় কী করতে হবে?",["আগুন নিভিয়ে যেতে হবে","আগুন জ্বালিয়ে রাখতে হবে","দরজা খোলা রাখতে হবে","সব আসবাব সঙ্গে নিতে হবে"],0,0],["ঘূর্ণিঝড়ের সময় রেডিওতে প্রতি কত মিনিট পরপর ঘূর্ণিঝড়ের খবর শুনতে হবে?",["১৫ মিনিট","৫ মিনিট","৩০ মিনিট","৬০ মিনিট"],0,0],["আবহাওয়া অধিদপ্তর কত প্রকার সংকেত ব্যবহার করে থাকে?",["৫ প্রকার","৭ প্রকার","১১ প্রকার","১৫ প্রকার"],2,0],["দুর্যোগের সময় গরু-ছাগল, হাঁস-মুরগি কোথায় রাখতে হবে?",["নিচু স্থানে","খোলা মাঠে","নদীর তীরে","উঁচু স্থানে বা বাঁধে"],3,0],["মহাবিপদ সংকেত পেলে ট্রলার ও নৌকা কী করতে হবে?",["সমুদ্রে নিয়ে যেতে হবে","বাড়িতে এনে রাখতে হবে","খোলা অবস্থায় ফেলে রাখতে হবে","নিকটস্থ জলায় ডুবিয়ে দড়ি দিয়ে খুঁটির সাথে শক্ত করে বাঁধতে হবে"],3,0],["ঝড় ও জলোচ্ছ্বাসের পর প্রয়োজনের জন্য মাটিতে পুতে রাখা অতি প্রয়োজনীয় দ্রব্যের তালিকায় কোনটি আছে?",["মোবাইল ফোন","ফিটকিরি","গ্যাস সিলিন্ডার","টেলিভিশন"],1,0],["দুর্যোগ পরবর্তী ব্যবস্থাপনায় নিজের ভিটায় কী করে দিতে হবে?",["আলাদা দোকান","গুদামঘর","অন্যদের মাথা গোঁজার ঠাঁই","চাষের জমি"],2,0],["সরকারের ভূমিকা হিসেবে জেলে নৌকায় কোনটি রাখা বাধ্যতামূলক করা ও মনিটরিং করার কথা উল্লেখ আছে?",["মোবাইল চার্জার","জাল","লাইফ বয়া","জ্বালানি তেল"],2,0],["সরকারি প্রশাসন উপকূ ল বরাবর কী নির্মাণের মাধ্যমে বাঁধ সংরক্ষণ করবে?",["কারখানা স্থাপনের মাধ্যমে","বন তৈরির মাধ্যমে","রাস্তা নির্মাণের মাধ্যমে","বাজার স্থাপনের মাধ্যমে"],1,0],["উপকূ লীয় এলাকার জন্য সরকার কোন কোড প্রবর্তনের কথা বলা হয়েছে?",["বিল্ডিং কোড","পেনাল কোড","ডাক কোড","ফোন কোড"],0,0],["ঘূর্ণিঝড় পূর্ব প্রস্তুতি, চলাকালীন সময় ও দুর্যোগ পরবর্তী সময়ে কত ধরনের স্বেচ্ছাসেবক থাকা প্রয়োজন?",["তিন ধরনের","এক ধরনের","দুই ধরনের","পাঁচ ধরনের"],0,0],["উপকূ লীয় এলাকায় কর্মরত এনজিওরা ঋণগ্রহীতার সঞ্চয়ের একটি অংশ আলাদা রেখে কোন নামে ফান্ড গঠন করতে পারে?",["উন্নয়ন ফান্ড","দুর্যোগ ফান্ড","শিক্ষা ফান্ড","স্বাস্থ্য ফান্ড"],1,0],["নিচের কোনটি দুর্যোগ ব্যবস্থাপনার উদ্দেশ্য?",["অনাকাঙ্ক্ষিত প্রাণহানী প্রতিরোধ করা","দুর্যোগ বৃদ্ধি করা","বিদেশি সাহায্য বন্ধ করা","জনসংখ্যা বৃদ্ধি করা"],0,0],["দুর্যোগ বলতে সাধারণভাবে কী বোঝায়?",["মানুষের জন্য সবসময় কল্যাণকর অবস্থা","শুধু তারা সম্পর্কিত বৈজ্ঞানিক ঘটনা","কেবল অর্থনৈতিক মন্দা","মানুষের জীবন, সমাজ ও পরিবেশ সৃষ্ট অস্বাভাবিক অবস্থা যা মানুষের ক্ষতিসাধন করে"],3,1],["'আক্রান্ত সমাজের পক্ষে একাকভাবে মোকাবেলা করা কষ্টসাধ্য'—এর অর্থ কী?",["সমাজ কখনও আক্রান্ত হয় না","সমাজ একাই সহজে মোকাবেলা করতে পারে","আক্রান্ত জনগোষ্ঠীকে ব্যতিক্রমী প্রচেষ্টা ও বাইরের সহায়তা নিতে হয়","মোকাবেলার প্রয়োজন নেই"],2,1],["ঘূর্ণিঝড়ের সময় অতি প্রয়োজনীয় দ্রব্য পলিথিনে ভরে গর্তে পুতে রাখতে বলা হয়েছে কেন?",["যাতে দ্রব্যগুলো নষ্ট হয়ে যায়","যাতে ঝড় ও জলোচ্ছ্বাসের পর প্রয়োজনে পাওয়া যায়","যাতে অন্যরা জানতে না পারে","যাতে দ্রব্যগুলো বিক্রি করা যায়"],1,1],["'রিলিফের মুখাপেক্ষি না হয়ে স্থানীয় জনসাধারণ একে অপরকে সাহায্য করবে'—এর অর্থ কী?",["ত্রাণ গ্রহণ নিষিদ্ধ","সবাই আলাদা থাকবে","শুধু বাইরের ত্রাণের ওপর নির্ভর না করে নিজেরা পরস্পরকে সহায়তা করবে","ত্রাণ কেবল বিদেশিরা পাবে"],2,1],["দুর্যোগ পরবর্তী সময়ে রাস্তাঘাটের উপর পড়ে থাকা গাছপালা সরিয়ে ফেলতে হবে কেন?",["যাতে কাঠ বিক্রি করা যায়","যাতে সহজে সাহায্যকারী দল আসতে পারে","যাতে রাস্তা বন্ধ থাকে","যাতে গাছ আবার লাগানো যায় না"],1,1],["উপকূ লবর্তী এলাকায় জলোচ্ছ্বাস ও লবণাক্ততা সহ্যক্ষম শস্য ব্যবস্থা প্রচলন করার তাৎপর্য কী?",["দুর্যোগের প্রভাব মোকাবেলায় ফসলের ক্ষতি কমানো","ফসল উৎপাদন বন্ধ করা","শহরে শিল্প স্থাপন","পানি দূষণ বাড়ানো"],0,1],["অবস্থাসম্পন্ন লোকেরা লজ্জার কারণে ত্রাণ নিতে আসে না—এ কারণে স্বেচ্ছাসেবকদের কী করতে হয়?",["তাদের প্রয়োজন অনুযায়ী ত্রাণ বিতরণের ব্যবস্থা নেওয়া","তাদের উপেক্ষা করা","তাদের ত্রাণ বাতিল করা","তাদের জরিমানা করা"],0,1],["'দুর্যোগ মানুষ ও তার পারিপার্শ্বিকতাকে ক্ষতিগ্রস্ত করে এবং স্বাভাবিক জীবন ধারাকে বিপর্যস্ত করে'—এর মূল তাৎপর্য কী?",["দুর্যোগে জীবনযাত্রা আরও সহজ হয়","দুর্যোগ শুধু প্রকৃতির উপর প্রভাব ফেলে","দুর্যোগে কোনো ক্ষতি হয় না","দুর্যোগ স্বাভাবিক জীবনযাত্রাকে ব্যাহত করে"],3,1],["দুর্যোগ ব্যবস্থাপনা বলতে কোন কার্যক্রমের সমষ্টিকে বোঝায়?",["দুর্যোগপূর্ব, দুর্যোগকালীন ও দুর্যোগ পরবর্তী সময়ে গৃহীত বিভিন্ন কার্যক্রমের সমষ্টি","শুধু ত্রাণ বিতরণ","শুধু দুর্যোগ পরবর্তী সময়ের কার্যক্রম","শুধু দুর্যোগের পূর্বাভাস"],0,1],["ঘূর্ণিঝড়ের বিপদসংকেত পাওয়া গেছে। রহিমের বাড়িতে তার বৃদ্ধ মা ও বোন আছেন। তার প্রথম করণীয় কী?",["তাঁদের বাড়িতে রেখে যাওয়া","তাঁদের নদীর তীরে নেওয়া","অপেক্ষা করা","তাঁদের দ্রুত নিকটবর্তী আশ্রয়কেন্দ্রে সরানো"],3,2],["সমুদ্রে মাছ ধরতে যাওয়ার আগে একজন জেলের নৌকায় সরকারি নির্দেশনা অনুযায়ী কোনটি থাকা বাধ্যতামূলক?",["টেলিভিশন","লাইফ বয়া ও কম্পাস","গ্যাসের চুলা","সোনার গহনা"],1,2],["করিম ঘূর্ণিঝড়ের আগে তার গরু-ছাগল রক্ষা করতে চায়। নির্দেশনা অনুযায়ী তার কী করা উচিত?",["গরু-ছাগল উঁচু বাঁধে বা উঁচু স্থানে বেঁধে রাখা","নিচু মাঠে ছেড়ে দেওয়া","নদীর তীরে বেঁধে রাখা","ঘরের বাইরে খোলা রাখা"],0,2],["ঘূর্ণিঝড়ের পর একটি গ্রামের রাস্তায় অনেক গাছ পড়ে আছে। এ অবস্থায় দুর্যোগ পরবর্তী ব্যবস্থাপনায় কী করা উচিত?",["গাছ ফেলে রাখা","রাস্তা আরও বন্ধ করা","গাছ বিক্রি করা","গাছপালা সরিয়ে ফেলা, যাতে সাহায্যকারী দল আসতে পারে"],3,2],["মহাবিপদ সংকেত পেয়ে এক ট্রলার মালিক তার ট্রলার সুরক্ষিত করতে চায়। সরকারি নির্দেশনা অনুযায়ী তার কী করা উচিত?",["সমুদ্রে ভাসিয়ে রাখা","বাড়ির ছাদে তোলা","নিকটস্থ জলায় ডুবিয়ে দড়ি দিয়ে খুঁটির সাথে শক্ত করে বেঁধে রাখা","খোলা রেখে চলে যাওয়া"],2,2],["একটি কারখানার বর্জ্যে নদীর পানি দূষিত হয়ে গেছে। এটি কোন ধরনের দুর্যোগ?",["প্রাকৃতিক দুর্যোগ","ভূমিকম্প","কৃত্রিম (মানুষ সৃষ্ট) দুর্যোগ","জলোচ্ছ্বাস"],2,2],["একটি গ্রামে হঠাৎ টর্নেডো আঘাত হানল। এ দুর্যোগকে কোন ধরনের দুর্যোগ বলা যায়?",["প্রাকৃতিক দুর্যোগ","কৃত্রিম দুর্যোগ","যুদ্ধজনিত দুর্যোগ","দাঙ্গাজনিত দুর্যোগ"],0,2],["ঘূর্ণিঝড়ের সংকেত পেয়ে সুমন আশ্রয়কেন্দ্রে যাওয়ার আগে রান্নাঘরের চুলায় জ্বালানো আগুন সম্পর্কে কী করবে?",["জ্বালিয়ে রেখে যাবে","আগুন নিভিয়ে যাবে","গ্যাস বাড়িয়ে দেবে","কাউকে না জানিয়ে যাবে"],1,2],["উপকূ লীয় এলাকায় কর্মরত একটি এনজিও ঋণগ্রহীতার সঞ্চয়ের একটি অংশ আলাদা রেখে দুর্যোগের সময় ঋণ গ্রহীতাকে সাহায্য করে। এ আলাদা অংশকে কী বলে?",["দুর্যোগ ফান্ড","সঞ্চয়পত্র","উন্নয়ন ঋণ","শিক্ষা বৃত্তি"],0,2],["প্রাকৃতিক ও মানবসৃষ্ট দুর্যোগের তুলনায় কোন বিবৃতিটি সঠিক?",["উভয়ই সবসময় প্রতিরোধযোগ্য","প্রাকৃতিক দুর্যোগ প্রায়শই প্রতিরোধযোগ্য, মানুষ সৃষ্ট নয়","উভয়ই কখনও প্রতিরোধযোগ্য নয়","প্রাকৃতিক দুর্যোগ সাধারণত প্রতিরোধ করা যায় না, কিন্তু মানুষ সৃষ্ট দুর্যোগ প্রায়শই প্রতিরোধযোগ্য"],3,3],["নিচের কার্যক্রম ও পর্যায়ের কোন মিলটি সঠিক?",["আগুন নিভানো—দুর্যোগ পরবর্তী; গাছ সরানো—প্রাক দুর্যোগ","ঝুঁকি চিহ্নিতকরণ—দুর্যোগ পরবর্তী; পুনর্বাসন—প্রাক দুর্যোগ","গাছ সরানো—দুর্যোগকালীন; আগুন নিভানো—প্রাক দুর্যোগ","ঝুঁকিপূর্ণ অঞ্চল চিহ্নিতকরণ—প্রাক দুর্যোগ; আগুন নিভিয়ে বাড়ি ত্যাগ— দুর্যোগকালীন; গাছপালা সরানো—দুর্যোগ পরবর্তী"],3,3],["প্রাকৃতিক ও মানবসৃষ্ট—উভয় দুর্যোগ সম্পর্কে কোন সিদ্ধান্তটি যুক্তিসংগত?",["উভয় ক্ষেত্রেই যথাযথ ব্যবস্থায় মারাত্মক ক্ষয়ক্ষতি কমানো যেতে পারে","উভয় ক্ষেত্রে ক্ষয়ক্ষতি কমানো অসম্ভব","শুধু প্রাকৃতিক দুর্যোগে ক্ষতি কমানো যায়","ক্ষয়ক্ষতি কমানোর প্রয়োজন নেই"],0,3],["সরকার ও এনজিওর ভূমিকার তুলনায় কোন জোড়াটি সঠিক?",["সরকার—দুর্যোগ ফান্ড গঠন; এনজিও—বাঁধ নির্মাণ","উভয়ই শুধু ত্রাণ বিতরণ","সরকার—উপকূ ল বরাবর বাঁধ নির্মাণ ও বন তৈরি; এনজিও—দুর্যোগ ফান্ড গঠন","সরকার—শুধু ঋণ প্রদান; এনজিও—শুধু বিদ্যালয় নির্মাণ"],2,3],["ঘূর্ণিঝড় ও জলোচ্ছ্বাসে ক্ষতিগ্রস্ত জনসাধারণ কেবল সরকারি বা এনজিও সাহায্যের অপেক্ষায় বসে না থেকে নিজেকে সাহায্য করার চেষ্টা করবে—এর যৌক্তিকতা কী?",["নিজেদের উদ্যোগ দুর্যোগ থেকে দ্রুত ঘুরে দাঁড়াতে সহায়তা করে","বাইরের সাহায্য ক্ষতিকর","এতে ত্রাণ বাতিল হয়","সরকারি সাহায্য কখনই আসে না"],0,3],["ঘূর্ণিঝড় পূর্ব প্রস্তুতি, চলাকালীন সময় এবং দুর্যোগ পরবর্তী সময়ের জন্য আলাদা আলাদা স্বেচ্ছাসেবক ও প্রশিক্ষণ প্রয়োজন কেন?",["প্রতিটি পর্যায়ের কাজের ধরন আলাদা বলে","সব পর্যায়ের কাজ একই বলে","শুধু একটি পর্যায়ে সাহায্য লাগে বলে","স্বেচ্ছাসেবক অপ্রয়োজনীয় বলে"],0,3],["দুর্যোগ ব্যবস্থাপনা সম্পর্কে কোন ধারণাটি সঠিক?",["এটি শুধু ত্রাণ বিতরণের নাম","এটি শুধু দুর্যোগের পরবর্তী কাজ","এটি শুধু ত্রাণ বিতরণ নয়, বরং দুর্যোগপূর্ব, দুর্যোগকালীন ও দুর্যোগ পরবর্তী কার্যক্রমের সমষ্টি","এটি শুধু সরকারের একার কাজ"],2,3],["উপকূ লীয় অঞ্চলে এনজিওদের অফিস আশ্রয়কেন্দ্রের মত করে গড়ে তোলার পরামর্শ থেকে কোন সিদ্ধান্ত নেওয়া যায়?",["এনজিও অফিস শুধু অফিসের কাজেই ব্যবহৃত হবে","এনজিও অবকাঠামোও দুর্যোগের সময় মানুষের আশ্রয়ের কাজে ব্যবহার করা সম্ভব","এনজিও অফিস নির্মাণ নিষিদ্ধ","আশ্রয়কেন্দ্রে এনজিও কাজ করবে না"],1,3],["বৃক্ষ নিধন একটি কৃত্রিম দুর্যোগ। এ থেকে দুর্যোগ হ্রাসে কোন উদ্যোগটি সবচেয়ে যুক্তিসংগত?",["আরও গাছ কাটা","বৃক্ষরোপণ, বনায়ন ও সামাজিক বনায়নে জোরদার ভূমিকা রাখা","বন ধ্বংস করা","কোনো ব্যবস্থা না নেওয়া"],1,3]].map(([q,o,a,t])=>({q,o,a,t}));
+/* t: 0=জ্ঞানমূলক 1=অনুধাবনমূলক 2=প্রয়োগমূলক 3=উচ্চতর দক্ষতা */
+const N=20,TIME=600,QUOTA=[11,3,3,3],TN=["জ্ঞানমূলক","অনুধাবনমূলক","প্রয়োগমূলক","উচ্চতর দক্ষতা"];
+const bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
+const $=id=>document.getElementById(id);
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const L=['ক','খ','গ','ঘ'];
+let Q=[],ans=[],left=TIME,tm=null,done=false;
+function renderMath(el){try{if(window.renderMathInElement)renderMathInElement(el,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false})}catch(e){}}
+function info(){
+  const n=masterQuestionBank.length,t=Math.min(N,n);
+  $('fullmark').textContent='পূর্ণমান: '+bn(t);$('timeinfo').textContent='সময়: '+bn(TIME/60)+' মিনিট';
+  $('info2').textContent='['+bn(n)+' টি প্রশ্ন আছে]';
+  $('info3').textContent='প্রতিবার '+bn(t)+'টা প্রশ্ন আসবে। (অপশনসহ এলোমেলো)'
+}
+function start(){
+  clearInterval(tm);done=false;left=TIME;
+  const take=Math.min(N,masterQuestionBank.length);let pick=[];
+  QUOTA.forEach((n,t)=>{pick=pick.concat(shuf(masterQuestionBank.filter(x=>x.t===t)).slice(0,n))});
+  if(pick.length<take){const rest=shuf(masterQuestionBank.filter(x=>!pick.includes(x)));pick=pick.concat(rest.slice(0,take-pick.length))}
+  pick=shuf(pick.slice(0,take));
+  Q=pick.map(x=>{const idx=shuf(x.o.map((t,i)=>i));return{q:x.q,t:x.t,o:idx.map(i=>x.o[i]),a:idx.indexOf(x.a)}});
+  ans=Q.map(()=>-1);
+  $('result').classList.add('hide');$('submit').disabled=false;$('submit').parentElement.classList.remove('hide');
+  const box=$('quiz');box.innerHTML='';
+  Q.forEach((q,i)=>{
+    const c=document.createElement('div');c.className='card';c.id='q'+i;
+    c.innerHTML='<div class="qn">'+bn(i+1)+'। '+q.q+'</div>'+q.o.map((t,j)=>'<button class="opt" data-i="'+i+'" data-j="'+j+'">'+t+'</button>').join('');
+    box.appendChild(c)});
+  box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>pickOpt(+b.dataset.i,+b.dataset.j));
+  upd();tick();tm=setInterval(tick,1000);
+  renderMath(box);try{window.scrollTo(0,0)}catch(e){}
+}
+function pickOpt(i,j){
+  if(done||ans[i]>=0)return;ans[i]=j;
+  document.querySelectorAll('#q'+i+' .opt').forEach((b,k)=>{b.disabled=true;if(k===j)b.classList.add('sel')});upd()
+}
+function upd(){$('prog').textContent=bn(ans.filter(a=>a>=0).length)+'/'+bn(Q.length)}
+function tick(){
+  const m=Math.floor(left/60),s=left%60;$('timer').textContent=bn(String(m).padStart(2,'0'))+':'+bn(String(s).padStart(2,'0'));
+  $('timer').classList.toggle('low',left<=60);
+  if(left<=0){clearInterval(tm);finish();return}left--
+}
+function submitClick(){
+  const miss=[];ans.forEach((a,i)=>{if(a<0)miss.push(i)});
+  if(miss.length){alert('নিচের প্রশ্নগুলোর উত্তর দেওয়া বাকি আছে: '+miss.map(i=>bn(i+1)).join(', '));
+    $('q'+miss[0]).scrollIntoView({behavior:'smooth',block:'center'});return}
+  clearInterval(tm);finish()
+}
+function finish(){
+  if(done)return;done=true;let c=0,w=0,u=0;
+  Q.forEach((q,i)=>{
+    const card=$('q'+i),opts=card.querySelectorAll('.opt');opts.forEach(b=>b.disabled=true);
+    opts[q.a].classList.add('correct');
+    if(ans[i]<0)u++;else if(ans[i]===q.a)c++;else{w++;opts[ans[i]].classList.add('wrong')}
+  });
+  const score=c,pct=Q.length?score/Q.length*100:0;
+  const items=[['মোট প্রশ্ন',bn(Q.length)],['সঠিক',bn(c)],['ভুল',bn(w)],['চূড়ান্ত স্কোর',bn(score.toFixed(2).replace(/\.?0+$/,''))+'/'+bn(Q.length)]];
+  $('stats').innerHTML=items.map(x=>'<div class="stat-box"><b>'+x[1]+'</b>'+x[0]+'</div>').join('');
+  $('prog').textContent='স্কোর: '+bn(score.toFixed(2).replace(/\.?0+$/,''))+'/'+bn(Q.length);
+  $('fb').textContent=pct>=90?'🎉 অসাধারণ! চমৎকার ফলাফল, চালিয়ে যান!':pct>=80?'👏 খুব ভালো! আরও অনুশীলন প্রয়োজন।':pct>=60?'🙂 ভালো, আরও অনুশীলন প্রয়োজন।':'📖 আরও মনোযোগ দিয়ে পড়ুন।';
+  $('submit').parentElement.classList.add('hide');$('result').classList.remove('hide');
+  renderMath($('quiz'));
+  setTimeout(()=>{try{$('result').scrollIntoView({block:'start'})}catch(_){}try{window.scrollTo(0,$('result').getBoundingClientRect().top+window.pageYOffset-70)}catch(_){}},80)
+}
+$('submit').onclick=submitClick;$('again').onclick=start;
+$('theme').onclick=()=>{const d=document.documentElement.dataset.theme==='dark';document.documentElement.dataset.theme=d?'light':'dark';$('theme').textContent=d?'🌙 ডার্ক মোড':'☀️ লাইট মোড'};
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  const k=e.key.toLowerCase(),blk=(e.ctrlKey&&['c','s','u'].includes(k))||e.key==='F12'||e.key==='PrintScreen';
+  if(blk){e.preventDefault();try{navigator.clipboard.writeText('')}catch(_){}alert('এই পেজে কপি/সেভ/সোর্স দেখা নিষিদ্ধ।')}});
+document.addEventListener('keyup',e=>{if(e.key==='PrintScreen'){try{navigator.clipboard.writeText('')}catch(_){}alert('স্ক্রিনশট নেওয়া নিষিদ্ধ।')}});
+window.addEventListener('load',()=>{info();start()});
+</script>
+</body>
+</html>

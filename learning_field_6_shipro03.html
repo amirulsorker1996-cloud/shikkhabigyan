@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>গুগল মিট-এর ব্যবহার - অনলাইন কুইজ পরীক্ষা</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+<style>
+@font-face{font-family:'SolaimanLipi';src:local('SolaimanLipi'),local('Solaiman Lipi'),url('SolaimanLipi.ttf') format('truetype');font-display:swap}
+*{font-family:'SolaimanLipi',Arial,sans-serif !important;box-sizing:border-box}
+.katex,.katex *{font-family:KaTeX_Main,'Times New Roman',serif !important}
+:root{--primary:#006a4e;--primary-d:#004d37;--bg:#f2f6f4;--card:#fff;--text:#1d2b26;--muted:#5d6d66;--border:#d5e2dc;--ok:#1b8a4b;--okbg:#e3f6ea;--bad:#c62828;--badbg:#fdeaea;--shadow:0 2px 10px rgba(0,0,0,.08);--ul:#006a4e}
+[data-theme=dark]{--primary:#4db6ac;--bg:#101816;--card:#1a2622;--text:#e6f0ec;--muted:#9bb0a8;--border:#2c3d37;--ok:#66d28f;--okbg:#17352a;--bad:#ff8a80;--badbg:#3a2020;--shadow:0 2px 10px rgba(0,0,0,.5);--ul:#4db6ac}
+body{margin:0;background:var(--bg);color:var(--text);line-height:1.7;-webkit-user-select:none;-moz-user-select:none;user-select:none}
+.wrap{max-width:900px;margin:0 auto;padding:12px}
+header{background:linear-gradient(135deg,#004d37,#006a4e);color:#fff;text-align:center;padding:22px 14px;border-radius:0 0 18px 18px;box-shadow:var(--shadow)}
+header h1{margin:0;font-size:1.5rem}header p{margin:3px 0 0;font-size:1rem;opacity:.95}
+.card{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:16px;margin:14px 0;border:1px solid var(--border)}
+.chapter-title{margin:0 0 12px;padding-bottom:8px;font-size:1.4rem;color:var(--primary);border-bottom:3px solid var(--ul)}
+.badge{background:var(--bg);border-left:4px solid var(--primary);padding:8px 12px;border-radius:8px;margin:8px 0;font-size:.95rem}
+.warn{background:#fff6e0;color:#6b4a00;border-left:4px solid #f0a500;padding:8px 12px;border-radius:8px;font-size:.95rem}
+#info2,#info3{text-align:center}
+#info3{white-space:nowrap;font-size:clamp(.62rem,3.3vw,.95rem)}
+.wrow{display:flex;justify-content:space-between;gap:10px;margin-bottom:2px}
+[data-theme=dark] .warn{background:#3a3016;color:#ffd98a}
+.bar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--card);padding:10px 14px;border-radius:12px;box-shadow:var(--shadow);border:1px solid var(--border)}
+#timer{font-size:1.3rem;font-weight:700;color:var(--primary)}#timer.low{color:var(--bad)}
+button{cursor:pointer;border:0;border-radius:10px;padding:9px 16px;font-size:1rem;background:var(--primary);color:#fff}
+[data-theme=dark] button{color:#0b1512}
+button:disabled{opacity:.5;cursor:default}
+.qn{font-weight:700;margin-bottom:8px}
+.opt{display:block;width:100%;text-align:left;background:var(--bg);color:var(--text);border:2px solid var(--border);margin:6px 0;padding:9px 12px;border-radius:10px}
+[data-theme=dark] .opt{color:var(--text)}
+.opt.sel{border-color:var(--primary)}
+.opt.correct{background:var(--okbg);border-color:var(--ok)}
+.opt.wrong{background:var(--badbg);border-color:var(--bad)}
+.tag{display:inline-block;font-size:.8rem;background:var(--bg);color:var(--primary);border:1px solid var(--border);border-radius:20px;padding:0 10px;margin-bottom:6px}
+.exp{display:none;margin-top:8px;padding:8px 12px;border-radius:8px;background:var(--bg);border-left:4px solid var(--primary);font-size:.95rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.stat-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;box-shadow:var(--shadow)}
+.stat-box b{display:block;font-size:1.5rem;color:var(--primary)}
+#fb{font-size:1.1rem;font-weight:700;text-align:center;margin:12px 0}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<h2 class="chapter-title">গুগল মিট-এর ব্যবহার</h2>
+<div class="warn"><div class="wrow"><b id="fullmark"></b><b id="timeinfo"></b></div><div id="info2"></div><div id="info3"></div></div>
+</div>
+<div class="bar"><span>⏱️ <span id="timer">১০:০০</span></span><span id="prog"></span><button id="theme">🌙 ডার্ক মোড</button></div>
+<div id="quiz"></div>
+<div id="result" class="hide">
+<div class="card"><div class="stats" id="stats"></div><div id="fb"></div><div style="text-align:center"><button id="again">পুনরায় কুইজ দাও</button></div></div>
+</div>
+<div class="card" style="text-align:center"><button id="submit">সাবমিট করো</button></div>
+
+</div>
+<script>
+const masterQuestionBank=[["গুগল মিট পরিষেবা কত সালে চালু হয়?",["২০১৭","২০১৫","২০১৯","২০২০"],0,0],["গুগল মিট (Google Meet) কোন প্রতিষ্ঠানের একটি পরিষেবা?",["ইয়াহু (Yahoo)","গুগল (Google)","বাইডু (Baidu)","মাইক্রোসফট"],1,0],["পাঠ অনুযায়ী পৃথিবীর মধ্যে বহুল ব্যবহৃত সার্চ ইঞ্জিন কোনটি?",["Bing","Yahoo","Yandex","গুগল (Google)"],3,0],["গুগলের নিজস্ব কী রয়েছে, যার সাহায্যে পৃথিবীর যাবতীয় তথ্য সংগ্রহ করা হয়?",["নিজস্ব টেলিভিশন চ্যানেল","কৃত্রিম উপগ্রহ (Satellite)","নিজস্ব রেডিও স্টেশন","নিজস্ব সমুদ্রবন্দর"],1,0],["কোন পরিষেবার মাধ্যমে গুগল মিটের উৎপত্তি হয়?",["Google Drive","Google Handouts","Google Docs","Google Sheets"],1,0],["কোন সালের আগস্ট মাসে Google Handouts-এর মাধ্যমে গুগল মিটের উৎপত্তি হয়?",["২০১৯","২০১৭","২০১৮","২০২০"],0,0],["কোন মাসে Google Meet সাধারণের জন্য বিনামূল্যে উন্মুক্ত করা হয়?",["এপ্রিল ২০২০","আগস্ট ২০১৯","জানুয়ারি ২০১৭","ডিসেম্বর ২০২০"],0,0],["পাঠ অনুযায়ী Google Meet কোন অ্যাপের ব্যবহার বিধির চেয়ে সহজ ও নির্ভরযোগ্য?",["Gmail","জুম (Zoom)","Google Calendar","Google Drive"],1,0],["Google Meet কী ধরনের শিখন উপকরণ?",["ভারী সফটওয়্যারভিত্তিক শিখন উপকরণ","শুধু মুদ্রিত শিখন উপকরণ","শুধু অফলাইন শিখন উপকরণ","সহজ ও হালকা নেটওয়ার্কভিত্তিক শিখন উপকরণ"],3,0],["Google Meet-এ একসাথে সর্বোচ্চ কতজন ব্যবহারকারীকে যুক্ত করা যায়?",["১০০ জন","১৫০ জন","২৫০ জন","৫০০ জন"],2,0],["Google Meet ব্যবহারে আলাদা কোন জিনিসটির প্রয়োজন নেই বলে পাঠে উল্লেখ আছে?",["ক্যালেন্ডার","আইডি বা পাসকোড","রেকর্ডিং সুবিধা","মেসেজ আদান-প্রদান"],1,0],["নিচের কোনটি একটি Web Browser?",["Gmail","Google Calendar","Excel Sheet","Opera"],3,0],["গুগল মিট ব্যবহারের জন্য প্রশিক্ষণার্থীর কী থাকা প্রয়োজন?",["জুম একাউন্ট","Yahoo ID","মিটিং পাসকোড","Gmail ID ও Password"],3,0],["Gmail Page Open হলে উপরে ডান পাশে কয়টি ফোঁটা দেখা যাবে?",["৪টি","৬টি","৯টি","১২টি"],2,0],["Gmail Page-এ ৯টি ফোঁটা (grid) কোথায় দেখা যায়?",["উপরে বাম পাশে","উপরে ডান পাশে","নিচে ডান পাশে","নিচে বাম পাশে"],1,0],["চিত্র অনুযায়ী Gmail Page-এ গুগল মিটের আইকন কোথায় দেখা যায়?",["উপরে ডান পাশে","পেজের ঠিক মাঝখানে","নিচে ডান পাশে","বামপাশে মেইল বক্সের নিচে"],3,0],["Gmail ID থেকে গুগল মিটে প্রবেশ করলে Password-এর প্রয়োজন কখন হবে?",["প্রতিবার প্রয়োজন হবে","শুধু রেকর্ডিংয়ের সময় প্রয়োজন হবে","শুধু ফাইল আপলোডের সময় প্রয়োজন হবে","কখনও প্রয়োজন হবে না"],3,0],["যেসব প্রশিক্ষণার্থীর নিজস্ব ইমেইল আইডি নেই, তাঁরা কীভাবে নতুন Gmail ID খুলবেন?",["জুম অ্যাপের সাহায্যে","প্রশিক্ষকের সহযোগিতায়","শুধু ক্যালেন্ডারের সাহায্যে","গুগল ড্রাইভের সাহায্যে"],1,0],["অংশগ্রহণকারীদের নিমন্ত্রণ পাঠানোর জন্য প্রশিক্ষক কার সাহায্য নেবেন?",["গুগল ক্যালেন্ডার (Google Calendar)","গুগল স্লাইড","গুগল ডকস","গুগল শিট"],0,0],["গুগল ক্যালেন্ডারের মাধ্যমে মিটিং সিডিউল কে পাঠিয়ে দেবেন?",["অংশগ্রহণকারী প্রশিক্ষণার্থী","অতিথি বক্তা","কো-হোস্ট ছাড়া কেউ নয়","হোস্ট বা প্রশিক্ষক"],3,0],["ইমেইল নিমন্ত্রণে ফাইল সংযুক্ত করতে বার্তা বক্সের ঠিক উপরের কোন আইকনে ক্লিক করতে হয়?",["Pin","Save","Remove","Mute"],0,0],["চিত্র অনুযায়ী Google Meet-এ কোথা থেকে ফাইল আপলোড করা যায়?",["শুধু Gmail Inbox থেকে","শুধু ক্যালেন্ডার থেকে","শুধু মোবাইল থেকে","Google Drive এবং নিজের কম্পিউটার থেকে"],3,0],["অতিথির (Guest) নাম বাদ বা ডিলিট করতে কোন Option-এ ক্লিক করতে হয়?",["Remove","Save","Invite others","Modify event"],0,0],["নিচের কোনটি Guest permissions-এর একটি অপশন?",["Mute guest","See guest list","Record guest","Delete meeting"],1,0],["অতিথি বক্তার উপস্থাপনের সময় হোস্ট তাঁদের কী নিযুক্ত করে দেবেন?",["গেস্ট","ওয়েটিং রুমের সদস্য","শুধু দর্শক","কো-হোস্ট (Co-Host)"],3,0],["Google Meet-এ Chat ফাংশনটি কোন আইকনের পাশে পাওয়া যায়?",["Grid view icon","Calendar icon","Pin icon","Remove icon"],0,0],["প্রশিক্ষক সেশন পরিচালনায় Screen শেয়ারে কয়টি অপশন ব্যবহার করতে পারেন?",["দুইটি","চারটি","তিনটি","পাঁচটি"],2,0],["উপসংহার অনুযায়ী করোনাকালীন সময়ে আমাদের দেশে কোন ধরনের প্রতিষ্ঠান ব্যাপকভাবে গুগল মিট ব্যবহার করেছে?",["শুধু মাদ্রাসা","কিন্ডারগার্টেন জাতীয় অভিজাত স্কুল","শুধু সরকারি প্রাথমিক বিদ্যালয়","শুধু কারিগরি প্রতিষ্ঠান"],1,0],["গুগল মিট প্রশিক্ষণ শিখন কার্যক্রমে সর্বাধিক জনপ্রিয় পরিষেবা হওয়ার একটি কারণ কোনটি?",["Google Calendar-সহ অন্যান্য Application সহজে ব্যবহার করা যায়","এটি শুধু মোবাইলে চলে","এতে কোনো ইন্টারনেট প্রয়োজন হয় না","এটি শুধু অর্থের বিনিময়ে পাওয়া যায়"],0,1],["Google Meet-এর আলাদা কোনো আইডি বা পাসকোড নেই—এর অর্থ কী?",["গুগল মিটে প্রবেশের কোনো উপায়ই নেই","Gmail ID ও Password-ই গুগল মিটের ID ও Password হিসেবে কাজ করে","জুমের আইডি দিয়ে প্রবেশ করতে হয়","মিটিং সবার জন্য উন্মুক্ত থাকে"],1,1],["Google Search Engine থেকে গুগল মিট Open করলে কী ঘটে?",["কখনও Password লাগে না","শুধু একবার Password লাগে","প্রতিটি অপশনে Password-এর প্রয়োজন হয়","Password-এর পরিবর্তে ফোন নম্বর লাগে"],2,1],["গুগল ক্যালেন্ডার মিটিং সিডিউল করার ক্ষেত্রে কীভাবে সাহায্য করে?",["মিটিংয়ের ভিডিও সম্পাদনা করে","অংশগ্রহণকারীদের Gmail Password বদলে দেয়","মিটিং বাতিল করে দেয়","সবাইকে মিটিংয়ের নোটিফিকেশন পাঠায় এবং ক্যালেন্ডারে স্বয়ংক্রিয়ভাবে চিহ্নিত করে"],3,1],["Screen শেয়ারে 'পুরো স্ক্রিন' অপশন নিলে প্রশিক্ষণার্থীরা কী করতে পারেন?",["শুধু একটি Excel ফাইল দেখতে পারেন","শুধু চ্যাট বন্ধ করতে পারেন","শুধু রেকর্ডিং মুছে দিতে পারেন","প্রশিক্ষকের স্ক্রিনের সমস্ত চলাফেরা (Movement) পর্যবেক্ষণ করতে পারেন"],3,1],["অংশগ্রহণকারীদের সাথে কথা বলে বা প্রশ্ন করে সেশনে সক্রিয় রাখতে হয় কেন?",["অনেকে ভিডিও অফ করে শুধু ছবি দিয়ে সেশনে অনুপস্থিত থাকেন বলে","সবাই ভিডিও চালু রাখেন বলে","ছবি থাকলে সেশন বন্ধ হয়ে যায় বলে","কথা বললে মিটিং রেকর্ড হয় না বলে"],0,1],["আমাদের দেশে জুম ও গুগল মিট শিক্ষার্থীর কাছে খুব ফলপ্রসূ হয়নি কেন?",["অ্যাপগুলো বিনামূল্যে ছিল বলে","শিক্ষার্থীরা পড়তে চায়নি বলে","শিক্ষকদের অদক্ষতা এবং প্রশিক্ষণলব্ধ জ্ঞানের অভাবের জন্য","অ্যাপগুলো শুধু ইংরেজি জানা ব্যবহারকারীর জন্য বলে"],2,1],["একজন শিক্ষক পুরো স্ক্রিন না দেখিয়ে শুধু তাঁর কম্পিউটারের একটি Excel Sheet ও Slideshow দেখাতে চান। তিনি Screen শেয়ারের কোন অপশনটি বেছে নেবেন?",["Your entire screen","একটি Chrome page","একটি Window","Chat অপশন"],2,2],["একজন শিক্ষক ক্লাসে একটি অনলাইন ডকুমেন্ট বা অনলাইন ভিডিও উপস্থাপন করতে চান। কোন অপশনটি তাঁর জন্য উপযোগী?",["শুধু একটি Chrome page উপস্থাপন করা","Remove Option","Pin Option","Modify event"],0,2],["একজন প্রশিক্ষক ইমেইল নিমন্ত্রণের সঙ্গে একটি পাঠ্য সামগ্রী ফাইল সংযুক্ত করতে চান। তিনি কী করবেন?",["বার্তা বক্সের উপরের 'Pin' আইকনে ক্লিক করবেন","Remove Option-এ ক্লিক করবেন","Mute অপশন চাপবেন","Grid view icon-এ ক্লিক করবেন"],0,2],["একজন হোস্ট ভুল ইমেইল আইডি অতিথি হিসেবে যুক্ত করে ফেলেছেন। তিনি কীভাবে সমস্যাটি সমাধান করবেন?",["Pin আইকনে ক্লিক করে","ঐ অতিথির নামের পাশে 'Remove' অপশনে ক্লিক করে","Chrome page উপস্থাপন করে","Gmail ID বদলে দিয়ে"],1,2],["একজন প্রশিক্ষক চান সব প্রশিক্ষণার্থী তাঁর স্ক্রিনের সব নড়াচড়া দেখুক। তাঁর কোন অপশনটি নির্বাচন করা উচিত?",["A window","A Chrome tab","Your entire screen","Remove guest"],2,2],["একজন নতুন প্রশিক্ষণার্থীর কোনো Gmail ID নেই। গুগল মিট ব্যবহারের জন্য তাঁর করণীয় কী?",["জুম একাউন্ট ব্যবহার করা","শুধু মিটিং পাসকোড চাওয়া","প্রশিক্ষকের সহযোগিতায় নতুন Gmail ID খুলে নেওয়া","অপেক্ষা করা যতক্ষণ না আইডি ছাড়াই ঢোকা যায়"],2,2],["একজন শিক্ষক Google Search Engine থেকে গুগল মিটে প্রবেশ করায় প্রতিটি অপশনে Password দিতে হচ্ছে। এটি এড়াতে তাঁর কী করা উচিত?",["Gmail ID থেকে গুগল মিটে প্রবেশ করা","প্রতিবার নতুন Gmail ID খোলা","জুম অ্যাপ ব্যবহার করা","সার্চ ইঞ্জিন পরিবর্তন করা"],0,2],["গুগল মিট সম্পর্কে নিচের কোন তথ্যটি পাঠ অনুযায়ী সঠিক?",["২০১৭ সালে চালু হওয়ার পর শিক্ষাক্ষেত্রে জুমের পর বহুল ব্যবহৃত হয়েছে","শিক্ষাক্ষেত্রে জুমের চেয়ে কম ব্যবহৃত হয়েছে","২০২০ সালে চালু হয়ে Google Handouts-এর উৎপত্তি ঘটিয়েছে","এটি Bing-এর একটি অ্যাপ"],0,3],["গুগল মিট শিখন-শেখানো কার্যক্রমে গুগল ক্যালেন্ডার, ডকস ও স্লাইডের সাথে একীভূত হয়ে কাজ করে—এর সুবিধা বিশ্লেষণ করলে কোনটি সঠিক?",["গুগল মিট বন্ধ হয়ে যায়","আলাদা আলাদা টুল ছাড়াই একই কার্যক্রমে একাধিক গুগল অ্যাপ ব্যবহার করা যায়","শুধু রেকর্ডিং করা যায়","কেবল Chat ফাংশন চালু থাকে"],1,3],["আমাদের দেশে গুগল মিট পাঠদানে সব ক্ষেত্রে সফল না হওয়ার কারণ কী?",["শিক্ষকদের আগ্রহের আধিক্য","উন্নত অবকাঠামোর আধিক্য","শিক্ষকদের প্রশিক্ষণের অভাব, দুর্বল অবকাঠামো এবং তথ্য প্রযুক্তির অপ্রতুলতা","গুগল মিটের মূল্য বেশি হওয়া"],2,3],["একজন হোস্ট চান অতিথি ইভেন্টের তথ্য পরিবর্তন করতে না পারলেও অন্যদের আমন্ত্রণ জানাতে ও অতিথি তালিকা দেখতে পারুক। Guest permissions-এ কোন সমন্বয়টি যুক্তিযুক্ত?",["Modify event চালু; Invite others বন্ধ","সবগুলো বন্ধ","Modify event বন্ধ; Invite others ও See guest list চালু","Modify event ও See guest list চালু; Invite others বন্ধ"],2,3],["গুগল মিটে প্রবেশের দুটি পথের তুলনায় কোনটি সঠিক?",["উভয় পথেই কখনও Password লাগে না","সার্চ ইঞ্জিন থেকে ঢুকলে Password লাগে না, Gmail থেকে প্রতিবার লাগে","উভয় পথেই শুধু একবার Password লাগে","Gmail ID থেকে ঢুকলে Password লাগে না, কিন্তু সার্চ ইঞ্জিন থেকে ঢুকলে প্রতিটি অপশনে লাগে"],3,3],["উপসংহার অনুযায়ী প্রশিক্ষণ ও অবকাঠামোর ঘাটতি দূর করার সবচেয়ে যুক্তিযুক্ত উপায় কোনটি?",["গুগল মিট ব্যবহার বন্ধ করা","শুধু কিন্ডারগার্টেন স্কুলে ব্যবহার করা","প্রশিক্ষণ ম্যানুয়ালে গুগল মিট সংযোজন এবং চলমান প্রশিক্ষণ","শুধু ক্যালেন্ডার ব্যবহার করা"],2,3],["পাঠ অনুযায়ী একাদশ-দ্বাদশ শ্রেণি ও কিন্ডারগার্টেনে গুগল মিটের ব্যাপক ব্যবহারের প্রধান কারণ কী?",["গুগল মিট জটিল বিধায়","গুগল মিট সহজ বিধায়","শুধু এতে পাসকোড নেই বিধায়","এটি জুমের চেয়ে ব্যয়বহুল বিধায়"],1,3],["নিচের কোন বৈশিষ্ট্যগুলোর সমন্বয়ে গুগল মিটকে শিক্ষা কার্যক্রমের জন্য উপযোগী বলা যায়?",["ব্যয়বহুল, জটিল ও কম ব্যবহারকারীর সীমা","শুধু অডিও সুবিধা ও আলাদা পাসকোড","সম্পূর্ণ ফ্রি, সহজে ব্যবহারযোগ্য, স্বয়ংক্রিয় রেকর্ডিং ও ২৫০ জনকে একসাথে যুক্ত করার সুবিধা","শুধু একটি ডিভাইসে রেকর্ডিং ও কোনো অ্যাপের সাথে সংযোগ না থাকা"],2,3]].map(([q,o,a,t])=>({q,o,a,t}));
+/* t: 0=জ্ঞানমূলক 1=অনুধাবনমূলক 2=প্রয়োগমূলক 3=উচ্চতর দক্ষতা */
+const N=20,TIME=600,QUOTA=[11,3,3,3],TN=["জ্ঞানমূলক","অনুধাবনমূলক","প্রয়োগমূলক","উচ্চতর দক্ষতা"];
+const bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
+const $=id=>document.getElementById(id);
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const L=['ক','খ','গ','ঘ'];
+let Q=[],ans=[],left=TIME,tm=null,done=false;
+function renderMath(el){try{if(window.renderMathInElement)renderMathInElement(el,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false})}catch(e){}}
+function info(){
+  const n=masterQuestionBank.length,t=Math.min(N,n);
+  $('fullmark').textContent='পূর্ণমান: '+bn(t);$('timeinfo').textContent='সময়: '+bn(TIME/60)+' মিনিট';
+  $('info2').textContent='['+bn(n)+' টি প্রশ্ন আছে]';
+  $('info3').textContent='প্রতিবার '+bn(t)+'টা প্রশ্ন আসবে। (অপশনসহ এলোমেলো)'
+}
+function start(){
+  clearInterval(tm);done=false;left=TIME;
+  const take=Math.min(N,masterQuestionBank.length);let pick=[];
+  QUOTA.forEach((n,t)=>{pick=pick.concat(shuf(masterQuestionBank.filter(x=>x.t===t)).slice(0,n))});
+  if(pick.length<take){const rest=shuf(masterQuestionBank.filter(x=>!pick.includes(x)));pick=pick.concat(rest.slice(0,take-pick.length))}
+  pick=shuf(pick.slice(0,take));
+  Q=pick.map(x=>{const idx=shuf(x.o.map((t,i)=>i));return{q:x.q,t:x.t,o:idx.map(i=>x.o[i]),a:idx.indexOf(x.a)}});
+  ans=Q.map(()=>-1);
+  $('result').classList.add('hide');$('submit').disabled=false;$('submit').parentElement.classList.remove('hide');
+  const box=$('quiz');box.innerHTML='';
+  Q.forEach((q,i)=>{
+    const c=document.createElement('div');c.className='card';c.id='q'+i;
+    c.innerHTML='<div class="qn">'+bn(i+1)+'। '+q.q+'</div>'+q.o.map((t,j)=>'<button class="opt" data-i="'+i+'" data-j="'+j+'">'+t+'</button>').join('');
+    box.appendChild(c)});
+  box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>pickOpt(+b.dataset.i,+b.dataset.j));
+  upd();tick();tm=setInterval(tick,1000);
+  renderMath(box);try{window.scrollTo(0,0)}catch(e){}
+}
+function pickOpt(i,j){
+  if(done||ans[i]>=0)return;ans[i]=j;
+  document.querySelectorAll('#q'+i+' .opt').forEach((b,k)=>{b.disabled=true;if(k===j)b.classList.add('sel')});upd()
+}
+function upd(){$('prog').textContent=bn(ans.filter(a=>a>=0).length)+'/'+bn(Q.length)}
+function tick(){
+  const m=Math.floor(left/60),s=left%60;$('timer').textContent=bn(String(m).padStart(2,'0'))+':'+bn(String(s).padStart(2,'0'));
+  $('timer').classList.toggle('low',left<=60);
+  if(left<=0){clearInterval(tm);finish();return}left--
+}
+function submitClick(){
+  const miss=[];ans.forEach((a,i)=>{if(a<0)miss.push(i)});
+  if(miss.length){alert('নিচের প্রশ্নগুলোর উত্তর দেওয়া বাকি আছে: '+miss.map(i=>bn(i+1)).join(', '));
+    $('q'+miss[0]).scrollIntoView({behavior:'smooth',block:'center'});return}
+  clearInterval(tm);finish()
+}
+function finish(){
+  if(done)return;done=true;let c=0,w=0,u=0;
+  Q.forEach((q,i)=>{
+    const card=$('q'+i),opts=card.querySelectorAll('.opt');opts.forEach(b=>b.disabled=true);
+    opts[q.a].classList.add('correct');
+    if(ans[i]<0)u++;else if(ans[i]===q.a)c++;else{w++;opts[ans[i]].classList.add('wrong')}
+  });
+  const score=c,pct=Q.length?score/Q.length*100:0;
+  const items=[['মোট প্রশ্ন',bn(Q.length)],['সঠিক',bn(c)],['ভুল',bn(w)],['চূড়ান্ত স্কোর',bn(score.toFixed(2).replace(/\.?0+$/,''))+'/'+bn(Q.length)]];
+  $('stats').innerHTML=items.map(x=>'<div class="stat-box"><b>'+x[1]+'</b>'+x[0]+'</div>').join('');
+  $('prog').textContent='স্কোর: '+bn(score.toFixed(2).replace(/\.?0+$/,''))+'/'+bn(Q.length);
+  $('fb').textContent=pct>=90?'🎉 অসাধারণ! চমৎকার ফলাফল, চালিয়ে যান!':pct>=80?'👏 খুব ভালো! আরও অনুশীলন প্রয়োজন।':pct>=60?'🙂 ভালো, আরও অনুশীলন প্রয়োজন।':'📖 আরও মনোযোগ দিয়ে পড়ুন।';
+  $('submit').parentElement.classList.add('hide');$('result').classList.remove('hide');
+  renderMath($('quiz'));
+  setTimeout(()=>{try{$('result').scrollIntoView({block:'start'})}catch(_){}try{window.scrollTo(0,$('result').getBoundingClientRect().top+window.pageYOffset-70)}catch(_){}},80)
+}
+$('submit').onclick=submitClick;$('again').onclick=start;
+$('theme').onclick=()=>{const d=document.documentElement.dataset.theme==='dark';document.documentElement.dataset.theme=d?'light':'dark';$('theme').textContent=d?'🌙 ডার্ক মোড':'☀️ লাইট মোড'};
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  const k=e.key.toLowerCase(),blk=(e.ctrlKey&&['c','s','u'].includes(k))||e.key==='F12'||e.key==='PrintScreen';
+  if(blk){e.preventDefault();try{navigator.clipboard.writeText('')}catch(_){}alert('এই পেজে কপি/সেভ/সোর্স দেখা নিষিদ্ধ।')}});
+document.addEventListener('keyup',e=>{if(e.key==='PrintScreen'){try{navigator.clipboard.writeText('')}catch(_){}alert('স্ক্রিনশট নেওয়া নিষিদ্ধ।')}});
+window.addEventListener('load',()=>{info();start()});
+</script>
+</body>
+</html>

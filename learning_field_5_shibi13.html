@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>English Reading and Writing Skills - অনলাইন কুইজ পরীক্ষা</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+<style>
+@font-face{font-family:'SolaimanLipi';src:local('SolaimanLipi'),local('Solaiman Lipi'),url('SolaimanLipi.ttf') format('truetype');font-display:swap}
+*{font-family:'SolaimanLipi',Arial,sans-serif !important;box-sizing:border-box}
+.katex,.katex *{font-family:KaTeX_Main,'Times New Roman',serif !important}
+:root{--primary:#006a4e;--primary-d:#004d37;--bg:#f2f6f4;--card:#fff;--text:#1d2b26;--muted:#5d6d66;--border:#d5e2dc;--ok:#1b8a4b;--okbg:#e3f6ea;--bad:#c62828;--badbg:#fdeaea;--shadow:0 2px 10px rgba(0,0,0,.08);--ul:#006a4e}
+[data-theme=dark]{--primary:#4db6ac;--bg:#101816;--card:#1a2622;--text:#e6f0ec;--muted:#9bb0a8;--border:#2c3d37;--ok:#66d28f;--okbg:#17352a;--bad:#ff8a80;--badbg:#3a2020;--shadow:0 2px 10px rgba(0,0,0,.5);--ul:#4db6ac}
+body{margin:0;background:var(--bg);color:var(--text);line-height:1.7;-webkit-user-select:none;-moz-user-select:none;user-select:none}
+.wrap{max-width:900px;margin:0 auto;padding:12px}
+header{background:linear-gradient(135deg,#004d37,#006a4e);color:#fff;text-align:center;padding:22px 14px;border-radius:0 0 18px 18px;box-shadow:var(--shadow)}
+header h1{margin:0;font-size:1.5rem}header p{margin:3px 0 0;font-size:1rem;opacity:.95}
+.card{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:16px;margin:14px 0;border:1px solid var(--border)}
+.chapter-title{margin:0 0 12px;padding-bottom:8px;font-size:1.4rem;color:var(--primary);border-bottom:3px solid var(--ul)}
+.badge{background:var(--bg);border-left:4px solid var(--primary);padding:8px 12px;border-radius:8px;margin:8px 0;font-size:.95rem}
+.warn{background:#fff6e0;color:#6b4a00;border-left:4px solid #f0a500;padding:8px 12px;border-radius:8px;font-size:.95rem}
+#info2,#info3{text-align:center}
+#info3{white-space:nowrap;font-size:clamp(.62rem,3.3vw,.95rem)}
+.wrow{display:flex;justify-content:space-between;gap:10px;margin-bottom:2px}
+[data-theme=dark] .warn{background:#3a3016;color:#ffd98a}
+.bar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--card);padding:10px 14px;border-radius:12px;box-shadow:var(--shadow);border:1px solid var(--border)}
+#timer{font-size:1.3rem;font-weight:700;color:var(--primary)}#timer.low{color:var(--bad)}
+button{cursor:pointer;border:0;border-radius:10px;padding:9px 16px;font-size:1rem;background:var(--primary);color:#fff}
+[data-theme=dark] button{color:#0b1512}
+button:disabled{opacity:.5;cursor:default}
+.qn{font-weight:700;margin-bottom:8px}
+.opt{display:block;width:100%;text-align:left;background:var(--bg);color:var(--text);border:2px solid var(--border);margin:6px 0;padding:9px 12px;border-radius:10px}
+[data-theme=dark] .opt{color:var(--text)}
+.opt.sel{border-color:var(--primary)}
+.opt.correct{background:var(--okbg);border-color:var(--ok)}
+.opt.wrong{background:var(--badbg);border-color:var(--bad)}
+.tag{display:inline-block;font-size:.8rem;background:var(--bg);color:var(--primary);border:1px solid var(--border);border-radius:20px;padding:0 10px;margin-bottom:6px}
+.exp{display:none;margin-top:8px;padding:8px 12px;border-radius:8px;background:var(--bg);border-left:4px solid var(--primary);font-size:.95rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.stat-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;box-shadow:var(--shadow)}
+.stat-box b{display:block;font-size:1.5rem;color:var(--primary)}
+#fb{font-size:1.1rem;font-weight:700;text-align:center;margin:12px 0}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<h2 class="chapter-title">English Reading and Writing Skills</h2>
+<div class="warn"><div class="wrow"><b id="fullmark"></b><b id="timeinfo"></b></div><div id="info2"></div><div id="info3"></div></div>
+</div>
+<div class="bar"><span>⏱️ <span id="timer">১০:০০</span></span><span id="prog"></span><button id="theme">🌙 ডার্ক মোড</button></div>
+<div id="quiz"></div>
+<div id="result" class="hide">
+<div class="card"><div class="stats" id="stats"></div><div id="fb"></div><div style="text-align:center"><button id="again">পুনরায় কুইজ দাও</button></div></div>
+</div>
+<div class="card" style="text-align:center"><button id="submit">সাবমিট করো</button></div>
+
+</div>
+<script>
+const masterQuestionBank=[["মাতৃভাষা শেখার সময় আমরা সাধারণত কোন দক্ষতাটি সবার আগে শিখি?",["Listening","Speaking","Reading","Writing"],0,0],["চারটি ভাষা দক্ষতার সঠিক শেখার ক্রম কোনটি, যা মাতৃভাষা শেখার সময় সাধারণত অনুসরণ করা হয়?",["বলা → শোনা → লেখা → পড়া","পড়া → লেখা → শোনা → বলা","শোনা → বলা → পড়া → লেখা","শোনা → পড়া → বলা → লেখা"],2,0],["পড়ার সময় একটি একটি করে শব্দ ধরে পড়াকে পাঠ্যাংশে কী হিসেবে উল্লেখ করা হয়েছে?",["খারাপ অভ্যাস","ভালো অভ্যাস","দ্রুত পড়ার কৌশল","শব্দভান্ডার বাড়ানোর উপায়"],0,0],["পাঠ্যাংশ অনুযায়ী শিক্ষার্থীদের কীভাবে পড়া উচিত?",["Word by word","Phrase by phrase","Letter by letter","Line by line with a pointer"],1,0],["পড়ার সময় বারবার মাথা না নেড়ে কী নড়ালেই যথেষ্ট বলা হয়েছে?",["চোখের মণি (eyeball)","মাথা","আঙুল","ঠোঁট"],0,0],["বেশি শব্দের তথ্য পেতে চাইলে চোখ ও পাঠ্যবস্তুর মধ্যে কী থাকতে হবে?",["অতিরিক্ত আলো","খুব কাছাকাছি অবস্থান","যথাযথ দূরত্ব","নির্দিষ্ট রঙের পাতা"],2,0],["লেখালেখি শিক্ষার্থীকে তার অর্জনের কী ধরনের প্রমাণ দেয়?",["Oral evidence","Digital certificate","Physical evidence","Teacher's remark"],2,0],["পাঠ্যাংশ অনুযায়ী একটি প্রবন্ধের ভিত্তি কী?",["Paragraph","Title","Vocabulary","Sentence"],3,0],["নিচের কোনটি লেখার অনুশীলনের উদাহরণ হিসেবে পাঠ্যাংশে উল্লেখ করা হয়েছে?",["Text shortening and rewriting","Skimming","Finger pointing","Head shaking"],0,0],["পাঠ্যাংশ অনুযায়ী ‘Reading’ কী?",["কেবল জোরে জোরে উচ্চারণ করার প্রক্রিয়া","শব্দ মুখস্থ করার প্রক্রিয়া","লিখিত প্রতীক দেখে সেখান থেকে অর্থ গ্রহণ করার প্রক্রিয়া","চিন্তা প্রকাশ করার প্রক্রিয়া"],2,0],["পাঠ্যাংশ অনুযায়ী পড়া কত উপায়ে হতে পারে?",["কেবল নীরবে","নীরবে (মনে মনে) অথবা জোরে (শব্দ করে)","কেবল জোরে","কেবল আঙুল দিয়ে অনুসরণ করে"],1,0],["Reading কোন ধরনের দক্ষতা (skill) হিসেবে পরিচিত?",["Receptive skill","Creative skill","Physical skill","Social skill"],0,0],["পাঠ্যাংশ অনুযায়ী ‘Writing’ হলো—",["শুধু কীবোর্ডে টাইপ করার প্রক্রিয়া","অন্যের লেখা অনুকরণ করার প্রক্রিয়া","চিন্তা ও ভাবনা পাঠযোগ্য রূপে প্রকাশের জন্য প্রতীক ব্যবহারের প্রক্রিয়া","কেবল শব্দ উচ্চারণ করার প্রক্রিয়া"],2,0],["“Shakespeare didn't make much money from writing.” বাক্যে ‘writing’ দ্বারা কী বোঝানো হয়েছে?",["হাতের লেখা","লেখকের কাজ বা পেশা","টাইপ করা","বানান শেখা"],1,0],["সাধারণত আমরা কী ব্যবহার করে লিখি?",["Microphone ও speaker","Camera ও screen","Projector ও remote","Pen/pencil অথবা keyboard"],3,0],["কোন ধরনের মানুষকে Voice recognition programs তাদের চিন্তা লিখে ফেলতে সাহায্য করে?",["যারা শুনতে পায় না","যারা ইংরেজি জানে না","যারা দেখতে বা হাত ব্যবহার করতে পারে না","যারা দ্রুত টাইপ করতে পারে"],2,0],["পড়াশোনার জন্য নোট নেওয়া কোন ধরনের লেখার উদাহরণ?",["নিজের জন্য লেখা","অচেনা পাঠকের জন্য লেখা","লক্ষ্যভিত্তিক পাঠকের জন্য লেখা","আনুষ্ঠানিক চিঠি লেখা"],0,0],["প্রকাশ্যে ব্লগ লেখা কোন ধরনের পাঠকের জন্য লেখার উদাহরণ?",["নিজে","অজানা পাঠক (unknown audience)","লক্ষ্যভিত্তিক পাঠক (targeted audience)","শুধু শিক্ষক"],1,0],["বন্ধুকে লেখা চিঠি কোন ধরনের লেখার উদাহরণ?",["অজানা পাঠকের জন্য লেখা","নিজের জন্য লেখা","সংবাদ লেখা","লক্ষ্যভিত্তিক পাঠকের জন্য লেখা"],3,0],["ইংরেজি লেখার দক্ষতা উন্নয়নের জন্য পাঠ্যাংশে কয়টি টিপস দেওয়া হয়েছে?",["৫টি","১০টি","১২টি","৮টি"],3,0],["লেখার দক্ষতা উন্নয়নে সব লেখা এক জায়গায় রাখার জন্য কী কিনতে বলা হয়েছে?",["Dictionary","Notebook অথবা journal","Typewriter","Camera"],1,0],["প্রতিদিন লেখার গুরুত্ব কী বলা হয়েছে?",["এটি একটি নতুন অভ্যাস তৈরি করে","এটি দ্রুত বানান শেখায়","এটি বই কেনার খরচ কমায়","এটি কথা বলার গতি বাড়ায়"],0,0],["‘Draft’ বলতে পাঠ্যাংশে কী বোঝানো হয়েছে?",["লেখার চূড়ান্ত সংস্করণ","লেখার শিরোনাম","লেখার সারসংক্ষেপ","লেখার প্রাথমিক সংস্করণ"],3,0],["লেখার বিষয় খুঁজে না পেলে কোথাকার writing prompts-এর সাহায্য নিতে বলা হয়েছে?",["Grammarly","GrammarBook.com","Google Doc","English Tonight"],3,0],["নিচের কোনটি grammar সংক্রান্ত অনলাইন রিসোর্স হিসেবে পাঠ্যাংশে উল্লেখ আছে?",["GrammarBook.com","Wikipedia","YouTube","Facebook"],0,0],["রাতে writer's block হলে পাঠ্যাংশে কী করার পরামর্শ দেওয়া হয়েছে?",["১৫ মিনিট আগে উঠে সকালে লেখা","রাতে আরও বেশি সময় ধরে লেখা","লেখা সম্পূর্ণ বন্ধ রাখা","দুপুরে ঘুমিয়ে নেওয়া"],0,0],["ইংরেজি দক্ষতা উন্নয়নের প্রথম ও সবচেয়ে গুরুত্বপূর্ণ ধাপ কোনটি?",["অনেক গল্প লেখা","ডিকশনারি মুখস্থ করা","দ্রুত পড়া","ব্যাকরণ জানা"],3,0],["ব্যাকরণগত ভুলের উদাহরণ হিসেবে পাঠ্যাংশে কোনটি দেওয়া হয়েছে?",["apple বানান ভুল করা","apples-এর পরিবর্তে apple লেখা","an apple-এর পরিবর্তে a apple লেখা","an-এর আগে comma ব্যবহার করা"],2,0],["পাঠ্যাংশ অনুযায়ী ‘Vocabulary’ কী?",["বাক্য গঠনের নিয়ম","শব্দ সম্পর্কে জ্ঞান","উচ্চারণের নিয়ম","বিরামচিহ্নের ব্যবহার"],1,0],["বানান ভুল হলে কী হতে পারে বলা হয়েছে?",["কেবল হাতের লেখা খারাপ দেখায়","কোনো প্রভাব পড়ে না","শুধু উচ্চারণ বদলে যায়","সম্পূর্ণ ভিন্ন বা বিপরীত অর্থ হতে পারে"],3,0],["বেশি করে ইংরেজিতে কথা বললে কোন দক্ষতাটি উন্নত হয়?",["Handwriting","Spelling only","Typing speed","Pronunciation"],3,0],["লেখা পুনরায় যাচাই করার জন্য ল্যাপটপে কোন কাজ করতে বলা হয়েছে?",["লেখা মুছে ফেলা","Error check (spell-check) চালানো","ফন্ট পরিবর্তন করা","লেখা ছোট করে ফেলা"],1,0],["ইংরেজি পড়ার অনুশীলনে ‘th’ কীভাবে উচ্চারিত হয় বলে উল্লেখ করা হয়েছে?",["শুধু t হিসেবে","শুধু h হিসেবে","t + h আলাদা না হয়ে একটি একক ধ্বনি হিসেবে","d হিসেবে"],2,0],["‘th’-এর মতো যে একক ধ্বনি গঠিত হয়, তাকে পাঠ্যাংশে কী বলা হয়েছে?",["Syllable","Phrase","Phoneme","Context clue"],2,0],["পাঠ্যাংশ অনুযায়ী ‘skimming’ বলতে কী বোঝায়?",["পুরো পৃষ্ঠায় চোখ বুলিয়ে মাত্র দু-একটি শব্দ গ্রহণ করা","প্রতিটি শব্দ মনোযোগ দিয়ে পড়া","জোরে জোরে পড়া","অভিধানে শব্দ খোঁজা"],0,0],["‘Context clues’ কী?",["অভিধান দেখে অর্থ মুখস্থ করা","বাক্যে শব্দটি কীভাবে ব্যবহৃত হয়েছে তা দেখে শব্দের অর্থ অনুমান করা","শব্দের বানান আলাদা করা","শব্দটি জোরে উচ্চারণ করা"],1,0],["পাতা উল্টানোর ঝামেলা এড়িয়ে সময় বাঁচাতে কী ব্যবহার করতে বলা হয়েছে?",["Online dictionary","Printed encyclopedia","Newspaper","Notebook"],0,0],["পাঠ্যাংশ অনুযায়ী বেশি বেশি পড়লে শিক্ষার্থীর কী বড় ও আরও পরিশীলিত হবে?",["Handwriting","Vocabulary","Pronunciation only","Spelling mistakes"],1,0],["কোনো কিছু প্রথমবার পুরোপুরি না বুঝলে কী করা ঠিক বলে বলা হয়েছে?",["পড়া বন্ধ করে দেওয়া","পরের অংশ ছেড়ে দেওয়া","আবার পড়া (reread)","শুধু শিরোনাম পড়া"],2,0],["পাঠ্যাংশ অনুযায়ী লাইব্রেরি থেকে বই বাছাই করা উচিত কিসের ওপর ভিত্তি করে?",["বইয়ের মোটা মলাট","বইয়ের দাম","নিজের reading level","বইয়ের পাতার সংখ্যা"],2,0],["পড়া শুরুর আগে কী বিষয়ে পড়বে তার ধারণা পেতে কী করতে বলা হয়েছে?",["শেষ পৃষ্ঠা আগে পড়া","ছবি দেখা বা গান শোনা","বন্ধুর সঙ্গে তর্ক করা","শব্দ গণনা করা"],1,0],["বড় অক্ষরে ছাপা যেসব বিষয় আপনি চেনেন, সেগুলো থেকে পড়া শুরু করতে বলা হয়েছে। এর উদাহরণ কোনটি?",["Footnotes","Titles ও names","Page numbers","Publisher's address"],1,0],["কিছু native speaker পড়তে ও লিখতে না পারলেও কী পারেন?",["সাবলীলভাবে ইংরেজি বলতে","ইংরেজি বুঝতে","ইংরেজি পড় তে","ইংরেজি লিখতে"],0,0],["পাঠ্যাংশ অনুযায়ী পড়া কী করে?",["শুধু হাতের লেখা সুন্দর করে","শব্দভান্ডারকে ব্যাপকভাবে বাড়ায়","শ্রবণ দক্ষতা কমিয়ে দেয়","কথা বলার প্রয়োজন দূর করে"],1,1],["পাঠ্যাংশে শিক্ষার্থীদের সঠিকভাবে ও নির্দিষ্ট গতিতে পড়তে বলা হয়েছে কেন?",["কারণ পরীক্ষার সব reading সীমিত সময়ের মধ্যে করতে হয়","কারণ দ্রুত পড় লে শব্দ মুখস্থ হয়","কারণ জোরে পড়া পরীক্ষায় বাধ্যতামূলক","কারণ ধীরে পড় লে অর্থ বোঝা যায় না"],0,1],["Reading-কে একই সঙ্গে receptive ও productive দক্ষতা বলা হয় কেন?",["কারণ এতে শুধু লেখার কাজ করা হয়","কারণ এতে কেবল শোনার প্রয়োজন হয়","কারণ এটি সবচেয়ে সহজ দক্ষতা","কারণ এতে তথ্য গ্রহণের পাশাপাশি শব্দ উচ্চারণের মাধ্যমে তথ্য প্রেরণও হয়"],3,1],["ইংরেজি বলার জন্য পড়া জরুরি না হলেও বেশি বেশি ইংরেজি পড়ার পরামর্শ দেওয়া হয় কেন?",["কারণ পড়া ছাড়া ইংরেজি বলা অসম্ভব","কারণ পড়া শব্দভান্ডার ব্যাপকভাবে বাড়ায়, যা বলা, শোনা ও লেখায় সাহায্য করে","কারণ পড় লে বানান ভুল করা যায় না","কারণ পড়া সবার পেশাগত দায়িত্ব"],1,1],["একাধিক draft লেখার পরামর্শ দেওয়া হয়েছে কেন?",["কারণ পরের draft-এ আগে ভাবা হয়নি এমন বিষয় যোগ করা যায় এবং বক্তব্য আরও স্পষ্ট হয়","কারণ প্রথম draft কখনো জমা দেওয়া যায় না","কারণ লেখা দীর্ঘ করা জরুরি","কারণ এতে ব্যাকরণ শেখার প্রয়োজন হয় না"],0,1],["বন্ধুকে দিয়ে লেখা সম্পাদনা করানোর সুবিধা কী?",["লেখকের আর কিছু লিখতে হয় না","লেখা দ্রুত ছাপা হয়ে যায়","অন্য একজন পাঠক এমন ভুল ধরতে পারেন যা লেখকের চোখ এড়ি য়ে গেছে","ব্যাকরণ শেখার প্রয়োজন থাকে না"],2,1],["ইংরেজি শেখায় বানান গুরুত্বপূর্ণ কেন?",["কারণ বানান শুধু হাতের লেখার সৌন্দর্য বাড়ায়","কারণ বানান ছাড়া কথা বলা যায় না","কারণ বানান ব্যাকরণের চেয়ে কম জরুরি","কারণ ভুল বানানে শব্দের অর্থ পাল্টে যেতে পারে বা অর্থহীন হতে পারে"],3,1],["Skimming-কে দ্রুত পড়ার উপায় মনে করা ঠিক নয় কেন?",["কারণ এতে প্রতিটি শব্দ গুনে পড় তে হয়","কারণ এতে জোরে পড় তে হয়","কারণ এতে পুরো পৃষ্ঠায় চোখ বুলিয়ে মাত্র দু-একটি শব্দ গ্রহণ করা হয়","কারণ এতে অভিধান ব্যবহার বাধ্যতামূলক"],2,1],["Context clues ব্যবহার করে পড়ার মূল সুবিধা কী?",["সব শব্দের বানান মনে থাকে","পড়ার সময় চোখ নাড়াতে হয় না","অভিধান কখনোই দেখতে হয় না","অজানা শব্দের অর্থ বাক্যে ব্যবহার দেখে বোঝা যায়"],3,1],["প্রতিদিন ইংরেজিতে লেখার অভ্যাস ধীরে ধীরে কী পরিবর্তন আনে?",["লেখা কঠিন ও বিরক্তিকর হয়ে ওঠে","লেখার প্রয়োজন কমে যায়","শুধু বানানের উন্নতি হয়","লেখা স্বাভাবিক হয়ে ওঠে এবং তা এমন কিছু হয় যার জন্য মানুষ অপেক্ষা করে"],3,1],["বর্তমান যুগে ইংরেজি জানা বাধ্যতামূলক হয়ে উঠেছে কেন?",["কারণ এটি শুধু বিজ্ঞানে ব্যবহৃত হয়","কারণ এটি আন্তর্জাতিক যোগাযোগের মাধ্যম এবং প্রতিটি ক্ষেত্রে প্রয়োজন হয়","কারণ এটি সবার মাতৃভাষা","কারণ এটি সবচেয়ে সহজ ভাষা"],1,1],["লেখার সময় পাঠক বিবেচনা করা জরুরি কেন?",["কারণ পাঠক সবসময় লেখকের পরিচিত হন","কারণ লেখার ধরন সবসময় একই থাকে","কারণ পাঠক ছাড়া লেখা যায় না","কারণ লেখার ধরন অনানুষ্ঠানিক থেকে আনুষ্ঠানিক পর্যন্ত বিভিন্ন রকম হয়"],3,1],["সব লেখা একই জায়গায় রাখলে কী সুবিধা পাওয়া যায়?",["লেখাগুলো অন্যরা সহজে নকল করতে পারে","নিজের উন্নতি কতটা হচ্ছে তা দেখা যায় এবং লেখাগুলো গোছানো থাকে","লেখা মুখস্থ করতে সুবিধা হয়","আর কখনো revise করতে হয় না"],1,2],["রাকিব পড়ার সময় আঙুল দিয়ে প্রতিটি শব্দ দেখিয়ে এবং মাথা নেড়ে পড়ে । পাঠ্যাংশ অনুযায়ী তার জন্য সবচেয়ে উপযুক্ত পরামর্শ কোনটি?",["আরও জোরে মাথা নাড়ানো","প্রতিটি শব্দ আলাদা করে মুখস্থ করা","Phrase by phrase পড়া এবং শুধু চোখের মণি নড়ানো","পড়ার গতি কমিয়ে দেওয়া"],2,2],["তুষার লিখল, “I ate a apple.” তার লেখায় কোন ধরনের ভুল সবচেয়ে স্পষ্ট?",["ব্যাকরণগত (grammar) ভুল","শব্দভান্ডারজনিত ভুল","বিরামচিহ্নের ভুল","বাক্যের দৈর্ঘ্যজনিত ভুল"],0,2],["সুমি পরীক্ষার প্রস্তুতির জন্য ক্লাসের পড়া নিজের খাতায় টুকে রাখে। এটি কোন ধরনের লেখা?",["অজানা পাঠকের জন্য লেখা","লক্ষ্যভিত্তিক পাঠকের জন্য লেখা","জনসমক্ষে প্রকাশিত লেখা","নিজের জন্য লেখা"],3,2],["রিয়া রাতে লিখতে বসলে কিছুই লিখতে পারে না। পাঠ্যাংশের পরামর্শ অনুযায়ী তার কী করা উচিত?",["১৫ মিনিট আগে উঠে সকালে লেখার চেষ্টা করা","রাতে আরও দেরি করে লেখা","লেখালেখি পুরোপুরি ছেড়ে দেওয়া","শুধু অন্যের লেখা কপি করা"],0,2],["রহিম গোলমালপূর্ণ ঘরে লিখতে গিয়ে মনোযোগ ধরে রাখতে পারছে না। সে কী করতে পারে?",["শান্ত ও আরামদায়ক জায়গায় লেখার চেষ্টা করা","আরও জোরে গান শুনে লেখা","লেখার সময় কমিয়ে দেওয়া","বন্ধুর কাছে লেখা জমা দিয়ে দেওয়া"],0,2],["রিনা একটি বাক্য পড়ছে: “Sumi is bold and fearless, the total opposite of her cousin, who is timid.” সে ‘timid’ শব্দের অর্থ ধরতে বাক্যের বাকি অংশ লক্ষ করল। সে কোন কৌশল ব্যবহার করছে?",["Skimming","Phoneme সনাক্তকরণ","Context clues","Draft লেখা"],2,2],["তানিয়া প্রতিদিন একই বিষয়ে লিখতে গিয়ে বিরক্ত হয়ে পড়ছে। পাঠ্যাংশের পরামর্শ অনুযায়ী কী করলে সে নতুনত্ব আনতে পারবে?",["প্রতিদিন একই ভঙ্গিতে লেখা প আর কখনো না লেখা","গল্টি","শুধু আগের লেখা কপি করা","একই গল্প ভিন্ন দৃষ্টিকোণ বা ভিন্ন tense-এ লেখা"],3,2],["কবির ইংরেজি শব্দ ভুল উচ্চারণ করে এবং তাকে শোধরানোর মতো কেউ আশেপাশে নেই। সবচেয়ে উপযুক্ত পদক্ষেপ কোনটি?",["ইংরেজিতে কথা বলা বন্ধ করা","শুধু ছবি দেখে শেখা","যারা শুদ্ধ করে দিতে পারেন এমন কারও সঙ্গে ইংরেজিতে বেশি কথা বলা","শুধু আগের মতোই লিখে যাওয়া"],2,2],["নাজমা একটি বাক্য পড়ে বুঝতে পারছে না। পাঠ্যাংশ অনুযায়ী তার প্রথম পদক্ষেপ কী হওয়া উচিত?",["বাক্যটি আবার পড়া এবং নিজে নিজে জোরে পড়া","পুরো বই বন্ধ করে দেওয়া","পরের অধ্যায়ে চলে যাওয়া","বাক্যটি না বুঝেই মুখস্থ করা"],0,2],["আরিফ একটি রচনা লেখা শেষ করেছে এবং দ্রুত বানান ও ব্যাকরণ যাচাই করতে চায়। কোনটি পাঠ্যাংশ অনুযায়ী উপযুক্ত?",["লেখাটি আর পড়ে না দেখা","Grammarly বা MS Word-এর spelling ও grammar check ব্যবহার করা","শুধু শিরোনাম বদলানো","লেখাটি ছোট করে ফেলা"],1,2],["নীলা কোথা থেকে পড়া শুরু করবে বুঝতে পারছে না। পাঠ্যাংশ অনুযায়ী সে প্রথমে কী করতে পারে?",["সবচেয়ে ছোট অক্ষরের অংশ থেকে শুরু করা","যেসব titles বা names সে চেনে, বড় অক্ষরে ছাপা সেগুলো থেকে শুরু করা","শেষ পাতার সূচি মুখস্থ করা","বইয়ের প্রকাশকের ঠিকানা পড়া"],1,2],["জামাল অনেকক্ষণ পড়ার পর বিরক্ত হয়ে পড়েছে। পাঠ্যাংশের পরামর্শ অনুযায়ী তার কী করা উচিত?",["জোর করে পড়া চালিয়ে যাওয়া","বইটি চিরতরে বন্ধ করে দেওয়া","বিরতি নিয়ে পরে যেখানে ছেড়ে ছিল সেখান থেকে আবার শুরু করা","শুরু থেকে আবার পড়া"],2,2],["পড়া (Reading) ও লেখা (Writing)-এর মধ্যে সঠিক তুলনা কোনটি?",["পড়া চতুর্থ দক্ষতা এবং লেখা তৃতীয় দক্ষতা","পড়া ও লেখা উভয়ই শুধু তথ্য গ্রহণের দক্ষতা","লেখার জন্য শুধু কীবোর্ড দরকার, পড়ার জন্য কিছুই নয়","পড়ার মাধ্যমে তথ্য গ্রহণ করা হয়, আর লেখার মাধ্যমে চিন্তা ও ভাবনা পাঠযোগ্য রূপে প্রকাশ করা হয়"],3,3],["একজন ব্যক্তি সাবলীলভাবে ইংরেজি বলতে পারেন কিন্তু পড়তে-লিখতে পারেন না। পাঠ্যাংশের তথ্যের ভিত্তিতে কোন সিদ্ধান্তটি যুক্তিসংগত?",["পড় তে না পারলে ইংরেজি বলা কোনোভাবেই সম্ভব নয়","ইংরেজি বলতে পড়া আবশ্যিক নয়, তবুও পড়া শব্দভান্ডার বাড়ি য়ে সামগ্রিক দক্ষতায় সাহায্য করে","বলতে পারলে পড়া ও লেখার আর কোনো প্রয়োজন নেই","পড়া কেবল লেখার দক্ষতাই বাড়ায়, অন্য কিছু নয়"],1,3],["শিক্ষার্থী লেখা শেষে বানান যাচাই না করায় পাঠক ভিন্ন অর্থ বুঝল। এ সমস্যা এড়াতে পাঠ্যাংশের আলোকে সবচেয়ে কার্যকর পদক্ষেপ কোনটি?",["লেখা আরও দ্রুত শেষ করা","লেখা শেষে নিজে বা অন্য কারও মাধ্যমে বানান যাচাই করা এবং spell-check চালানো","বাক্য আরও দীর্ঘ করা","বানান না দেখে শুধু ব্যাকরণ দেখা"],1,3],["‘Skimming’ ও ‘সতর্ক ভাবে পড়া’ (Read the page carefully)-এর তুলনায় কোনটি সঠিক?",["Skimming-ই প্রকৃত দ্রুত ও কার্যকর পড়া","সতর্ক পড়ায় শুধু শিরোনাম পড়া হয়","Skimming-এ পুরো পৃষ্ঠায় চোখ বুলিয়ে অল্প শব্দ নেওয়া হয়, আর সতর্ক পড়ায় তাড়াহুড়ো না করে সময় নিয়ে পড়া হয়","উভয় পদ্ধতিতে প্রতিটি শব্দ মুখস্থ করা হয়"],2,3],["নিচের বিবৃতিগুলো লক্ষ করো: i. পড়া নীরবে বা জোরে—দুইভাবেই হতে পারে ii. লেখার পাঠক জানা বা অজানা দুই-ই হতে পারে iii. Skimming-ই দ্রুত পড়ার সঠিক উপায় পাঠ্যাংশের তথ্য অনুযায়ী কোনটি সঠিক?",["i ও ii","i ও iii","ii ও iii","i, ii ও iii"],0,3],["একজন শিক্ষার্থী একবার লিখে জমা দেয়। পরে দেখা গেল তার লেখায় অনেক ভুল ও বাদ পড়া ভাবনা আছে। পাঠ্যাংশের কোন দুটি টিপস একসঙ্গে প্রয়োগ করলে সবচেয়ে বেশি উপকার হতো?",["শুধু একই জায়গায় লেখা রাখা এবং বিষয় বদলানো","কেবল আরও দ্রুত লেখা এবং কম পড়া","একাধিক draft লেখা এবং বন্ধুকে দিয়ে সম্পাদনা করানো","আগের লেখা মুছে নতুন করে না লেখা"],2,3],["“My mother is always happy and optimistic, the total opposite of my brother, the pessimist.” বাক্যটি থেকে ‘pessimist’-এর অর্থ নির্ণয়ের যুক্তি কোনটি?",["বাক্যে ‘mother’ শব্দ আছে, তাই pessimist মানে সুখী","বাক্যটি ছোট, তাই অর্থ নির্ণয় সম্ভব নয়","শব্দটি আগে শুরু হয়েছে, তাই এর অর্থ আশাবাদী","মা সুখী ও আশাবাদী, ভাই তার সম্পূর্ণ বিপরীত—তাই ‘pessimist’ মানে মেজাজি ও রাগী ধরনের"],3,3],["পাঠ্যাংশের তথ্য অনুযায়ী পড়ার অভ্যাসের সঙ্গে ভাষা দক্ষতার সঠিক কার্যকারণ সম্পর্ক কোনটি?",["বেশি পড়া → বানান ভুল বাড়ে → বলার দক্ষতা কমে","বেশি পড়া → পড়া ও লেখার দক্ষতা বাড়ে → শুদ্ধ বানান ও শব্দের বিভিন্ন ব্যবহার জানা যায়","কম পড়া → শব্দভান্ডার বাড়ে → লেখা সহজ হয়","বেশি পড়া → কথা বলা অপ্রয়োজনীয় হয় → উচ্চারণ উন্নত হয়"],1,3],["অধিকাংশ পেশাজীবী ও প্রতিষ্ঠানের জন্য ইংরেজির প্রাথমিক জ্ঞান আবশ্যক হওয়ার পেছনের যুক্তি কী?",["এটি শুধু স্থানীয় ব্যবসার ভাষা","এটি কেবল বিজ্ঞানের গবেষণায় লাগে","এটি শেখা সবচেয়ে সহজ","এটি বিশ্বের বিভিন্ন অঞ্চলের বিপুল সংখ্যক মানুষের কাছে পৌঁছানোর মাধ্যম"],3,3],["একজন শিক্ষার্থী উচ্চারণ, ব্যাকরণ ও শব্দভান্ডার—তিনটিই উন্নত করতে চায়। পাঠ্যাংশের আলোকে সবচেয়ে কার্যকর পরিকল্নাপ কোনটি?",["ইংরেজিতে বেশি কথা বলা, অনলাইন grammar রিসোর্স ব্যবহার করা এবং অজানা শব্দে dictionary দেখা","শুধু একটি বিষয়ে রোজ একই কাজ করা","শুধু নীরবে পড়া এবং কখনো না লেখা","ভুল হলে সেটি উপেক্ষা করা"],0,3],["একজন শিক্ষার্থী পড়ার সময় বুঝতে পারছে না এবং ক্লান্ত বোধ করছে। পাঠ্যাংশের ধারণা অনুযায়ী কোন সমন্বিত পদক্ষেপ সবচেয়ে উপযুক্ত?",["জোর করে না বুঝেই পড়ে যাওয়া","পড়া বন্ধ করে চিরতরে ছেড়ে দেওয়া","বিরতি নিয়ে আবার পড়া, প্রয়োজনে ভালো পাঠকের সাহায্য নেওয়া বা নিজের স্তরের উপযোগী বই বেছে নেওয়া","কঠিনতর বই বেছে নেওয়া"],2,3],["নিচের বিবৃতিগুলো লক্ষ করো: i. বয়স যা-ই হোক, নিজের reading level অনুযায়ী বই বাছাই করা উচিত ii. কিছু না বুঝলে আবার পড়া ঠিক আছে iii. বিরক্ত হলেও জোর করে পড়া চালিয়ে যেতে হবে পাঠ্যাংশের তথ্য অনুযায়ী কোনটি সঠিক?",["i ও iii","ii ও iii","i, ii ও iii","i ও ii"],3,3]].map(([q,o,a,t])=>({q,o,a,t}));
+/* t: 0=জ্ঞানমূলক 1=অনুধাবনমূলক 2=প্রয়োগমূলক 3=উচ্চতর দক্ষতা */
+const N=20,TIME=600,QUOTA=[11,3,3,3],TN=["জ্ঞানমূলক","অনুধাবনমূলক","প্রয়োগমূলক","উচ্চতর দক্ষতা"];
+const bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
+const $=id=>document.getElementById(id);
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const L=['ক','খ','গ','ঘ'];
+let Q=[],ans=[],left=TIME,tm=null,done=false;
+function renderMath(el){try{if(window.renderMathInElement)renderMathInElement(el,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false})}catch(e){}}
+function info(){
+  const n=masterQuestionBank.length,t=Math.min(N,n);
+  $('fullmark').textContent='পূর্ণমান: '+bn(t);$('timeinfo').textContent='সময়: '+bn(TIME/60)+' মিনিট';
+  $('info2').textContent='['+bn(n)+' টি প্রশ্ন আছে]';
+  $('info3').textContent='প্রতিবার '+bn(t)+'টা প্রশ্ন আসবে। (অপশনসহ এলোমেলো)'
+}
+function start(){
+  clearInterval(tm);done=false;left=TIME;
+  const take=Math.min(N,masterQuestionBank.length);let pick=[];
+  QUOTA.forEach((n,t)=>{pick=pick.concat(shuf(masterQuestionBank.filter(x=>x.t===t)).slice(0,n))});
+  if(pick.length<take){const rest=shuf(masterQuestionBank.filter(x=>!pick.includes(x)));pick=pick.concat(rest.slice(0,take-pick.length))}
+  pick=shuf(pick.slice(0,take));
+  Q=pick.map(x=>{const idx=shuf(x.o.map((t,i)=>i));return{q:x.q,t:x.t,o:idx.map(i=>x.o[i]),a:idx.indexOf(x.a)}});
+  ans=Q.map(()=>-1);
+  $('result').classList.add('hide');$('submit').disabled=false;$('submit').parentElement.classList.remove('hide');
+  const box=$('quiz');box.innerHTML='';
+  Q.forEach((q,i)=>{
+    const c=document.createElement('div');c.className='card';c.id='q'+i;
+    c.innerHTML='<div class="qn">'+bn(i+1)+'। '+q.q+'</div>'+q.o.map((t,j)=>'<button class="opt" data-i="'+i+'" data-j="'+j+'">'+t+'</button>').join('');
+    box.appendChild(c)});
+  box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>pickOpt(+b.dataset.i,+b.dataset.j));
+  upd();tick();tm=setInterval(tick,1000);
+  renderMath(box);try{window.scrollTo(0,0)}catch(e){}
+}
+function pickOpt(i,j){
+  if(done||ans[i]>=0)return;ans[i]=j;
+  document.querySelectorAll('#q'+i+' .opt').forEach((b,k)=>{b.disabled=true;if(k===j)b.classList.add('sel')});upd()
+}
+function upd(){$('prog').textContent=bn(ans.filter(a=>a>=0).length)+'/'+bn(Q.length)}
+function tick(){
+  const m=Math.floor(left/60),s=left%60;$('timer').textContent=bn(String(m).padStart(2,'0'))+':'+bn(String(s).padStart(2,'0'));
+  $('timer').classList.toggle('low',left<=60);
+  if(left<=0){clearInterval(tm);finish();return}left--
+}
+function submitClick(){
+  const miss=[];ans.forEach((a,i)=>{if(a<0)miss.push(i)});
+  if(miss.length){alert('নিচের প্রশ্নগুলোর উত্তর দেওয়া বাকি আছে: '+miss.map(i=>bn(i+1)).join(', '));
+    $('q'+miss[0]).scrollIntoView({behavior:'smooth',block:'center'});return}
+  clearInterval(tm);finish()
+}
+function finish(){
+  if(done)return;done=true;let c=0,w=0,u=0;
+  Q.forEach((q,i)=>{
+    const card=$('q'+i),opts=card.querySelectorAll('.opt');opts.forEach(b=>b.disabled=true);
+    opts[q.a].classList.add('correct');
+    if(ans[i]<0)u++;else if(ans[i]===q.a)c++;else{w++;opts[ans[i]].classList.add('wrong')}
+  });
+  const score=c,pct=Q.length?score/Q.length*100:0;
+  const items=[['মোট প্রশ্ন',bn(Q.length)],['সঠিক',bn(c)],['ভুল',bn(w)],['চূড়ান্ত স্কোর',bn(score.toFixed(2).replace(/\.?0+$/,''))+'/'+bn(Q.length)]];
+  $('stats').innerHTML=items.map(x=>'<div class="stat-box"><b>'+x[1]+'</b>'+x[0]+'</div>').join('');
+  $('prog').textContent='স্কোর: '+bn(score.toFixed(2).replace(/\.?0+$/,''))+'/'+bn(Q.length);
+  $('fb').textContent=pct>=90?'🎉 অসাধারণ! চমৎকার ফলাফল, চালিয়ে যান!':pct>=80?'👏 খুব ভালো! আরও অনুশীলন প্রয়োজন।':pct>=60?'🙂 ভালো, আরও অনুশীলন প্রয়োজন।':'📖 আরও মনোযোগ দিয়ে পড়ুন।';
+  $('submit').parentElement.classList.add('hide');$('result').classList.remove('hide');
+  renderMath($('quiz'));
+  setTimeout(()=>{try{$('result').scrollIntoView({block:'start'})}catch(_){}try{window.scrollTo(0,$('result').getBoundingClientRect().top+window.pageYOffset-70)}catch(_){}},80)
+}
+$('submit').onclick=submitClick;$('again').onclick=start;
+$('theme').onclick=()=>{const d=document.documentElement.dataset.theme==='dark';document.documentElement.dataset.theme=d?'light':'dark';$('theme').textContent=d?'🌙 ডার্ক মোড':'☀️ লাইট মোড'};
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  const k=e.key.toLowerCase(),blk=(e.ctrlKey&&['c','s','u'].includes(k))||e.key==='F12'||e.key==='PrintScreen';
+  if(blk){e.preventDefault();try{navigator.clipboard.writeText('')}catch(_){}alert('এই পেজে কপি/সেভ/সোর্স দেখা নিষিদ্ধ।')}});
+document.addEventListener('keyup',e=>{if(e.key==='PrintScreen'){try{navigator.clipboard.writeText('')}catch(_){}alert('স্ক্রিনশট নেওয়া নিষিদ্ধ।')}});
+window.addEventListener('load',()=>{info();start()});
+</script>
+</body>
+</html>

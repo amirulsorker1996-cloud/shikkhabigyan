@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>শিক্ষার্থী মূল্যায়নের ধারণা, গুরুত্ব ও বাস্তবায়ন - অনলাইন কুইজ পরীক্ষা</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+<style>
+@font-face{font-family:'SolaimanLipi';src:local('SolaimanLipi'),local('Solaiman Lipi'),url('SolaimanLipi.ttf') format('truetype');font-display:swap}
+*{font-family:'SolaimanLipi',Arial,sans-serif !important;box-sizing:border-box}
+.katex,.katex *{font-family:KaTeX_Main,'Times New Roman',serif !important}
+:root{--primary:#006a4e;--primary-d:#004d37;--bg:#f2f6f4;--card:#fff;--text:#1d2b26;--muted:#5d6d66;--border:#d5e2dc;--ok:#1b8a4b;--okbg:#e3f6ea;--bad:#c62828;--badbg:#fdeaea;--shadow:0 2px 10px rgba(0,0,0,.08);--ul:#006a4e}
+[data-theme=dark]{--primary:#4db6ac;--bg:#101816;--card:#1a2622;--text:#e6f0ec;--muted:#9bb0a8;--border:#2c3d37;--ok:#66d28f;--okbg:#17352a;--bad:#ff8a80;--badbg:#3a2020;--shadow:0 2px 10px rgba(0,0,0,.5);--ul:#4db6ac}
+body{margin:0;background:var(--bg);color:var(--text);line-height:1.7;-webkit-user-select:none;-moz-user-select:none;user-select:none}
+.wrap{max-width:900px;margin:0 auto;padding:12px}
+header{background:linear-gradient(135deg,#004d37,#006a4e);color:#fff;text-align:center;padding:22px 14px;border-radius:0 0 18px 18px;box-shadow:var(--shadow)}
+header h1{margin:0;font-size:1.5rem}header p{margin:3px 0 0;font-size:1rem;opacity:.95}
+.card{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:16px;margin:14px 0;border:1px solid var(--border)}
+.chapter-title{margin:0 0 12px;padding-bottom:8px;font-size:1.4rem;color:var(--primary);border-bottom:3px solid var(--ul)}
+.badge{background:var(--bg);border-left:4px solid var(--primary);padding:8px 12px;border-radius:8px;margin:8px 0;font-size:.95rem}
+.warn{background:#fff6e0;color:#6b4a00;border-left:4px solid #f0a500;padding:8px 12px;border-radius:8px;font-size:.95rem}
+#info2,#info3{text-align:center}
+#info3{white-space:nowrap;font-size:clamp(.62rem,3.3vw,.95rem)}
+.wrow{display:flex;justify-content:space-between;gap:10px;margin-bottom:2px}
+[data-theme=dark] .warn{background:#3a3016;color:#ffd98a}
+.bar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--card);padding:10px 14px;border-radius:12px;box-shadow:var(--shadow);border:1px solid var(--border)}
+#timer{font-size:1.3rem;font-weight:700;color:var(--primary)}#timer.low{color:var(--bad)}
+button{cursor:pointer;border:0;border-radius:10px;padding:9px 16px;font-size:1rem;background:var(--primary);color:#fff}
+[data-theme=dark] button{color:#0b1512}
+button:disabled{opacity:.5;cursor:default}
+.qn{font-weight:700;margin-bottom:8px}
+.opt{display:block;width:100%;text-align:left;background:var(--bg);color:var(--text);border:2px solid var(--border);margin:6px 0;padding:9px 12px;border-radius:10px}
+[data-theme=dark] .opt{color:var(--text)}
+.opt.sel{border-color:var(--primary)}
+.opt.correct{background:var(--okbg);border-color:var(--ok)}
+.opt.wrong{background:var(--badbg);border-color:var(--bad)}
+.tag{display:inline-block;font-size:.8rem;background:var(--bg);color:var(--primary);border:1px solid var(--border);border-radius:20px;padding:0 10px;margin-bottom:6px}
+.exp{display:none;margin-top:8px;padding:8px 12px;border-radius:8px;background:var(--bg);border-left:4px solid var(--primary);font-size:.95rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.stat-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;box-shadow:var(--shadow)}
+.stat-box b{display:block;font-size:1.5rem;color:var(--primary)}
+#fb{font-size:1.1rem;font-weight:700;text-align:center;margin:12px 0}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<h2 class="chapter-title">শিক্ষার্থী মূল্যায়নের ধারণা, গুরুত্ব ও বাস্তবায়ন</h2>
+<div class="warn"><div class="wrow"><b id="fullmark"></b><b id="timeinfo"></b></div><div id="info2"></div><div id="info3"></div></div>
+</div>
+<div class="bar"><span>⏱️ <span id="timer">১০:০০</span></span><span id="prog"></span><button id="theme">🌙 ডার্ক মোড</button></div>
+<div id="quiz"></div>
+<div id="result" class="hide">
+<div class="card"><div class="stats" id="stats"></div><div id="fb"></div><div style="text-align:center"><button id="again">পুনরায় কুইজ দাও</button></div></div>
+</div>
+<div class="card" style="text-align:center"><button id="submit">সাবমিট করো</button></div>
+
+</div>
+<script>
+const masterQuestionBank=[["বাংলাদেশের শিক্ষার্থী মূল্যায়ন কী কেন্দ্রিক?",["শিক্ষককেন্দ্রিক","প্রকল্পকেন্দ্রিক","বিদ্যালয়কেন্দ্রিক","পাবলিক পরীক্ষাকেন্দ্রিক"],3,0],["শিক্ষার উদ্দেশ্য হলো শিক্ষার্থীর আচরণের কোন ধরনের পরিবর্তন সংগঠিত করা?",["ইতিবাচক পরিবর্তন","নেতিবাচক পরিবর্তন","সাময়িক পরিবর্তন","শারীরিক পরিবর্তন"],0,0],["সাধারণ অর্থে মূল্যায়ন বলতে কী বোঝায়?",["কোনো কিছু মুখস্থ করা","কোনো কিছু নতুন করে তৈরি করা","কোনো কিছুর মান নির্ধারণ বা নিরূপণ কিংবা গুণ বিচার করা","কোনো কিছুর সংখ্যা গণনা করা"],2,0],["বাংলাদেশে কলেজসমূহে শিক্ষার্থীদের মূল্যায়ন কয়ভাবে করা হয়?",["একভাবে","তিনভাবে","চারভাবে","দুইভাবে"],3,0],["শিক্ষা বোর্ড পরিচালিত মূল্যায়ন কোনটি?",["অভ্যন্তরীণ মূল্যায়ন","সাপ্তাহিক পরীক্ষা","মাসিক পরীক্ষা","পাবলিক পরীক্ষা"],3,0],["বাংলাদেশের কলেজসমূহে শিক্ষার্থী মূল্যায়ন প্রধানত কী নির্ভর?",["মৌখিক পরীক্ষানির্ভর","লিখিত পরীক্ষানির্ভর","ব্যবহারিক কাজনির্ভর","পর্যবেক্ষণনির্ভর"],1,0],["শিক্ষার্থীরা সাধারণত বছরে কয়টি সাময়িক পরীক্ষায় অংশগ্রহণ করে?",["১টি","২টি","৩টি","৪টি"],1,0],["শিক্ষার্থী মূল্যায়নে কোন শিক্ষাক্রম ব্যাপক সংস্কার এনেছে?",["জাতীয় শিক্ষাক্রম ২০১২","জাতীয় শিক্ষাক্রম ২০০০","জাতীয় শিক্ষাক্রম ১৯৯৫","জাতীয় শিক্ষাক্রম ২০২২"],0,0],["শিক্ষার্থী মূল্যায়নে জানা প্রয়োজন এমন দুটি পদ (Term) কোনগুলো?",["পরিমাপ ও পর্যবেক্ষণ","পরিমাপ ও অভীক্ষা","অভীক্ষা ও শিখনফল","পর্যবেক্ষণ ও সামষ্টিক"],1,0],["শিক্ষার্থীর অর্জনের সংখ্যাগত পরিমাণ নির্ধারণ করাকে কী বলা হয়?",["অভীক্ষা","শিখনফল","নিরাময়","পরিমাপ"],3,0],["শিক্ষার্থীর জ্ঞান ও দক্ষতা পরিমাপের টুলস বা কৌশলকে কী বলা হয়?",["পরিমাপ","শিখনফল","অভীক্ষা","গঠনকালীন মূল্যায়ন"],2,0],["অভীক্ষার সাহায্যে নিচের কোনটি পরিমাপ করা যায় না?",["মূল্যবোধ","জ্ঞান","দক্ষতা","লিখিত উত্তরের নম্বর"],0,0],["অভীক্ষার জন্য প্রশ্নপত্র, কাজ বা সমস্যাকে প্রণয়ন করেন?",["শিক্ষার্থী","অভিভাবক","শিক্ষক","প্রতিষ্ঠানপ্রধান"],2,0],["শিক্ষার্থী মূল্যায়নে সবচেয়ে গুরুত্বপূর্ণ বিবেচ্য বিষয় কোনটি?",["প্রশ্নের সংখ্যা","পরীক্ষার স্থান","পরীক্ষকের সংখ্যা","সময় অর্থাৎ কখন মূল্যায়ন করা হচ্ছে"],3,0],["মূল্যায়নের জন্য শিক্ষার্থী প্রস্তুত কি না তা বোঝাতে ইংরেজিতে কোন শব্দ ব্যবহৃত হয়েছে?",["Readiness","Reliability","Validity","Feedback"],0,0],["মূল্যায়নকে প্রধানত কোন দুটি ধারায় ভাগ করা হয়েছে?",["আনুষ্ঠানিক ও লিখিত","অভ্যন্তরীণ ও মৌখিক","ধারাবাহিক ও সামষ্টিক","গঠনকালীন ও ব্যবহারিক"],2,0],["Continuous assessment-এর বাংলা কোনটি?",["সামষ্টিক মূল্যায়ন","ধারাবাহিক মূল্যায়ন","অভ্যন্তরীণ মূল্যায়ন","আনুষ্ঠানিক মূল্যায়ন"],1,0],["ধারাবাহিক মূল্যায়নকে আর কী বলা হয়?",["গঠনকালীন মূল্যায়ন","সামষ্টিক মূল্যায়ন","পাবলিক মূল্যায়ন","চূড়ান্ত মূল্যায়ন"],0,0],["Assessment for learning কোন ধরনের মূল্যায়নকে বলা হয়?",["সামষ্টিক মূল্যায়ন","ধারাবাহিক মূল্যায়ন","পাবলিক পরীক্ষা","টেস্ট পরীক্ষা"],1,0],["Assessment of learning কোন ধরনের মূল্যায়নকে বলা হয়?",["ধারাবাহিক মূল্যায়ন","গঠনকালীন মূল্যায়ন","অনানুষ্ঠানিক মূল্যায়ন","সামষ্টিক মূল্যায়ন"],3,0],["নিচের কোনটি সামষ্টিক মূল্যায়নের উদাহরণ?",["হাতে-কলমে কাজের প্রক্রিয়া পর্যবেক্ষণ","শিক্ষার্থীর সামাজিক আচরণ পর্যবেক্ষণ","এইচএসসি পরীক্ষা","শিখন চলাকালীন তাৎক্ষণিক সহায়তা"],2,0],["সামষ্টিক মূল্যায়ন প্রধানত কীভাবে সংগঠিত হয়ে থাকে?",["মৌখিকভাবে","পর্যবেক্ষণের মাধ্যমে","লিখিতভাবে","ব্যবহারিক কাজের মাধ্যমে"],2,0],["কোন মূল্যায়নের মাধ্যমে আবেগীয় ক্ষেত্রের শিখনফল পরিমাপ করা যায় না?",["ধারাবাহিক মূল্যায়ন","গঠনকালীন মূল্যায়ন","শিখনের জন্য মূল্যায়ন","সামষ্টিক মূল্যায়ন"],3,0],["ধারাবাহিক মূল্যায়নের মাধ্যমে শিক্ষার্থীর শিখন দুর্বলতা চিহ্নিত করে কী ধরনের ব্যবস্থা নেওয়া যায়?",["নিরাময়মূলক ব্যবস্থা","শাস্তিমূলক ব্যবস্থা","বহিষ্কারমূলক ব্যবস্থা","জরিমানামূলক ব্যবস্থা"],0,0],["ধারাবাহিক মূল্যায়নের মাধ্যমে শিক্ষক কোন সুযোগ পান?",["বেতন বৃদ্ধির সুযোগ","পদোন্নতির সুযোগ","পেশাগত দক্ষতা বৃদ্ধির সুযোগ","পরীক্ষা বাতিলের সুযোগ"],2,0],["ধারাবাহিক মূল্যায়ন শিক্ষার্থীকে শিখন কার্যক্রমের সাথে সংযুক্ত করায় শিক্ষার্থীর কোনটি হ্রাস পায়?",["আগ্রহ","জড়তা","দক্ষতা","সৃজনশীলতা"],1,0],["ধারাবাহিক মূল্যায়ন শিক্ষার্থীর কোন বিকাশে সহায়তা করে?",["সৃজনশীলতা","স্মরণশক্তি","পরীক্ষা-ভীতি","জড়তা"],0,0],["ধারাবাহিক মূল্যায়নের মাধ্যমে শিক্ষার্থী মূল্যায়নকে কীরূপ করা যায়?",["সংক্ষিপ্ত ও সহজ","যথার্থ (Valid) ও নির্ভরযোগ্য (Reliable)","গোপনীয় ও চূড়ান্ত","আনুষ্ঠানিক ও কঠিন"],1,0],["শিক্ষাক্রমকে অসমাপ্ত রেখে অসমাপ্ত অংশের মূল্যায়ন করা সম্পর্কে কোনটি সঠিক?",["এটি অনৈতিক, কারণ শিক্ষার্থীকে সম্পূর্ণ প্রস্তুত করেই মূল্যায়ন করা প্রয়োজন","এটি নৈতিক, কারণ এতে সময় বাঁচে","এটি নৈতিক, কারণ এতে ফলাফল দ্রুত পাওয়া যায়","এটি অনৈতিক, কারণ এতে পরীক্ষার সংখ্যা কমে"],0,1],["শুধু লিখিত পরীক্ষার মাধ্যমে প্রচলিত মূল্যায়নকে যথার্থ ও নির্ভরযোগ্য বলা যাবে না কেন?",["কারণ লিখিত পরীক্ষা নিতে অনেক সময় লাগে","কারণ শিক্ষাক্রমে নির্ধারিত জ্ঞান, দক্ষতা, দৃষ্টিভঙ্গি ও মূল্যবোধ এর মাধ্যমে পূর্ণাঙ্গভাবে পরিমাপ করা যায় না","কারণ লিখিত পরীক্ষায় শিক্ষক প্রশ্ন করেন না","কারণ লিখিত পরীক্ষা বছরে একবারই নেওয়া যায়"],1,1],["সামষ্টিক মূল্যায়নকে Assessment of learning বলা হয় কেন?",["কারণ শিখন কার্যক্রম সমাপ্তির পর এটি সংগঠিত হয়","কারণ শিখন চলাকালীন এটি সংগঠিত হয়","কারণ এতে শুধু আবেগীয় শিখনফল পরিমাপ করা হয়","কারণ এতে নিরাময়মূলক ব্যবস্থা নেওয়া যায়"],0,1],["ধারাবাহিক মূল্যায়নকে Assessment for learning বলা হয় কেন?",["কারণ শিখন শেষে এটি সংগঠিত হয়","কারণ এটি শুধু লিখিত পরীক্ষানির্ভর","কারণ শিখন চলাকালীন এটি সংগঠিত হয়ে শিখনের মানোন্নয়নে ভূমিকা রাখে","কারণ এতে শুধু বুদ্ধিবৃত্তীয় শিখনফল পরিমাপ করা হয়"],2,1],["শুধু সামষ্টিক মূল্যায়নের ভিত্তিতে শিক্ষার্থীকে কৃতিত্ব প্রদান করলে তা যথার্থ ও নির্ভরযোগ্য বলা যাবে না কেন?",["কারণ এতে কোনো লিখিত পরীক্ষা নেওয়া হয় না","কারণ এটি শিখন চলাকালীন সংগঠিত হয়","কারণ এতে সব শিখনফলই পরিমাপ করা যায়","কারণ এতে আবেগীয় ক্ষেত্রের শিখনফল পরিমাপ করা যায় না"],3,1],["পরিমাপ ও অভীক্ষার মধ্যে পার্থক্য সম্পর্কে কোনটি সঠিক?",["পরিমাপ হলো পরিমাপের টুলস, আর অভীক্ষা হলো সংখ্যাগত পরিমাণ","দুটিই মূল্যবোধ পরিমাপের একমাত্র উপায়","পরিমাপ হলো সংখ্যাগত পরিমাণ নির্ধারণ, আর অভীক্ষা হলো জ্ঞান ও দক্ষতা পরিমাপের টুলস বা কৌশল","দুটিই শুধু শিক্ষক পর্যবেক্ষণের নাম"],2,1],["বছরে মাত্র ২টি সাময়িক পরীক্ষার মাধ্যমে মূল্যায়ন করলে কোন সমস্যা দেখা দেয়?",["শিক্ষার্থী সবসময় ফিডব্যাক পায়","শিক্ষার্থীকে ফিডব্যাক দেওয়ার সুযোগ থাকে না","সব শিখনফল পরিমাপ করা সহজ হয়","শিক্ষার্থীর জড়তা কমে যায়"],1,1],["শিক্ষক পরীক্ষাগারে শিক্ষার্থীর হাতে-কলমে কাজ করার প্রক্রিয়া পর্যবেক্ষণ করে সঙ্গে সঙ্গে নির্দেশনা দিচ্ছেন। এটি কোন ধরনের মূল্যায়ন?",["সামষ্টিক মূল্যায়ন","পাবলিক পরীক্ষা","টেস্ট পরীক্ষা","ধারাবাহিক মূল্যায়ন"],3,2],["একটি কলেজে শিখন কার্যক্রম শেষে টেস্ট পরীক্ষা নিয়ে শিক্ষার্থীদের ফলাফল ঘোষণা করা হলো। এটি কোন ধরনের মূল্যায়ন?",["সামষ্টিক মূল্যায়ন","ধারাবাহিক মূল্যায়ন","গঠনকালীন মূল্যায়ন","শিখনের জন্য মূল্যায়ন"],0,2],["রুবেল ইংরেজি বিষয়ে ৮০ নম্বর পেয়েছে। এই সংখ্যাটি মূল্যায়নের কোন ধারণাকে নির্দেশ করে?",["অভীক্ষা","পরিমাপ","গঠনকালীন মূল্যায়ন","শিখনফল"],1,2],["শিক্ষক শিখনফলের চাহিদা অনুসারে একগুচ্ছ প্রশ্নপত্র ও কাজ প্রণয়ন করলেন। এই টুলসটিকে কী বলা হয়?",["অভীক্ষা","পরিমাপ","সামষ্টিক মূল্যায়ন","নিরাময়মূলক ব্যবস্থা"],0,2],["একজন শিক্ষক শুধু এইচএসসি পরীক্ষার নম্বর দেখে শিক্ষার্থীর আবেগীয় দিক মূল্যায়ন করতে চান। এ বিষয়ে কোনটি সঠিক?",["এটি যথার্থ, কারণ সামষ্টিক মূল্যায়নে আবেগীয় শিখনফল সবচেয়ে ভালো পরিমাপ করা যায়","এটি যথার্থ নয়, কারণ সামষ্টিক মূল্যায়নে আবেগীয় ক্ষেত্রের শিখনফল পরিমাপ করা যায় না","এটি যথার্থ, কারণ নম্বরই আচরণের একমাত্র মাপকাঠি","এটি যথার্থ নয়, কারণ এইচএসসি পরীক্ষা লিখিত নয়"],1,2],["শিক্ষক পাঠ শেষ না করেই সে অংশের পরীক্ষা নিলেন। এ কাজ সম্পর্কে নিচের কোনটি সঠিক?",["এটি সম্পূর্ণ নৈতিক","এটি শিক্ষার্থীকেন্দ্রিক মূল্যায়নের উদাহরণ","এটি অনৈতিক","এটি শিক্ষার্থীর প্রস্তুতির উত্তম নিশ্চয়তা"],2,2],["শিক্ষক পাঠদান চলাকালে শিক্ষার্থীর শিখন দুর্বলতা চিহ্নিত করে তাৎক্ষণিক সহায়তা দিলেন। এই মূল্যায়নকে আর কী নামে অভিহিত করা যায়?",["শিখনের মূল্যায়ন (Assessment of learning)","সামষ্টিক মূল্যায়ন","শিখনের জন্য মূল্যায়ন (Assessment for learning)","পাবলিক পরীক্ষা"],2,2],["নিচের বিবৃতিগুলো লক্ষ করো :<br>i. ধারাবাহিক মূল্যায়নে শিক্ষক শিখন-শেখানো পদ্ধতির যথার্থতা নির্ধারণের সুযোগ পান<br>ii. ধারাবাহিক মূল্যায়নে সবগুলো শিখনফল পরিমাপের আওতায় আনা যায়<br>iii. ধারাবাহিক মূল্যায়ন শিক্ষার্থীকে শ্রেণিমুখী করে<br>নিচের কোনটি সঠিক?",["i ও ii","i ও iii","ii ও iii","i, ii ও iii"],3,3],["নিচের বিবৃতিগুলো লক্ষ করো :<br>i. সামষ্টিক মূল্যায়ন প্রধানত লিখিত হয়ে থাকে<br>ii. সামষ্টিক মূল্যায়নে আবেগীয় ক্ষেত্রের শিখনফল পরিমাপ করা যায়<br>iii. অভীক্ষার সাহায্যে মূল্যবোধ পরিমাপ করা যায়<br>নিচের কোনটি সঠিক?",["শুধু i","i ও ii","ii ও iii","i, ii ও iii"],0,3],["নিচের বিবৃতিগুলো লক্ষ করো :<br>i. ধারাবাহিক মূল্যায়নকে গঠনকালীন মূল্যায়ন বলা হয়<br>ii. সামষ্টিক মূল্যায়নকে Assessment for learning বলা হয়<br>iii. সামষ্টিক মূল্যায়নকে Assessment of learning বলা হয়<br>নিচের কোনটি সঠিক?",["i ও ii","ii ও iii","i ও iii","i, ii ও iii"],2,3],["ধারাবাহিক ও সামষ্টিক মূল্যায়নের মধ্যে সঠিক তুলনা কোনটি?",["ধারাবাহিক মূল্যায়ন শিখন শেষে হয়, আর সামষ্টিক মূল্যায়ন শিখন চলাকালীন হয়","দুটিই শুধু শিখন শেষে সংগঠিত হয়","দুটিতেই নিরাময়মূলক ব্যবস্থা নেওয়ার সুযোগ সমান","ধারাবাহিক মূল্যায়ন শিখন চলাকালীন হয়, আর সামষ্টিক মূল্যায়ন শিখন শেষে হয়"],3,3],["নিচের কোনটি ধারাবাহিক মূল্যায়নের বৈশিষ্ট্য নয়?",["শিখন দুর্বলতা চিহ্নিত করে নিরাময়মূলক ব্যবস্থা নেওয়া","শিক্ষার্থীকে শ্রেণিমুখী করা","শিখন কার্যক্রম শেষে সংগঠিত হওয়া","সব শিখনফলকে পরিমাপের আওতায় আনা"],2,3],["একটি কলেজ বছরে শুধু দুটি সাময়িক পরীক্ষা নিয়ে ফল প্রকাশ করে। শিক্ষার্থী মূল্যায়ন উন্নত করতে কোন পরিবর্তনটি যুক্তিযুক্ত?",["পরীক্ষার সংখ্যা আরও কমানো, কারণ এতে সময় বাঁচে","ধারাবাহিক মূল্যায়ন যুক্ত করা, কারণ এতে ফিডব্যাক দিয়ে দুর্বলতা তাৎক্ষণিক সারানো যায়","শুধু সামষ্টিক মূল্যায়ন বহাল রাখা, কারণ এতে আবেগীয় শিখনফল পরিমাপ হয়","মূল্যায়ন পুরোপুরি বন্ধ করা, কারণ এতে জড়তা বাড়ে"],1,3],["পাঠ অনুযায়ী ধারাবাহিক ও সামষ্টিক মূল্যায়নের মধ্যে কোন সিদ্ধান্তটি সঠিক?",["শুধু সামষ্টিক মূল্যায়নই যথেষ্ট","শুধু ধারাবাহিক মূল্যায়নই বাতিলযোগ্য","দুটির কোনোটিরই প্রয়োজন নেই","শিক্ষার্থী মূল্যায়নে উভয় ধারার মূল্যায়নেরই প্রয়োজন আছে"],3,3],["কোন মূল্যায়নে শিক্ষার্থীর দুর্বলতা সারিয়ে তোলার কার্যকর নিরাময়মূলক ব্যবস্থা নেওয়ার সুযোগ থাকে এবং কেন?",["সামষ্টিক মূল্যায়ন; কারণ এটি শিখন শেষে সংগঠিত হয়","সামষ্টিক মূল্যায়ন; কারণ এটি শুধু লিখিত হয়","ধারাবাহিক মূল্যায়ন; কারণ এটি শিখন চলাকালীন সংগঠিত হয়","ধারাবাহিক মূল্যায়ন; কারণ এটি শুধু শিখন শেষে হয়"],2,3]].map(([q,o,a,t])=>({q,o,a,t}));
+/* t: 0=জ্ঞানমূলক 1=অনুধাবনমূলক 2=প্রয়োগমূলক 3=উচ্চতর দক্ষতা */
+const N=20,TIME=600,QUOTA=[11,3,3,3],TN=["জ্ঞানমূলক","অনুধাবনমূলক","প্রয়োগমূলক","উচ্চতর দক্ষতা"];
+const bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
+const $=id=>document.getElementById(id);
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const L=['ক','খ','গ','ঘ'];
+let Q=[],ans=[],left=TIME,tm=null,done=false;
+function renderMath(el){try{if(window.renderMathInElement)renderMathInElement(el,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false})}catch(e){}}
+function info(){
+  const n=masterQuestionBank.length,t=Math.min(N,n);
+  $('fullmark').textContent='পূর্ণমান: '+bn(t);$('timeinfo').textContent='সময়: '+bn(TIME/60)+' মিনিট';
+  $('info2').textContent='['+bn(n)+' টি প্রশ্ন আছে]';
+  $('info3').textContent='প্রতিবার '+bn(t)+'টা প্রশ্ন আসবে। (অপশনসহ এলোমেলো)'
+}
+function start(){
+  clearInterval(tm);done=false;left=TIME;
+  const take=Math.min(N,masterQuestionBank.length);let pick=[];
+  QUOTA.forEach((n,t)=>{pick=pick.concat(shuf(masterQuestionBank.filter(x=>x.t===t)).slice(0,n))});
+  if(pick.length<take){const rest=shuf(masterQuestionBank.filter(x=>!pick.includes(x)));pick=pick.concat(rest.slice(0,take-pick.length))}
+  pick=shuf(pick.slice(0,take));
+  Q=pick.map(x=>{const idx=shuf(x.o.map((t,i)=>i));return{q:x.q,t:x.t,o:idx.map(i=>x.o[i]),a:idx.indexOf(x.a)}});
+  ans=Q.map(()=>-1);
+  $('result').classList.add('hide');$('submit').disabled=false;$('submit').parentElement.classList.remove('hide');
+  const box=$('quiz');box.innerHTML='';
+  Q.forEach((q,i)=>{
+    const c=document.createElement('div');c.className='card';c.id='q'+i;
+    c.innerHTML='<div class="qn">'+bn(i+1)+'। '+q.q+'</div>'+q.o.map((t,j)=>'<button class="opt" data-i="'+i+'" data-j="'+j+'">'+t+'</button>').join('');
+    box.appendChild(c)});
+  box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>pickOpt(+b.dataset.i,+b.dataset.j));
+  upd();tick();tm=setInterval(tick,1000);
+  renderMath(box);try{window.scrollTo(0,0)}catch(e){}
+}
+function pickOpt(i,j){
+  if(done||ans[i]>=0)return;ans[i]=j;
+  document.querySelectorAll('#q'+i+' .opt').forEach((b,k)=>{b.disabled=true;if(k===j)b.classList.add('sel')});upd()
+}
+function upd(){$('prog').textContent=bn(ans.filter(a=>a>=0).length)+'/'+bn(Q.length)}
+function tick(){
+  const m=Math.floor(left/60),s=left%60;$('timer').textContent=bn(String(m).padStart(2,'0'))+':'+bn(String(s).padStart(2,'0'));
+  $('timer').classList.toggle('low',left<=60);
+  if(left<=0){clearInterval(tm);finish();return}left--
+}
+function submitClick(){
+  const miss=[];ans.forEach((a,i)=>{if(a<0)miss.push(i)});
+  if(miss.length){alert('নিচের প্রশ্নগুলোর উত্তর দেওয়া বাকি আছে: '+miss.map(i=>bn(i+1)).join(', '));
+    $('q'+miss[0]).scrollIntoView({behavior:'smooth',block:'center'});return}
+  clearInterval(tm);finish()
+}
+function finish(){
+  if(done)return;done=true;let c=0,w=0,u=0;
+  Q.forEach((q,i)=>{
+    const card=$('q'+i),opts=card.querySelectorAll('.opt');opts.forEach(b=>b.disabled=true);
+    opts[q.a].classList.add('correct');
+    if(ans[i]<0)u++;else if(ans[i]===q.a)c++;else{w++;opts[ans[i]].classList.add('wrong')}
+  });
+  const score=c,pct=Q.length?score/Q.length*100:0;
+  const items=[['মোট প্রশ্ন',bn(Q.length)],['সঠিক',bn(c)],['ভুল',bn(w)],['চূড়ান্ত স্কোর',bn(score.toFixed(2).replace(/\.?0+$/,''))+'/'+bn(Q.length)]];
+  $('stats').innerHTML=items.map(x=>'<div class="stat-box"><b>'+x[1]+'</b>'+x[0]+'</div>').join('');
+  $('prog').textContent='স্কোর: '+bn(score.toFixed(2).replace(/\.?0+$/,''))+'/'+bn(Q.length);
+  $('fb').textContent=pct>=90?'🎉 অসাধারণ! চমৎকার ফলাফল, চালিয়ে যান!':pct>=80?'👏 খুব ভালো! আরও অনুশীলন প্রয়োজন।':pct>=60?'🙂 ভালো, আরও অনুশীলন প্রয়োজন।':'📖 আরও মনোযোগ দিয়ে পড়ুন।';
+  $('submit').parentElement.classList.add('hide');$('result').classList.remove('hide');
+  renderMath($('quiz'));
+  setTimeout(()=>{try{$('result').scrollIntoView({block:'start'})}catch(_){}try{window.scrollTo(0,$('result').getBoundingClientRect().top+window.pageYOffset-70)}catch(_){}},80)
+}
+$('submit').onclick=submitClick;$('again').onclick=start;
+$('theme').onclick=()=>{const d=document.documentElement.dataset.theme==='dark';document.documentElement.dataset.theme=d?'light':'dark';$('theme').textContent=d?'🌙 ডার্ক মোড':'☀️ লাইট মোড'};
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  const k=e.key.toLowerCase(),blk=(e.ctrlKey&&['c','s','u'].includes(k))||e.key==='F12'||e.key==='PrintScreen';
+  if(blk){e.preventDefault();try{navigator.clipboard.writeText('')}catch(_){}alert('এই পেজে কপি/সেভ/সোর্স দেখা নিষিদ্ধ।')}});
+document.addEventListener('keyup',e=>{if(e.key==='PrintScreen'){try{navigator.clipboard.writeText('')}catch(_){}alert('স্ক্রিনশট নেওয়া নিষিদ্ধ।')}});
+window.addEventListener('load',()=>{info();start()});
+</script>
+</body>
+</html>

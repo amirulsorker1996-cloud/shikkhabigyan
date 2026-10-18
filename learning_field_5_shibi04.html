@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>প্রাতিষ্ঠানিক সুশাসন - অনলাইন কুইজ পরীক্ষা</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+<style>
+@font-face{font-family:'SolaimanLipi';src:local('SolaimanLipi'),local('Solaiman Lipi'),url('SolaimanLipi.ttf') format('truetype');font-display:swap}
+*{font-family:'SolaimanLipi',Arial,sans-serif !important;box-sizing:border-box}
+.katex,.katex *{font-family:KaTeX_Main,'Times New Roman',serif !important}
+:root{--primary:#006a4e;--primary-d:#004d37;--bg:#f2f6f4;--card:#fff;--text:#1d2b26;--muted:#5d6d66;--border:#d5e2dc;--ok:#1b8a4b;--okbg:#e3f6ea;--bad:#c62828;--badbg:#fdeaea;--shadow:0 2px 10px rgba(0,0,0,.08);--ul:#006a4e}
+[data-theme=dark]{--primary:#4db6ac;--bg:#101816;--card:#1a2622;--text:#e6f0ec;--muted:#9bb0a8;--border:#2c3d37;--ok:#66d28f;--okbg:#17352a;--bad:#ff8a80;--badbg:#3a2020;--shadow:0 2px 10px rgba(0,0,0,.5);--ul:#4db6ac}
+body{margin:0;background:var(--bg);color:var(--text);line-height:1.7;-webkit-user-select:none;-moz-user-select:none;user-select:none}
+.wrap{max-width:900px;margin:0 auto;padding:12px}
+header{background:linear-gradient(135deg,#004d37,#006a4e);color:#fff;text-align:center;padding:22px 14px;border-radius:0 0 18px 18px;box-shadow:var(--shadow)}
+header h1{margin:0;font-size:1.5rem}header p{margin:3px 0 0;font-size:1rem;opacity:.95}
+.card{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:16px;margin:14px 0;border:1px solid var(--border)}
+.chapter-title{margin:0 0 12px;padding-bottom:8px;font-size:1.4rem;color:var(--primary);border-bottom:3px solid var(--ul)}
+.badge{background:var(--bg);border-left:4px solid var(--primary);padding:8px 12px;border-radius:8px;margin:8px 0;font-size:.95rem}
+.warn{background:#fff6e0;color:#6b4a00;border-left:4px solid #f0a500;padding:8px 12px;border-radius:8px;font-size:.95rem}
+#info2,#info3{text-align:center}
+#info3{white-space:nowrap;font-size:clamp(.62rem,3.3vw,.95rem)}
+.wrow{display:flex;justify-content:space-between;gap:10px;margin-bottom:2px}
+[data-theme=dark] .warn{background:#3a3016;color:#ffd98a}
+.bar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--card);padding:10px 14px;border-radius:12px;box-shadow:var(--shadow);border:1px solid var(--border)}
+#timer{font-size:1.3rem;font-weight:700;color:var(--primary)}#timer.low{color:var(--bad)}
+button{cursor:pointer;border:0;border-radius:10px;padding:9px 16px;font-size:1rem;background:var(--primary);color:#fff}
+[data-theme=dark] button{color:#0b1512}
+button:disabled{opacity:.5;cursor:default}
+.qn{font-weight:700;margin-bottom:8px}
+.opt{display:block;width:100%;text-align:left;background:var(--bg);color:var(--text);border:2px solid var(--border);margin:6px 0;padding:9px 12px;border-radius:10px}
+[data-theme=dark] .opt{color:var(--text)}
+.opt.sel{border-color:var(--primary)}
+.opt.correct{background:var(--okbg);border-color:var(--ok)}
+.opt.wrong{background:var(--badbg);border-color:var(--bad)}
+.tag{display:inline-block;font-size:.8rem;background:var(--bg);color:var(--primary);border:1px solid var(--border);border-radius:20px;padding:0 10px;margin-bottom:6px}
+.exp{display:none;margin-top:8px;padding:8px 12px;border-radius:8px;background:var(--bg);border-left:4px solid var(--primary);font-size:.95rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.stat-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;box-shadow:var(--shadow)}
+.stat-box b{display:block;font-size:1.5rem;color:var(--primary)}
+#fb{font-size:1.1rem;font-weight:700;text-align:center;margin:12px 0}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<h2 class="chapter-title">প্রাতিষ্ঠানিক সুশাসন</h2>
+<div class="warn"><div class="wrow"><b id="fullmark"></b><b id="timeinfo"></b></div><div id="info2"></div><div id="info3"></div></div>
+</div>
+<div class="bar"><span>⏱️ <span id="timer">১০:০০</span></span><span id="prog"></span><button id="theme">🌙 ডার্ক মোড</button></div>
+<div id="quiz"></div>
+<div id="result" class="hide">
+<div class="card"><div class="stats" id="stats"></div><div id="fb"></div><div style="text-align:center"><button id="again">পুনরায় কুইজ দাও</button></div></div>
+</div>
+<div class="card" style="text-align:center"><button id="submit">সাবমিট করো</button></div>
+
+</div>
+<script>
+const masterQuestionBank=[["বর্তমানে উন্নয়নের আলোচনায় বিশ্বব্যাপী সর্বাধিক উচ্চারিত ধারণা কোনটি?", ["বিশ্বায়ন ও বাণিজ্য উদারীকরণ", "নগরায়ন ও শিল্পায়ন", "জনসংখ্যা ও পরিবেশ ব্যবস্থাপনা", "শাসন ও শাসন প্রক্রিয়া তথা সুশাসন"], 3, 0], ["সকল প্রকার দুর্নীতি, স্বজনপ্রীতি এবং প্রাতিষ্ঠানিক ও সামাজিক অনাচারের মূলে কী রয়েছে?", ["সম্পদের প্রাচুর্য", "জনসংখ্যার চাপ", "প্রযুক্তির অগ্রগতি", "সুশাসনের অভাব তথা অপশাসন"], 3, 0], ["সাধারণভাবে 'সুশাসন' হলো কিসের সুষ্ঠু ও দক্ষ ব্যবস্থাপনা এবং পরিচালনা?", ["অর্থনৈতিক প্রবৃদ্ধি", "শাসন প্রক্রিয়া", "আন্তর্জাতিক বাণিজ্য", "নির্বাচন ব্যবস্থা"], 1, 0], ["সুশাসনে কোন তিনটি বিষয়ের নিশ্চয়তা রয়েছে?", ["গোপনীয়তা, নিয়ন্ত্রণ ও কর্তৃত্ব", "দক্ষতা, মুনাফা ও প্রতিযোগিতা", "সাম্য, বণ্টন ও রাজস্ব", "স্বচ্ছতা, জবাবদিহিতা ও অংশগ্রহণ"], 3, 0], ["বিশ্বব্যাংক শাসন প্রক্রিয়াকে কয়ভাবে সংজ্ঞায়িত করেছে?", ["দুইভাবে", "একভাবে", "তিনভাবে", "চারভাবে"], 0, 0], ["'শাসন প্রক্রিয়া হলো জনগণ কীভাবে শাসিত হচ্ছে, কীভাবে রাষ্ট্রীয় বিষয়াবলি পরিচালিত হয়'—এটি কাদের মত?", ["Alicia Ziccardi ও B. K. Thapliyal", "Douglass North ও Ronald Coase", "Pierre Landell-Mills ও Ismail Serageldin", "Kaufmann ও Kraay"], 2, 0], ["শাসন প্রক্রিয়ার সুনির্দিষ্ট ধরন কয়টি এবং কী কী?", ["দুটি—গণতান্ত্রিক ও একনায়কতান্ত্রিক", "দুটি—অপশাসন/কুশাসন ও সুশাসন", "তিনটি—সুশাসন, অপশাসন ও মিশ্র শাসন", "একটি—সুশাসন"], 1, 0], ["অপশাসন কী থেকে উদ্ভূত হয়?", ["জনগণের অতিরিক্ত অংশগ্রহণ থেকে", "সুশীল সমাজের শক্তিশালী ভূমিকা থেকে", "আইনের কঠোর প্রয়োগ থেকে", "প্রতিষ্ঠিত ও বিদ্যমান শাসন কাঠামোর দুর্বলতা এবং অসামঞ্জস্য থেকে"], 3, 0], ["অপশাসনে সুশীল সমাজ গঠনমূলক ভূমিকার পরিবর্তে কী করে?", ["সরকারকে সম্পূর্ণ সমর্থন করে", "রাষ্ট্র পরিচালনা করে", "বিভিন্ন ইস্যুতে বিভক্ত থাকে", "নির্বাচনে অংশ নেয়"], 2, 0], ["'Poor governance undermines all efforts to improve policy making and to create durable institutions'—উক্তিটি কার?", ["বিশ্বব্যাংকের", "ইউএনডিপির", "আইডিএর", "ট্রান্সপারেন্সি ইন্টারন্যাশনালের"], 0, 0], ["নিচের কোনটি অপশাসনের সাধারণ বৈশিষ্ট্য?", ["আইনের শাসনের দৃঢ় প্রতিষ্ঠা", "স্বচ্ছতা ও জবাবদিহিতার উপস্থিতি", "বণ্টনমূলক ন্যায্যতা", "স্বাধীন বিচার ব্যবস্থার অভাব"], 3, 0], ["নিচের কোনটি অপশাসনের বৈশিষ্ট্য?", ["বণ্টনহীন প্রবৃদ্ধি", "জবাবদিহিতার নিশ্চয়তা", "মানবাধিকারের উচ্চ মান", "স্বাধীন বিচার ব্যবস্থা"], 0, 0], ["কোন গবেষকের মতে 'গভর্ন্যান্স' প্রপঞ্চের সাথে 'সু' প্রত্যয় যুক্ত করে এর নরম্যাটিভ উপাদানের প্রকাশ ঘটানো হয়?", ["B. K. Thapliyal", "Isabelle Johnson", "Alicia Ziccardi", "Dr. Kamal Siddique"], 2, 0], ["অপশাসনকে 'অনুন্নয়ন নির্ভর' বলা হয় কেন?", ["কারণ এটি দ্রুত উন্নয়ন ঘটায়", "কারণ এতে জনগণের অংশগ্রহণ সর্বাধিক", "কারণ এতে আইনের শাসন সুদৃঢ় থাকে", "কারণ এটি সুষ্ঠু উন্নয়নকে বাধাগ্রস্ত করে"], 3, 1], ["'সুশাসন' সম্পর্কে আলোচনার পূর্বে 'শাসন প্রক্রিয়া' সম্পর্কে আলোচনা প্রয়োজন কেন?", ["কারণ শাসন প্রক্রিয়া সুশাসনের বিপরীত ধারণা", "কারণ দুটি ধারণা সম্পূর্ণ অভিন্ন", "কারণ সুশাসন শাসন প্রক্রিয়ারই বিবর্তিত ও কাম্য রূপ", "কারণ শাসন প্রক্রিয়া কেবল অর্থনীতির বিষয়"], 2, 1], ["'শাসন প্রক্রিয়া একটি বহুমাত্রিক ধারণা'—এ কথার অর্থ কী?", ["এর একটি মাত্র সর্বজনস্বীকৃত সংজ্ঞা আছে", "এটি বিভিন্ন অবস্থা, দৃষ্টিভঙ্গি ও প্রেক্ষাপট থেকে ব্যাখ্যা ও বিশ্লেষণ করা হয়েছে", "এটি শুধু আইনের দৃষ্টিকোণ থেকে বিচার্য", "এটি শুধু রাজনৈতিক নেতাদের বিষয়"], 1, 1], ["বিশ্বব্যাংক উন্নয়নের সংকটকে কী হিসেবে অভিহিত করে সুশাসনের ধারণাকে গুরুত্বপূর্ণ করে তুলেছে?", ["মূলধনের সংকট", "জনসংখ্যার সংকট", "শাসন প্রক্রিয়ার সংকট", "প্রযুক্তির সংকট"], 2, 1], ["নব্য প্রতিষ্ঠানবাদীদের মতে কোন ধরনের রাষ্ট্র নিরবচ্ছিন্ন ও টেকসই উন্নয়ন প্রক্রিয়া লালনপালন করতে পারে না?", ["যে রাষ্ট্র বৈদেশিক সাহায্য গ্রহণ করে না", "যে রাষ্ট্র অর্থনৈতিক প্রণোদনা নিশ্চিত করার জন্য প্রতিষ্ঠান গড়ে তুলতে পারে না", "যে রাষ্ট্রের জনসংখ্যা বেশি", "যে রাষ্ট্রে সম্পদ প্রচুর"], 1, 1], ["'আইন প্রয়োগ ও শাস্তি প্রদানই দুর্নীতি দমনের একমাত্র কৌশল নয়'—এর তাৎপর্য কী?", ["নাগরিক চরিত্রনিষ্ঠ করতে রাষ্ট্রীয় ও সামাজিক আন্দোলনও প্রয়োজন", "আইনের কোনো প্রয়োজন নেই", "শাস্তি প্রদান নিষিদ্ধ", "দুর্নীতি দমন সম্ভব নয়"], 0, 1], ["'প্রাতিষ্ঠানিক কার্যক্রমে সুশাসন নিশ্চিতকরণের কোনো বিকল্প নেই'—এর অর্থ কী?", ["সুশাসন নিশ্চিতকরণ অপরিহার্য", "সুশাসন ঐচ্ছিক বিষয়", "সুশাসনের চেয়ে ভালো বিকল্প আছে", "সুশাসন কেবল শহরের জন্য প্রযোজ্য"], 0, 1], ["বাংলাদেশের সংবিধান রাষ্ট্রীয় কার্যক্রমে সুশাসন নিশ্চিতকরণের মৌলিক ভিত্তি রচনা করেছে—কেন?", ["কারণ সংবিধানে শুধু নির্বাচন পদ্ধতি বর্ণিত", "কারণ সংবিধানে বিদেশি সাহায্যের কথা আছে", "কারণ সংবিধানে ছুটির বিধান আছে", "কারণ সংবিধানে শোষণ-বৈষম্য নিরসন, ন্যায়বিচার ও দুর্নীতিমুক্ত সমাজ গঠনের অঙ্গীকার রয়েছে"], 3, 1], ["বার্ষিক কর্মসম্পাদন চুক্তিতে (APA) একটি সরকারি অফিস কী করে?", ["উর্ধ্বতন কর্তৃপক্ষের সাথে চুক্তি স্বাক্ষরের মাধ্যমে কার্যক্রম বাস্তবায়নে অঙ্গীকারাবদ্ধ হয়", "জনগণের সাথে চুক্তি করে বেতন নির্ধারণ করে", "বিদেশি সংস্থার সাথে চুক্তি করে ঋণ নেয়", "কর্মচারীদের ছুটি বাতিল করে"], 0, 1], ["একজন নাগরিক সরকারি অফিসে তথ্য চেয়েও পাননি। তথ্য অধিকার সংক্রান্ত অভিযোগ নিষ্পত্তির জন্য তিনি কোন প্রতিষ্ঠানের শরণাপন্ন হতে পারেন?", ["বিশ্বব্যাংক", "ইউএনডিপি", "আইডিএ", "তথ্য কমিশন"], 3, 2], ["একটি প্রতিষ্ঠানের সিদ্ধান্ত গ্রহণ প্রক্রিয়া সহজ, গতিশীল, জবাবদিহিমূলক, সাড়াদানকারী ও স্বচ্ছ। প্রতিষ্ঠানটির শাসন ব্যবস্থাকে প্রফেসর থাপলিয়ালের ধারণা অনুযায়ী কী বলা যায়?", ["Poor governance", "SMART governance", "Mis-governance", "Neo-institutionalism"], 1, 2], ["একটি দেশে বিচার ব্যবস্থা স্বাধীন নয়, তথ্য গোপন রাখা হয়, আইনের শাসন দুর্বল এবং জবাবদিহিতা নেই। দেশটির শাসন প্রক্রিয়াকে কী বলা যায়?", ["অপশাসন", "সুশাসন", "মানবিক শাসন", "স্মার্ট শাসন"], 0, 2], ["একটি সরকারি দপ্তরের প্রধান প্রতি অর্থ বছরে উর্ধ্বতন কর্তৃপক্ষের সাথে নির্দিষ্ট লক্ষ্যমাত্রা অর্জনের চুক্তি স্বাক্ষর করেন। এটি কোন কৌশলের উদাহরণ?", ["তথ্য অধিকার নিশ্চিতকরণ", "শুদ্ধাচার পুরস্কার", "অভিযোগ প্রতিকার ব্যবস্থা", "বার্ষিক কর্মসম্পাদন চুক্তি (APA)"], 3, 2], ["একটি দেশের দুর্নীতি নিয়ন্ত্রণের মান কেমন—তা পরিমাপ করা হলে বিশ্বব্যাংকের কোন সূচকটি ব্যবহৃত হবে?", ["Regulatory Quality (RQ)", "Government Effectiveness (GE)", "Control of Corruption (CC)", "Voice and Accountability (VA)"], 2, 2], ["একটি দেশের জনগণ মতপ্রকাশের স্বাধীনতা ভোগ করে এবং সরকারকে জবাবদিহি করতে পারে। বিশ্বব্যাংকের কোন সূচক এটি নির্দেশ করে?", ["Rule of Law (RL)", "Political Stability (PV)", "Voice and Accountability (VA)", "Regulatory Quality (RQ)"], 2, 2], ["একটি কলেজ প্রতি বছর তার আয়-ব্যয়ের হিসাব সবার জন্য উন্মুক্ত করে। এটি সুশাসনের কোন উপাদানকে প্রতিফলিত করে?", ["স্বচ্ছতা", "অংশগ্রহণ", "আইনের শাসন", "জবাবদিহিতা"], 0, 2], ["সরকার কোনো কর্মকর্তাকে সমাজে উল্লেখযোগ্য অবদানের জন্য বার্ষিক পুরস্কার প্রদান করছে। এটি সুশাসন নিশ্চিতকরণের কোন কৌশলের অংশ?", ["তথ্য অধিকার নিশ্চিতকরণ", "শুদ্ধাচার কৌশল বাস্তবায়ন", "বার্ষিক কর্মসম্পাদন চুক্তি", "অভিযোগ প্রতিকার ব্যবস্থা"], 1, 2], ["একটি দেশে অপশাসন, দুর্নীতি, নিম্ন অর্থনৈতিক প্রবৃদ্ধি ও নিম্ন মানব উন্নয়ন একে অপরকে শক্তিশালী করে চলেছে। এ অবস্থাকে চিত্রে কী বলে বর্ণনা করা হয়েছে?", ["দুষ্টচক্র", "সুবিধাজনক চক্র", "উন্নয়ন চক্র", "নিরপেক্ষ চক্র"], 0, 2], ["আইডিএ ও বিশ্বব্যাংকের Development Research Group-এর উল্লিখিত সুশাসনের উপাদান/সূচকের তুলনায় কোন বিবৃতিটি সঠিক?", ["উভয়ই ৪টি করে", "আইডিএ ৬টি এবং বিশ্বব্যাংক ৪টি", "উভয়ই ৬টি করে", "আইডিএ ৪টি উপাদান এবং বিশ্বব্যাংক ৬টি সূচকের কথা বলেছে"], 3, 3], ["আফ্রিকায় বৈদেশিক সাহায্য দ্বিগুণ করার পরও প্রবৃদ্ধি ঋণাত্মক হয়েছিল এবং কাঠামোগত সংস্কার কর্মসূচিও ব্যর্থ হয়। এ থেকে বিশ্বব্যাংকের কোন সিদ্ধান্ত যুক্তিসংগত?", ["আরও বেশি ঋণ দিলেই সমস্যা মিটবে", "জনসংখ্যা কমালেই উন্নয়ন হবে", "প্রযুক্তি আমদানি একমাত্র সমাধান", "উন্নয়নের সংকটের মূলে রয়েছে শাসন প্রক্রিয়ার সংকট"], 3, 3], ["সুশাসন তত্ত্বের দুটি উৎসের মধ্যে কোন তুলনাটি সঠিক?", ["একটি আফ্রিকায় বিশ্বব্যাংকের ব্যর্থতার বাস্তব প্রেক্ষাপটে, অন্যটি অর্থনীতিতে নতুন প্রাতিষ্ঠানিক ঘরানার তাত্ত্বিক উদ্ভবে", "দুটিই আফ্রিকার ব্যর্থতা থেকে", "দুটিই নব্য প্রতিষ্ঠানবাদ থেকে", "একটি ইউএনডিপি থেকে, অন্যটি আইডিএ থেকে"], 0, 3], ["সুশাসন ও অপশাসনের তুলনায় কোন জোড়াটি সঠিক?", ["সুশাসনে আইনের শাসন দুর্বল; অপশাসনে সবল", "সুশাসনে বৈষম্য বেশি; অপশাসনে কম", "সুশাসনে জবাবদিহিতা থাকে; অপশাসনে স্বচ্ছতা ও জবাবদিহিতার অনুপস্থিতি থাকে", "উভয়েই স্বাধীন বিচার ব্যবস্থা অনুপস্থিত"], 2, 3], ["বিশ্বব্যাংকের প্রতিবেদন অনুযায়ী উন্নয়ন সমস্যার সমাধানের জন্য শুধু প্রাতিষ্ঠানিক সংস্কার ও নীতি প্রণয়নই যথেষ্ট নয়। তাহলে উন্নয়নের জন্য আর কী প্রয়োজন?", ["সুশাসনের মাধ্যমে রাষ্ট্র গঠন (পুনর্গঠন)", "কেবল বৈদেশিক সাহায্য বৃদ্ধি", "কেবল শিল্পায়ন", "কেবল জনসংখ্যা নিয়ন্ত্রণ"], 0, 3], ["দুর্নীতি দমনে কেবল আইন ও শাস্তির ওপর নির্ভর না করে কোন সমন্বিত সিদ্ধান্ত গ্রহণ সবচেয়ে যুক্তিসংগত?", ["আইন প্রয়োগের পাশাপাশি রাষ্ট্রীয় ও সামাজিক আন্দোলনের মাধ্যমে নাগরিক চরিত্রনিষ্ঠ করা", "শুধু শাস্তি বাড়ানো", "শুধু বিদেশি সাহায্য বন্ধ করা", "শুধু পুরস্কার বন্ধ করা"], 0, 3], ["অপশাসন-দুর্নীতির দুষ্টচক্র সংক্রান্ত চিত্র অনুযায়ী দুর্নীতির ফলে কোনটি ঘটে?", ["সরকারি রাজস্ব বৃদ্ধি পায়", "অবকাঠামো দ্রুত উন্নত হয়", "সরকারি রাজস্ব হ্রাস পায়", "মূলধন দেশে ফিরে আসে"], 2, 3], ["সুশাসন নিশ্চিতকরণের কৌশল ও লক্ষ্যের কোন মিলটি সঠিক?", ["APA—তথ্যের অবাধ প্রবাহ; তথ্য অধিকার—দায়বদ্ধতা", "তথ্য অধিকার আইন—তথ্যের অবাধ প্রবাহ; শুদ্ধাচার কৌশল—নাগরিকের চরিত্রনিষ্ঠতা", "শুদ্ধাচার—অভিযোগ প্রতিকার; APA—পুরস্কার প্রদান", "তথ্য কমিশন—বার্ষিক চুক্তি; GRS—শুদ্ধাচার"], 1, 3], ["নিচের কোন সূচকটি বিশ্বব্যাংকের ৬টি সূচকে আছে, কিন্তু আইডিএর ৪টি উপাদানে নেই?", ["জবাবদিহিতা", "রাজনৈতিক স্থিতিশীলতা ও সহিংসতা/সন্ত্রাসের অনুপস্থিতি (PV)", "স্বচ্ছতা", "অংশগ্রহণ"], 1, 3], ["'সুশাসন'-কে 'SMART governance' হিসেবে অভিহিত করেছেন কে?", ["Professor B. K. Thapliyal", "Alicia Ziccardi", "Ismail Serageldin", "Ronald Coase"], 0, 0], ["SMART governance-এর 'S' দ্বারা কী বোঝায়?", ["Strong", "Stable", "Simple", "Social"], 2, 0], ["SMART governance-এর 'M' দ্বারা কী বোঝায়?", ["Modern", "Moral", "Measured", "Managed"], 1, 0], ["SMART governance-এর 'R' দ্বারা কী বোঝায়?", ["Rational", "Responsive", "Regulated", "Reliable"], 1, 0], ["সুশাসন তত্ত্বের কয়টি উৎস রয়েছে?", ["একটি", "তিনটি", "চারটি", "দুটি"], 3, 0], ["সুশাসন তত্ত্বের প্রথম উৎস কোনটি?", ["ইউরোপে শিল্পবিপ্লব", "আফ্রিকায় বিশ্বব্যাংকের পর্বতপ্রমাণ ব্যর্থতার প্রেক্ষাপট", "এশিয়ায় ঔপনিবেশিক শাসন", "লাতিন আমেরিকায় গণঅভ্যুত্থান"], 1, 0], ["১৯৭০ থেকে ১৯৭৮ সময়কালে আফ্রিকায় প্রবৃদ্ধির হার কত ছিল?", ["৫ থেকে ৭ শতাংশের মধ্যে", "শূন্যের নিচে", "১.৫ থেকে ২ শতাংশের মধ্যে", "১০ শতাংশের বেশি"], 2, 0], ["১৯৭০–১৯৭৮ সময়ে আফ্রিকায় বৈদেশিক সাহায্যের পরিমাণ মোট জাতীয় উৎপাদনের কত শতাংশ ছিল?", ["৫ থেকে ৭ শতাংশ", "১ থেকে ২ শতাংশ", "১০ থেকে ১২ শতাংশ", "২০ শতাংশের বেশি"], 0, 0], ["বিশ্বব্যাংক তার এক সমীক্ষায় সর্বপ্রথম কত সালে 'সুশাসন' প্রত্যয়টি ব্যবহার করে?", ["১৯৮৯", "১৯৭০", "১৯৭৮", "১৯৯৭"], 0, 0], ["নব্য প্রাতিষ্ঠানবাদী ঘরানার নেতৃত্বে কে ছিলেন?", ["B. K. Thapliyal", "Alicia Ziccardi", "ডগলাস নর্থ", "Pierre Landell-Mills"], 2, 0], ["ইউএনডিপি 'সুশাসন'-কে কী হিসেবে আখ্যায়িত করে?", ["সামরিক শাসন", "গণতান্ত্রিক শাসন", "স্মার্ট শাসন", "মানবিক শাসন"], 3, 0], ["আইডিএ (IDA) সুশাসনের কয়টি উপাদানের উল্লেখ করেছে?", ["তিনটি", "পাঁচটি", "ছয়টি", "চারটি"], 3, 0], ["নিচের কোনটি আইডিএ উল্লিখিত সুশাসনের উপাদান?", ["দুর্নীতি নিয়ন্ত্রণ", "আইনের শাসন", "সরকারি কার্যকারিতা", "নিয়ন্ত্রণ মান"], 1, 0], ["বিশ্বব্যাংকের Development Research Group সুশাসনের জন্য কয়টি সাধারণ সূচকের উপস্থিতির ওপর গুরুত্ব আরোপ করেছে?", ["৪টি", "৫টি", "৬টি", "৮টি"], 2, 0], ["বিশ্বব্যাংকের সূচক 'Control of Corruption (CC)'-এর বাংলা কী?", ["আইনের শাসন", "নিয়ন্ত্রণ মান", "দুর্নীতি নিয়ন্ত্রণ", "সরকারি কার্যকারিতা"], 2, 0], ["বাংলাদেশ সরকার তথ্যের অবাধ প্রবাহ ও জনগণের তথ্য অধিকার নিশ্চিত করতে কোন সালে তথ্য অধিকার আইন প্রণয়ন করে?", ["২০০১", "২০০৯", "২০১৪", "২০১৫"], 1, 0], ["তথ্য অধিকার সংক্রান্ত অভিযোগ নিষ্পত্তির জন্য সরকার অনলাইনে কোন ব্যবস্থা প্রতিষ্ঠা করেছে?", ["অভিযোগ প্রতিকারের ব্যবস্থা (GRS)", "বার্ষিক কর্মসম্পাদন চুক্তি (APA)", "শুদ্ধাচার পুরস্কার", "জাতীয় তথ্য বাতায়ন"], 0, 0], ["বাংলাদেশ কোন অর্থ বছর হতে প্রাতিষ্ঠানিক পর্যায়ে বার্ষিক কর্মসম্পাদন চুক্তি (এপিএ) প্রবর্তনে পদক্ষেপ গ্রহণ করে?", ["২০১৪-১৫", "২০০৯-১০", "২০১২-১৩", "২০১৮-১৯"], 0, 0], ["দুর্নীতির বিরুদ্ধে বহুমুখী ব্যবস্থা গ্রহণের লক্ষ্যে বাংলাদেশ জাতিসংঘের কোন কনভেনশনের অনুস্বাক্ষরকারী দেশ?", ["Convention on the Rights of the Child", "United Nations Convention Against Corruption (UNCAC)", "Convention on Biological Diversity", "Convention on Elimination of Discrimination"], 1, 0], ["প্রাতিষ্ঠানিক সুশাসন নিশ্চিতকরণে বাংলাদেশ সরকার কর্তৃক গৃহীত উল্লেখযোগ্য কৌশল কয়টি?", ["তিনটি", "দুটি", "চারটি", "পাঁচটি"], 0, 0]].map(([q,o,a,t])=>({q,o,a,t}));
+/* t: 0=জ্ঞানমূলক 1=অনুধাবনমূলক 2=প্রয়োগমূলক 3=উচ্চতর দক্ষতা */
+const N=20,TIME=600,QUOTA=[11,3,3,3],TN=["জ্ঞানমূলক","অনুধাবনমূলক","প্রয়োগমূলক","উচ্চতর দক্ষতা"];
+const bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
+const $=id=>document.getElementById(id);
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const L=['ক','খ','গ','ঘ'];
+let Q=[],ans=[],left=TIME,tm=null,done=false;
+function renderMath(el){try{if(window.renderMathInElement)renderMathInElement(el,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false})}catch(e){}}
+function info(){
+  const n=masterQuestionBank.length,t=Math.min(N,n);
+  $('fullmark').textContent='পূর্ণমান: '+bn(t);$('timeinfo').textContent='সময়: '+bn(TIME/60)+' মিনিট';
+  $('info2').textContent='['+bn(n)+' টি প্রশ্ন আছে]';
+  $('info3').textContent='প্রতিবার '+bn(t)+'টা প্রশ্ন আসবে। (অপশনসহ এলোমেলো)'
+}
+function start(){
+  clearInterval(tm);done=false;left=TIME;
+  const take=Math.min(N,masterQuestionBank.length);let pick=[];
+  QUOTA.forEach((n,t)=>{pick=pick.concat(shuf(masterQuestionBank.filter(x=>x.t===t)).slice(0,n))});
+  if(pick.length<take){const rest=shuf(masterQuestionBank.filter(x=>!pick.includes(x)));pick=pick.concat(rest.slice(0,take-pick.length))}
+  pick=shuf(pick.slice(0,take));
+  Q=pick.map(x=>{const idx=shuf(x.o.map((t,i)=>i));return{q:x.q,t:x.t,o:idx.map(i=>x.o[i]),a:idx.indexOf(x.a)}});
+  ans=Q.map(()=>-1);
+  $('result').classList.add('hide');$('submit').disabled=false;$('submit').parentElement.classList.remove('hide');
+  const box=$('quiz');box.innerHTML='';
+  Q.forEach((q,i)=>{
+    const c=document.createElement('div');c.className='card';c.id='q'+i;
+    c.innerHTML='<div class="qn">'+bn(i+1)+'। '+q.q+'</div>'+q.o.map((t,j)=>'<button class="opt" data-i="'+i+'" data-j="'+j+'">'+t+'</button>').join('');
+    box.appendChild(c)});
+  box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>pickOpt(+b.dataset.i,+b.dataset.j));
+  upd();tick();tm=setInterval(tick,1000);
+  renderMath(box);try{window.scrollTo(0,0)}catch(e){}
+}
+function pickOpt(i,j){
+  if(done||ans[i]>=0)return;ans[i]=j;
+  document.querySelectorAll('#q'+i+' .opt').forEach((b,k)=>{b.disabled=true;if(k===j)b.classList.add('sel')});upd()
+}
+function upd(){$('prog').textContent=bn(ans.filter(a=>a>=0).length)+'/'+bn(Q.length)}
+function tick(){
+  const m=Math.floor(left/60),s=left%60;$('timer').textContent=bn(String(m).padStart(2,'0'))+':'+bn(String(s).padStart(2,'0'));
+  $('timer').classList.toggle('low',left<=60);
+  if(left<=0){clearInterval(tm);finish();return}left--
+}
+function submitClick(){
+  const miss=[];ans.forEach((a,i)=>{if(a<0)miss.push(i)});
+  if(miss.length){alert('নিচের প্রশ্নগুলোর উত্তর দেওয়া বাকি আছে: '+miss.map(i=>bn(i+1)).join(', '));
+    $('q'+miss[0]).scrollIntoView({behavior:'smooth',block:'center'});return}
+  clearInterval(tm);finish()
+}
+function finish(){
+  if(done)return;done=true;let c=0,w=0,u=0;
+  Q.forEach((q,i)=>{
+    const card=$('q'+i),opts=card.querySelectorAll('.opt');opts.forEach(b=>b.disabled=true);
+    opts[q.a].classList.add('correct');
+    if(ans[i]<0)u++;else if(ans[i]===q.a)c++;else{w++;opts[ans[i]].classList.add('wrong')}
+  });
+  const score=c,pct=Q.length?score/Q.length*100:0;
+  const items=[['মোট প্রশ্ন',bn(Q.length)],['সঠিক',bn(c)],['ভুল',bn(w)],['চূড়ান্ত স্কোর',bn(score.toFixed(2).replace(/\.?0+$/,''))+'/'+bn(Q.length)]];
+  $('stats').innerHTML=items.map(x=>'<div class="stat-box"><b>'+x[1]+'</b>'+x[0]+'</div>').join('');
+  $('prog').textContent='স্কোর: '+bn(score.toFixed(2).replace(/\.?0+$/,''))+'/'+bn(Q.length);
+  $('fb').textContent=pct>=90?'🎉 অসাধারণ! চমৎকার ফলাফল, চালিয়ে যান!':pct>=80?'👏 খুব ভালো! আরও অনুশীলন প্রয়োজন।':pct>=60?'🙂 ভালো, আরও অনুশীলন প্রয়োজন।':'📖 আরও মনোযোগ দিয়ে পড়ুন।';
+  $('submit').parentElement.classList.add('hide');$('result').classList.remove('hide');
+  renderMath($('quiz'));
+  setTimeout(()=>{try{$('result').scrollIntoView({block:'start'})}catch(_){}try{window.scrollTo(0,$('result').getBoundingClientRect().top+window.pageYOffset-70)}catch(_){}},80)
+}
+$('submit').onclick=submitClick;$('again').onclick=start;
+$('theme').onclick=()=>{const d=document.documentElement.dataset.theme==='dark';document.documentElement.dataset.theme=d?'light':'dark';$('theme').textContent=d?'🌙 ডার্ক মোড':'☀️ লাইট মোড'};
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  const k=e.key.toLowerCase(),blk=(e.ctrlKey&&['c','s','u'].includes(k))||e.key==='F12'||e.key==='PrintScreen';
+  if(blk){e.preventDefault();try{navigator.clipboard.writeText('')}catch(_){}alert('এই পেজে কপি/সেভ/সোর্স দেখা নিষিদ্ধ।')}});
+document.addEventListener('keyup',e=>{if(e.key==='PrintScreen'){try{navigator.clipboard.writeText('')}catch(_){}alert('স্ক্রিনশট নেওয়া নিষিদ্ধ।')}});
+window.addEventListener('load',()=>{info();start()});
+</script>
+</body>
+</html>

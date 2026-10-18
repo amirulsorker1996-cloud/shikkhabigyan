@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>জুম অ্যাপ-এর ব্যবহার - অনলাইন কুইজ পরীক্ষা</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+<style>
+@font-face{font-family:'SolaimanLipi';src:local('SolaimanLipi'),local('Solaiman Lipi'),url('SolaimanLipi.ttf') format('truetype');font-display:swap}
+*{font-family:'SolaimanLipi',Arial,sans-serif !important;box-sizing:border-box}
+.katex,.katex *{font-family:KaTeX_Main,'Times New Roman',serif !important}
+:root{--primary:#006a4e;--primary-d:#004d37;--bg:#f2f6f4;--card:#fff;--text:#1d2b26;--muted:#5d6d66;--border:#d5e2dc;--ok:#1b8a4b;--okbg:#e3f6ea;--bad:#c62828;--badbg:#fdeaea;--shadow:0 2px 10px rgba(0,0,0,.08);--ul:#006a4e}
+[data-theme=dark]{--primary:#4db6ac;--bg:#101816;--card:#1a2622;--text:#e6f0ec;--muted:#9bb0a8;--border:#2c3d37;--ok:#66d28f;--okbg:#17352a;--bad:#ff8a80;--badbg:#3a2020;--shadow:0 2px 10px rgba(0,0,0,.5);--ul:#4db6ac}
+body{margin:0;background:var(--bg);color:var(--text);line-height:1.7;-webkit-user-select:none;-moz-user-select:none;user-select:none}
+.wrap{max-width:900px;margin:0 auto;padding:12px}
+header{background:linear-gradient(135deg,#004d37,#006a4e);color:#fff;text-align:center;padding:22px 14px;border-radius:0 0 18px 18px;box-shadow:var(--shadow)}
+header h1{margin:0;font-size:1.5rem}header p{margin:3px 0 0;font-size:1rem;opacity:.95}
+.card{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:16px;margin:14px 0;border:1px solid var(--border)}
+.chapter-title{margin:0 0 12px;padding-bottom:8px;font-size:1.4rem;color:var(--primary);border-bottom:3px solid var(--ul)}
+.badge{background:var(--bg);border-left:4px solid var(--primary);padding:8px 12px;border-radius:8px;margin:8px 0;font-size:.95rem}
+.warn{background:#fff6e0;color:#6b4a00;border-left:4px solid #f0a500;padding:8px 12px;border-radius:8px;font-size:.95rem}
+#info2,#info3{text-align:center}
+#info3{white-space:nowrap;font-size:clamp(.62rem,3.3vw,.95rem)}
+.wrow{display:flex;justify-content:space-between;gap:10px;margin-bottom:2px}
+[data-theme=dark] .warn{background:#3a3016;color:#ffd98a}
+.bar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--card);padding:10px 14px;border-radius:12px;box-shadow:var(--shadow);border:1px solid var(--border)}
+#timer{font-size:1.3rem;font-weight:700;color:var(--primary)}#timer.low{color:var(--bad)}
+button{cursor:pointer;border:0;border-radius:10px;padding:9px 16px;font-size:1rem;background:var(--primary);color:#fff}
+[data-theme=dark] button{color:#0b1512}
+button:disabled{opacity:.5;cursor:default}
+.qn{font-weight:700;margin-bottom:8px}
+.opt{display:block;width:100%;text-align:left;background:var(--bg);color:var(--text);border:2px solid var(--border);margin:6px 0;padding:9px 12px;border-radius:10px}
+[data-theme=dark] .opt{color:var(--text)}
+.opt.sel{border-color:var(--primary)}
+.opt.correct{background:var(--okbg);border-color:var(--ok)}
+.opt.wrong{background:var(--badbg);border-color:var(--bad)}
+.tag{display:inline-block;font-size:.8rem;background:var(--bg);color:var(--primary);border:1px solid var(--border);border-radius:20px;padding:0 10px;margin-bottom:6px}
+.exp{display:none;margin-top:8px;padding:8px 12px;border-radius:8px;background:var(--bg);border-left:4px solid var(--primary);font-size:.95rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.stat-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;box-shadow:var(--shadow)}
+.stat-box b{display:block;font-size:1.5rem;color:var(--primary)}
+#fb{font-size:1.1rem;font-weight:700;text-align:center;margin:12px 0}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<h2 class="chapter-title">জুম অ্যাপ-এর ব্যবহার</h2>
+<div class="warn"><div class="wrow"><b id="fullmark"></b><b id="timeinfo"></b></div><div id="info2"></div><div id="info3"></div></div>
+</div>
+<div class="bar"><span>⏱️ <span id="timer">১০:০০</span></span><span id="prog"></span><button id="theme">🌙 ডার্ক মোড</button></div>
+<div id="quiz"></div>
+<div id="result" class="hide">
+<div class="card"><div class="stats" id="stats"></div><div id="fb"></div><div style="text-align:center"><button id="again">পুনরায় কুইজ দাও</button></div></div>
+</div>
+<div class="card" style="text-align:center"><button id="submit">সাবমিট করো</button></div>
+
+</div>
+<script>
+const masterQuestionBank=[["জুম অ্যাপ প্রথম কত সালে আবিষ্কৃত হয়?",["২০১১","২০০৯","২০১৫","২০২০"],0,0],["জুম অ্যাপের হেড অফিস কোথায় ছিল?",["নিউইয়র্কের Albany","ক্যালিফোর্নিয়ার San Jose","টেক্সাসের Austin","ওয়াশিংটনের Seattle"],1,0],["Tyler Lacoma জুম সম্পর্কে কোন তারিখে মন্তব্য করেছিলেন?",["১০ই জানুয়ারি ২০২০","১০ই ডিসেম্বর ২০১১","২০শে ডিসেম্বর ২০২০","১০ই ডিসেম্বর ২০২০"],3,0],["জুম (Zoom) কী ধরনের অ্যাপ্লিকেশন পরিষেবা?",["ইমেইল ও বার্তা আদান-প্রদান","ভিডিও এবং ওয়েব কনফারেন্সিং","অনলাইন গেমিং","ফাইল সংরক্ষণ"],1,0],["জুম ভিডিও কনফারেন্সিং পরিষেবাটি কোন প্ল্যাটফর্মে কাজ করে?",["ডেস্কটপ প্ল্যাটফর্ম","ক্লাউড প্ল্যাটফর্ম","স্থানীয় সার্ভার প্ল্যাটফর্ম","টেলিভিশন প্ল্যাটফর্ম"],1,0],["কোভিড-১৯ মহামারির সময় ২০২০ সালে প্রতিদিন কত মিলিয়ন জুম ডাউনলোড সম্পন্ন হয়েছে?",["৫০০ মিলিয়ন","৩০০ মিলিয়ন","১০০ মিলিয়ন","১৫০ মিলিয়ন"],0,0],["২০২০ সালে জুমে প্রতিদিন কত মিলিয়ন মিটিং অনুষ্ঠিত হয়েছে?",["৩০০ মিলিয়ন","৫০০ মিলিয়ন","১০০ মিলিয়ন","২০০ মিলিয়ন"],0,0],["বিনামূল্যের জুম অ্যাপটিতে সর্বোচ্চ কতজন অংশগ্রহণকারী যুক্ত হতে পারে?",["৪০ জন","১০০ জন","৫০ জন","১৫০ জন"],1,0],["বিনামূল্যের সংস্করণে ভিডিও বা অডিও কনফারেন্স একক্রমে কত মিনিট চালু থাকতে পারে?",["১৫ মিনিট","৩০ মিনিট","৬০ মিনিট","৪০ মিনিট"],3,0],["১৫০ ডলারের অফারে ক্লাউড রেকর্ডিংয়ের জন্য ব্যবহারকারীকে কত স্টোরেজ বরাদ্দ দেওয়া হয়?",["পাঁচ গিগাবাইট (জিবি)","দশ গিগাবাইট (জিবি)","এক গিগাবাইট (জিবি)","পাঁচশ মেগাবাইট (এমবি)"],2,0],["১৫০ ডলারের অফারে মিটিংয়ের সময়সীমা সম্পর্কে কোনটি সঠিক?",["৪০ মিনিট সময়সীমা থাকে","কোনো নির্দিষ্ট সময়সীমা থাকে না","এক ঘণ্টা সময়সীমা থাকে","দুই ঘণ্টা সময়সীমা থাকে"],1,0],["জুম মিটিং শুরু করার জন্য ব্যবহারকারীর কী প্রয়োজন হবে?",["গুগল মিটের একাউন্ট","বিশ্ববিদ্যালয়ের আইডি কার্ড","ক্লাউড স্টোরেজ","নিজস্ব জুম একাউন্ট"],3,0],["জুম একাউন্ট কীভাবে তৈরি করা যায়?",["শুধু প্রশিক্ষক তৈরি করে দেন","আর্থিক প্যাকেজ কিনে তৈরি করতে হয়","শুধু বিশ্ববিদ্যালয় থেকে তৈরি করতে হয়","ব্যবহারকারী নিজে বিনামূল্যে তৈরি করতে পারেন"],3,0],["জুম অ্যাপ ডাউনলোডের জন্য পাঠে কোন লিংকটি দেওয়া হয়েছে?",["https://zoom.us/meeting/schedule","https://zoom.us/support/install","https://zoom.us/support/download","https://meet.google.com/download"],2,0],["Software-টি Activate করতে Software-এর উপরে Cursor রেখে কী করতে হয়?",["Double Click","Right Click","Drag","Delete"],1,0],["Software Activate করতে কোন Option-এ Click করতে হয়?",["Run as Guest","Open with Browser","Save as Default","Run as Administrator"],3,0],["পর্যায়ক্রমে অনুশীলনে কোন Option-এ Click করলে Software-টি Activate হবে?",["Cancel","Dismiss","Schedule","Finish"],3,0],["জুম অ্যাপ ডাউনলোড হলে এর আইকনটি কোথায় দেখা যাবে?",["Taskbar-এর Clock-এ","Desktop-এ","Recycle Bin-এ","Google Calendar-এ"],1,0],["মিটিং সিডিউল করার জন্য জুম অ্যাপের কোন আইকনে ক্লিক করতে হয়?",["Schedule","Join","Share Screen","New Meeting"],0,0],["Scheduling a Meeting চিত্রে ১ নম্বর ধাপটি কী?",["মিটিংয়ের পাসওয়ার্ড দেওয়া","ক্যালেন্ডার চিহ্নিত করা","ভিডিও দৃশ্যমানতা ঠিক করা","মিটিংয়ের শিরোনাম (Title) যুক্ত করা"],3,0],["Scheduling a Meeting চিত্রে ৫ নম্বর ধাপটি কী নির্দেশ করে?",["মিটিংয়ের পাসওয়ার্ড","মিটিংয়ের সময়","ভিডিও দৃশ্যমানতা","অনলাইন ক্যালেন্ডার"],0,0],["মিটিংয়ের নিমন্ত্রণ পাঠানোর ক্ষেত্রে পাঠে কোন ক্যালেন্ডার ব্যবহারের কথা বলা হয়েছে?",["আউটলুক ক্যালেন্ডার","এক্সেল ক্যালেন্ডার","উইন্ডোজ ক্যালেন্ডার","গুগল ক্যালেন্ডার (Google Calendar)"],3,0],["অংশগ্রহণকারী প্রশিক্ষণার্থীদের প্রবেশের আগে কোথায় অপেক্ষায় রাখা হয়?",["ওয়েটিং রুম (Waiting Room)","কো-হোস্ট রুম","ক্লাউড রুম","গেস্ট লিস্ট"],0,0],["Advance Options-এ Alternative Hosts-এর জন্য কী লিখতে হয়?",["অংশগ্রহণকারীর পাসকোড","কো-হোস্টের ইমেইল আইডি","মিটিং নম্বর","রেকর্ডিং সংরক্ষণের স্থান"],1,0],["Advance Options-এ মিটিং রেকর্ডিংয়ের দুটি বিকল্প কোনগুলো?",["Locally এবং In the mail","Online এবং Offline","Host এবং Co-Host","Locally এবং In the cloud"],3,0],["অতিথি বক্তার উপস্থাপনের সময় হোস্টকে তাঁকে কী করে দিতে হবে?",["কো-হোস্ট (Co-Host)","মিউট (Mute)","ওয়েটিং রুমের সদস্য","শুধু দর্শক"],0,0],["নিচের কোনটি এই পাঠের শিখনফল?",["জুম অ্যাপের সফটওয়্যার তৈরি করতে পারবেন","জুম অ্যাপের হেড অফিস স্থাপন করতে পারবেন","জুম অ্যাপের মাধ্যমে সেশন পরিচালনা করতে পারবেন","জুম অ্যাপের ক্লাউড সার্ভার পরিচালনা করতে পারবেন"],2,0],["জুম অ্যাপ ডিজিটাল কন্টেন্টটি কার প্রণীত?",["Tyler Lacoma","প্রফেসর ড. পিন্টু চন্দ্র শীল","প্রফেসর ড. মো. আব্দুল করিম","ড. জন পিটার"],1,0],["শিক্ষকগণ জুম ও গুগল মিট ব্যবহারে খুব বেশি সফল হননি কেন?",["দুর্বল অবকাঠামো, উন্নত প্রযুক্তির অভাব ও ব্যবহারে অদক্ষতার কারণে","শিক্ষার্থীদের অনীহার কারণে","অ্যাপ বিনামূল্যে পাওয়া যায় না বলে","অ্যাপটি শুধু আমেরিকায় ব্যবহার করা যায় বলে"],0,1],["বিনামূল্যের জুম সংস্করণে ৪০ মিনিট পর কী ঘটে?",["অংশগ্রহণকারীর সংখ্যা বেড়ে যায়","কনফারেন্সটি নিজে থেকেই বন্ধ হয়ে যায়","ক্লাউড রেকর্ডিং চালু হয়","হোস্ট পরিবর্তন হয়ে যায়"],1,1],["মিটিংয়ের তারিখ ও সময় আন্তর্জাতিক সময় অনুযায়ী ঠিক করতে হয় কেন?",["মিটিংয়ের পাসওয়ার্ড সুরক্ষিত রাখার জন্য","রেকর্ডিং ফাইলের আকার ছোট রাখার জন্য","না করলে মিটিংয়ের সময় হেরফের হয়ে যাবে বলে","ভিডিওর মান বাড়ানোর জন্য"],2,1],["মিটিং শুরুর আগে Waiting Room রাখার উদ্দেশ্য কী?",["মিটিং রেকর্ড করা","অংশগ্রহণকারীদের মিউট করা","ক্যালেন্ডারে রিমাইন্ডার দেওয়া","মিটিং শুরুর আগে অংশগ্রহণকারীদের অপেক্ষায় রাখা"],3,1],["প্রশিক্ষকগণ প্রশিক্ষণার্থীদের জুম অ্যাপ ডাউনলোড প্রক্রিয়া বারবার অনুশীলন করান কেন?",["যেন অ্যাপের আকার কমে যায়","যেন অ্যাপ বিনামূল্যে পাওয়া যায়","যেন লিংকটি পরিবর্তন করা যায়","যেন তাঁরা ডাউনলোড করতে অভ্যস্ত হয়ে যান"],3,1],["সেশন পরিচালনার সময় কো-হোস্টের ভূমিকা কী?",["হোস্টের দায়িত্ব পালন করা","অংশগ্রহণকারীদের ভিডিও বন্ধ করে রাখা","মিটিংয়ের পাসওয়ার্ড তৈরি করা","জুম একাউন্ট বিনামূল্যে তৈরি করা"],0,1],["কলেজ শিক্ষকদের প্রশিক্ষণ ম্যানুয়ালে জুম অ্যাপ সংযোজন করা হয়েছে কেন?",["জুম অ্যাপের ডাউনলোড সংখ্যা বাড়ানোর লক্ষ্যে","গুগল মিটকে বাদ দেওয়ার লক্ষ্যে","শিক্ষকদের দক্ষতা বৃদ্ধির লক্ষ্যে","শিক্ষার্থীদের পরীক্ষা বন্ধ রাখার লক্ষ্যে"],2,1],["একজন শিক্ষক বিনামূল্যের জুম অ্যাপে ৬০ মিনিটের একটানা ক্লাস নিতে চান। এ ক্ষেত্রে কোন সমাধানটি পাঠ অনুযায়ী উপযোগী?",["অংশগ্রহণকারীর সংখ্যা ১০০ জন করা","ওয়েটিং রুম বন্ধ করা","সময়সীমাহীন ১৫০ ডলারের অফার গ্রহণ করা","মিটিংয়ের পাসওয়ার্ড বদলানো"],2,2],["একজন প্রশিক্ষক ক্লাসের রেকর্ডিং নিজের কম্পিউটারেই সংরক্ষণ করতে চান। তাঁর কোন অপশনটি নির্বাচন করা উচিত?",["Automatically record meeting-এর অধীনে Locally","Automatically record meeting-এর অধীনে In the cloud","Enable join before host","Only authenticated users can join"],0,2],["একজন প্রশিক্ষক চান সেশনের শুরুতে সবাই যেন মিউট অবস্থায় থাকে। তিনি কোন অপশনটি সক্রিয় করবেন?",["Mute participants upon entry","Enable Waiting Room","Enable join before host","Alternative Hosts"],0,2],["একজন হোস্ট চান শুধু জুমে সাইন ইন করা ব্যবহারকারীরাই মিটিংয়ে ঢুকতে পারুক। তাঁকে কোন অপশনটি বেছে নিতে হবে?",["Enable Waiting Room","Only authenticated users can join: Sign in to Zoom","Mute participants upon entry","Automatically record meeting"],1,2],["একজন শিক্ষক প্রতিদিন একই সময়ে নির্দিষ্ট ক্লাস নেন। মিটিং সিডিউল করার সময় তিনি কোন বিকল্পটি ব্যবহার করবেন?",["Waiting Room","Alternative Hosts","Recurring meeting","Generate Automatically বন্ধ করা"],2,2],["একটি সেশনে বহু অংশগ্রহণকারী ভিডিও বন্ধ রেখে শুধু ছবি দিয়ে উপস্থিত আছেন। সেশন সক্রিয় রাখতে হোস্টের করণীয় কী?",["সবাইকে স্থায়ীভাবে মিউট রাখা","সবাইকে ওয়েটিং রুমে পাঠিয়ে দেওয়া","তাঁদের আনমিউট করে কথা বলার ও প্রশ্ন করার সুযোগ দেওয়া","মিটিং বন্ধ করে দেওয়া"],2,2],["একজন প্রশিক্ষক চান তিনি অনলাইনে আসার আগেই প্রশিক্ষণার্থীরা মিটিংয়ে ঢুকতে পারুক। তাঁকে কোন অপশনটি সক্রিয় করতে হবে?",["Enable join before host","Mute participants upon entry","Only authenticated users can join","Automatically record meeting"],0,2],["কোভিড-১৯ কালে জুম অ্যাপের জনপ্রিয়তা দ্রুত বাড়ার সবচেয়ে যুক্তিসংগত কারণ কোনটি?",["শ্রেণি কার্যক্রম বন্ধ থাকায় বিনামূল্যে ডাউনলোডযোগ্য ও সহজ ভিডিও কনফারেন্সিং-এর চাহিদা তৈরি হওয়া","শুধু অ্যাপটির হেড অফিস ক্যালিফোর্নিয়ায় থাকা","অ্যাপটি শুধু Linux-এ চলা","অ্যাপটি ২০১১ সালে আবিষ্কৃত হওয়া"],0,3],["বিনামূল্যের সংস্করণ ও ১৫০ ডলারের অফারের তুলনায় নিচের কোন তথ্যটি সঠিক?",["বিনামূল্যে ক্লাউড স্টোরেজ এক গিগাবাইট, ১৫০ ডলারে কোনো স্টোরেজ নেই","বিনামূল্যে ক্লাউড রেকর্ডিংয়ের স্টোরেজ থাকে না, অথচ ১৫০ ডলারের অফারে এক গিগাবাইট পাওয়া যায়","উভয় ক্ষেত্রেই ৪০ মিনিট সময়সীমা আছে","উভয় ক্ষেত্রেই সোশ্যাল মিডিয়া স্ট্রিমিং নিষিদ্ধ"],1,3],["জুম ও গুগল মিটের ব্যবহারে শ্রেণি কার্যক্রম থেকে শিক্ষার্থীরা তেমন উপকার পায়নি—পাঠ অনুযায়ী এর প্রধান কারণ কী?",["জুম অ্যাপের মূল্য বেশি হওয়া","শিক্ষার্থীর সংখ্যা কম হওয়া","শিক্ষকদের অদক্ষতা ও প্রশিক্ষণলব্ধ জ্ঞানের অভাব","গুগল ক্যালেন্ডার না থাকা"],2,3],["একজন হোস্ট চান নির্ধারিত অংশগ্রহণকারীরাই ঢুকুক এবং প্রবেশের আগে তাঁদের অপেক্ষায় রাখা হোক। কোন অপশন দুটির সমন্বয় সবচেয়ে উপযোগী?",["Enable join before host এবং Mute participants upon entry","Automatically record meeting এবং Alternative Hosts","Enable Waiting Room এবং Only authenticated users can join","Recurring meeting এবং Generate Automatically"],2,3],["সেশন পরিচালনায় অংশগ্রহণকারীদের উপস্থিতি নিশ্চিত করাই যথেষ্ট নয়—এর যুক্তিযুক্ত ব্যাখ্যা কোনটি?",["কারণ ছবি থাকলে মিটিং বন্ধ হয়ে যায়","কারণ উপস্থিতি জুম নিজেই বাতিল করে","কারণ আনমিউট করলে ক্লাউড রেকর্ডিং বন্ধ হয়","অনেকে ভিডিও অফ করে শুধু ছবি দিয়ে উপস্থিত থাকেন, তাই কথা বলিয়ে ও প্রশ্ন করিয়ে সক্রিয় রাখতে হয়"],3,3],["উপসংহার অনুযায়ী অনার্স কলেজে জুম ব্যবহারে ঘাটতি দূর করার সবচেয়ে কার্যকর উপায় কোনটি?",["জুম অ্যাপ বন্ধ করে দেওয়া","শুধু অবকাঠামো ছাড়াই ক্লাস চালানো","প্রশিক্ষণ ম্যানুয়ালে জুম সংযোজন ও চলমান প্রশিক্ষণ","শুধু ক্যালেন্ডারে নিমন্ত্রণ পাঠানো"],2,3],["কোনো প্রশিক্ষণার্থী মিটিংয়ের আইডি পেয়েছেন কিন্তু প্রবেশ করতে পারছেন না। পাঠ অনুযায়ী আইডির পাশাপাশি তাঁর কাছে আর কী পাঠানো উচিত ছিল?",["Alternative Host-এর তালিকা","পাসকোড (Passcode)","রেকর্ডিং সংরক্ষণের স্থান","ডাউনলোড লিংকের স্ক্রিনশট"],1,3],["জুমকে শিক্ষাক্ষেত্রে উপযোগী ডিজিটাল শিখন উপকরণ বলার যুক্তিযুক্ত কারণ কোনটি?",["এটি শুধু অডিও কনফারেন্সিংয়ে ব্যবহৃত হয়","এটি শুধু কম্পিউটারে চলে","এটি সহজ ও হালকা এবং দ্রুত ভিডিও কনফারেন্সিং-এর মাধ্যমে শিখন সহজবোধ্য করে","এটি ব্যবহারে কোনো একাউন্ট লাগে না"],2,3]].map(([q,o,a,t])=>({q,o,a,t}));
+/* t: 0=জ্ঞানমূলক 1=অনুধাবনমূলক 2=প্রয়োগমূলক 3=উচ্চতর দক্ষতা */
+const N=20,TIME=600,QUOTA=[11,3,3,3],TN=["জ্ঞানমূলক","অনুধাবনমূলক","প্রয়োগমূলক","উচ্চতর দক্ষতা"];
+const bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
+const $=id=>document.getElementById(id);
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const L=['ক','খ','গ','ঘ'];
+let Q=[],ans=[],left=TIME,tm=null,done=false;
+function renderMath(el){try{if(window.renderMathInElement)renderMathInElement(el,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false})}catch(e){}}
+function info(){
+  const n=masterQuestionBank.length,t=Math.min(N,n);
+  $('fullmark').textContent='পূর্ণমান: '+bn(t);$('timeinfo').textContent='সময়: '+bn(TIME/60)+' মিনিট';
+  $('info2').textContent='['+bn(n)+' টি প্রশ্ন আছে]';
+  $('info3').textContent='প্রতিবার '+bn(t)+'টা প্রশ্ন আসবে। (অপশনসহ এলোমেলো)'
+}
+function start(){
+  clearInterval(tm);done=false;left=TIME;
+  const take=Math.min(N,masterQuestionBank.length);let pick=[];
+  QUOTA.forEach((n,t)=>{pick=pick.concat(shuf(masterQuestionBank.filter(x=>x.t===t)).slice(0,n))});
+  if(pick.length<take){const rest=shuf(masterQuestionBank.filter(x=>!pick.includes(x)));pick=pick.concat(rest.slice(0,take-pick.length))}
+  pick=shuf(pick.slice(0,take));
+  Q=pick.map(x=>{const idx=shuf(x.o.map((t,i)=>i));return{q:x.q,t:x.t,o:idx.map(i=>x.o[i]),a:idx.indexOf(x.a)}});
+  ans=Q.map(()=>-1);
+  $('result').classList.add('hide');$('submit').disabled=false;$('submit').parentElement.classList.remove('hide');
+  const box=$('quiz');box.innerHTML='';
+  Q.forEach((q,i)=>{
+    const c=document.createElement('div');c.className='card';c.id='q'+i;
+    c.innerHTML='<div class="qn">'+bn(i+1)+'। '+q.q+'</div>'+q.o.map((t,j)=>'<button class="opt" data-i="'+i+'" data-j="'+j+'">'+t+'</button>').join('');
+    box.appendChild(c)});
+  box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>pickOpt(+b.dataset.i,+b.dataset.j));
+  upd();tick();tm=setInterval(tick,1000);
+  renderMath(box);try{window.scrollTo(0,0)}catch(e){}
+}
+function pickOpt(i,j){
+  if(done||ans[i]>=0)return;ans[i]=j;
+  document.querySelectorAll('#q'+i+' .opt').forEach((b,k)=>{b.disabled=true;if(k===j)b.classList.add('sel')});upd()
+}
+function upd(){$('prog').textContent=bn(ans.filter(a=>a>=0).length)+'/'+bn(Q.length)}
+function tick(){
+  const m=Math.floor(left/60),s=left%60;$('timer').textContent=bn(String(m).padStart(2,'0'))+':'+bn(String(s).padStart(2,'0'));
+  $('timer').classList.toggle('low',left<=60);
+  if(left<=0){clearInterval(tm);finish();return}left--
+}
+function submitClick(){
+  const miss=[];ans.forEach((a,i)=>{if(a<0)miss.push(i)});
+  if(miss.length){alert('নিচের প্রশ্নগুলোর উত্তর দেওয়া বাকি আছে: '+miss.map(i=>bn(i+1)).join(', '));
+    $('q'+miss[0]).scrollIntoView({behavior:'smooth',block:'center'});return}
+  clearInterval(tm);finish()
+}
+function finish(){
+  if(done)return;done=true;let c=0,w=0,u=0;
+  Q.forEach((q,i)=>{
+    const card=$('q'+i),opts=card.querySelectorAll('.opt');opts.forEach(b=>b.disabled=true);
+    opts[q.a].classList.add('correct');
+    if(ans[i]<0)u++;else if(ans[i]===q.a)c++;else{w++;opts[ans[i]].classList.add('wrong')}
+  });
+  const score=c,pct=Q.length?score/Q.length*100:0;
+  const items=[['মোট প্রশ্ন',bn(Q.length)],['সঠিক',bn(c)],['ভুল',bn(w)],['চূড়ান্ত স্কোর',bn(score.toFixed(2).replace(/\.?0+$/,''))+'/'+bn(Q.length)]];
+  $('stats').innerHTML=items.map(x=>'<div class="stat-box"><b>'+x[1]+'</b>'+x[0]+'</div>').join('');
+  $('prog').textContent='স্কোর: '+bn(score.toFixed(2).replace(/\.?0+$/,''))+'/'+bn(Q.length);
+  $('fb').textContent=pct>=90?'🎉 অসাধারণ! চমৎকার ফলাফল, চালিয়ে যান!':pct>=80?'👏 খুব ভালো! আরও অনুশীলন প্রয়োজন।':pct>=60?'🙂 ভালো, আরও অনুশীলন প্রয়োজন।':'📖 আরও মনোযোগ দিয়ে পড়ুন।';
+  $('submit').parentElement.classList.add('hide');$('result').classList.remove('hide');
+  renderMath($('quiz'));
+  setTimeout(()=>{try{$('result').scrollIntoView({block:'start'})}catch(_){}try{window.scrollTo(0,$('result').getBoundingClientRect().top+window.pageYOffset-70)}catch(_){}},80)
+}
+$('submit').onclick=submitClick;$('again').onclick=start;
+$('theme').onclick=()=>{const d=document.documentElement.dataset.theme==='dark';document.documentElement.dataset.theme=d?'light':'dark';$('theme').textContent=d?'🌙 ডার্ক মোড':'☀️ লাইট মোড'};
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  const k=e.key.toLowerCase(),blk=(e.ctrlKey&&['c','s','u'].includes(k))||e.key==='F12'||e.key==='PrintScreen';
+  if(blk){e.preventDefault();try{navigator.clipboard.writeText('')}catch(_){}alert('এই পেজে কপি/সেভ/সোর্স দেখা নিষিদ্ধ।')}});
+document.addEventListener('keyup',e=>{if(e.key==='PrintScreen'){try{navigator.clipboard.writeText('')}catch(_){}alert('স্ক্রিনশট নেওয়া নিষিদ্ধ।')}});
+window.addEventListener('load',()=>{info();start()});
+</script>
+</body>
+</html>
