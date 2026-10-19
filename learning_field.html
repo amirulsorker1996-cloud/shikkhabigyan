@@ -28,11 +28,15 @@ header h1{margin:0;font-size:1.4rem}header p{margin:2px 0 0;font-size:.95rem}
 .cv-badge b{font-size:clamp(1.3rem,6vw,2.4rem);line-height:1}
 .cv-quiz{display:inline-block;padding:4px clamp(28px,9vw,64px);font-size:clamp(1.5rem,6.5vw,2.6rem);font-weight:700;color:#063d2c;background:linear-gradient(#ffe27a,#f5a623);border:3px solid #fff;border-radius:50px;box-shadow:0 5px 14px rgba(0,0,0,.4)}
 .cv-tag{margin-top:12px;font-size:clamp(1rem,4.4vw,1.7rem);letter-spacing:.06em;color:#d9fff0;font-style:italic}
-.top{max-width:210mm;margin:10px auto 0;padding:0 10px;text-align:right}
+.top{max-width:210mm;margin:12px auto 0;padding:0 12px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.tt{margin:0;font-size:clamp(1.3rem,6vw,1.8rem);color:var(--primary);text-align:center;flex:1}
+.qb{display:inline-flex;align-items:center;justify-content:center;min-width:92px;padding:5px 26px;font-size:1.25rem;font-weight:700;letter-spacing:.05em;border-radius:50px;color:#063d2c;background:linear-gradient(#ffe27a,#f5a623);border:3px solid #fff;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.qb:active{transform:scale(.96)}
 button{cursor:pointer;border:0;border-radius:10px;padding:8px 14px;font-size:1rem;background:var(--primary);color:#fff}
 [data-theme=dark] button{color:#0b1512}
 .page{width:210mm;max-width:100%;margin:10px auto 24px;background:var(--paper);border:1px solid var(--border);border-radius:6px;box-shadow:0 2px 12px rgba(0,0,0,.1);padding:14mm 12mm}
-.page h2.t{text-align:center;margin:0 0 12px;font-size:1.6rem}
+.page h2.t{text-align:center;margin:0 0 14px;font-size:1.6rem;color:var(--primary);position:relative;padding-bottom:10px}
+.page h2.t::after{content:"";display:block;width:64px;height:4px;border-radius:4px;background:#f5a623;margin:8px auto 0}
 .sec{--sc:var(--hc);margin:18px 0 4px;font-weight:700;font-size:1.1rem;color:var(--sc);background:color-mix(in srgb,var(--sc) 12%,transparent);border-bottom:3px solid var(--sc);border-radius:8px 8px 0 0;padding:6px 8px}
 .row{display:flex;gap:12px;padding:4px 6px;border-radius:6px;text-decoration:none;color:var(--text);cursor:pointer}
 .row{--sc:var(--tc);border-left:4px solid var(--sc)}
@@ -41,7 +45,13 @@ button{cursor:pointer;border:0;border-radius:10px;padding:8px 14px;font-size:1re
 .row.on .n{color:var(--sc);font-weight:700;text-decoration:underline}
 .row:hover{background:color-mix(in srgb,var(--sc) 10%,transparent)}
 .row:hover{background:var(--bg)}
-[data-theme=dark] [data-theme=dark] [data-theme=dark] [data-theme=dark] [data-theme=dark] [data-theme=dark] [data-theme=dark] #msg{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#333;color:#fff;padding:9px 16px;border-radius:20px;display:none;z-index:9;max-width:90%;text-align:center}
+#msg{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#333;color:#fff;padding:9px 16px;border-radius:20px;display:none;z-index:9;max-width:90%;text-align:center}
+@media(max-width:600px){
+.page{margin:10px 8px 20px;width:auto;padding:14px 10px;border-radius:12px}
+.page h2.t{font-size:1.4rem;margin-bottom:6px}
+.sec{margin:14px 0 4px;font-size:1rem}
+.row{gap:8px}.row .c{flex:0 0 62px}
+}
 @media print{.cover{page-break-after:always}header,.top,#msg{display:none}.page{box-shadow:none;border:0;margin:0}}
 </style>
 </head>
@@ -57,8 +67,8 @@ button{cursor:pointer;border:0;border-radius:10px;padding:8px 14px;font-size:1re
 <div class="cv-quiz">কুইজ</div>
 <div class="cv-tag">Practice Makes Perfect</div>
 </div></div>
-<div class="top"><button id="theme">🌙 ডার্ক মোড</button></div>
-<div class="page" id="toc"><h2 class="t">সূচিপত্র</h2></div>
+<div class="top"><a class="qb" id="sq" href="learning_field_sq.html">SQ</a><h2 class="tt">সূচিপত্র</h2><a class="qb" id="cq" href="learning_field_cq.html">CQ</a></div>
+<div class="page" id="toc"></div>
 <div id="msg"></div>
 <script>
 /* ফাইলের নাম স্বয়ংক্রিয়: learning_field_ক্ষেত্র_কোড+ক্রম.html — যেমন learning_field_1_shini02.html। ফাইলটি এই পেজের পাশে রাখলেই লিংক চালু হবে। */
@@ -87,10 +97,7 @@ SECTIONS.forEach((s,k)=>{
       fetch(file,{method:'HEAD'}).then(x=>x.ok?location.href=file:soon(t)).catch(()=>location.href=file)};
     toc.appendChild(r)})
 });
-document.getElementById('theme').onclick=function(){const d=document.documentElement.dataset.theme==='dark';document.documentElement.dataset.theme=d?'light':'dark';this.textContent=d?'🌙 ডার্ক মোড':'☀️ লাইট মোড'};
 document.addEventListener('contextmenu',e=>e.preventDefault());
 </script>
-<script data-goatcounter="https://shikha-biggan-quiz.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
